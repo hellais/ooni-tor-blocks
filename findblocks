@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+
+# Reads an OONI http_requests report and shows URLs that have known block pages.
+#
+# First, make an OONI report:
+#   ooniprobe -i /usr/share/ooni/decks/complete_no_root.deck
+# Then,
+#   ./findblocks report-http_requests-XXXX.yamloo
+
+import getopt
+import sys
+import yaml
+
+from bs4 import BeautifulSoup
+
+def classify_blockpage(response):
+    soup = BeautifulSoup(response["body"])
+    title = soup.title
+    if response["code"] == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
+        return "CLOUDFLARE"
+    return None
+
+# Return a (nontor, tor) pair if there are exactly two requests and one is
+# nontor and one is tor, or else raise an exception.
+def split_requests(requests):
+    nontor = None
+    tor = None
+    for request in requests:
+        if request.get("failure") is not None:
+            continue
+        if not request["request"]["tor"]["is_tor"]:
+            if nontor is not None:
+                raise ValueError("more than one is_tor:false request")
+            nontor = request
+        else:
+            if tor is not None:
+                raise ValueError("more than one is_tor:true request")
+            tor = request
+    if nontor is None:
+        raise ValueError("no is_tor:false request")
+    if tor is None:
+        raise ValueError("no is_tor:true request")
+    return nontor, tor
+    
+def process_file(f):
+    yamloo = yaml.safe_load_all(f)
+
+    # First YAML doc in YAMLOO file is a header with a different format.
+    header = next(yamloo)
+    # Sanity check: make sure a header key is in there.
+    assert "input_hashes" in header
+
+    for doc in yamloo:
+        if doc["control_failure"] is not None:
+            print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
+            continue
+        if doc["experiment_failure"] is not None:
+            print >> sys.stderr, "%s: experiment_failure=%s" % (doc["input"], doc["experiment_failure"])
+            continue
+
+        try:
+            nontor, tor = split_requests(doc["requests"])
+        except ValueError, e:
+            print >> sys.stderr, "%s: %s" % (doc["input"], str(e))
+            continue
+
+        nontor_class = classify_blockpage(nontor["response"])
+        tor_class = classify_blockpage(tor["response"])
+
+        if nontor_class is not None or tor_class is not None:
+            print "%s\t%s\t%s" % (nontor_class, tor_class, doc["input"])
+
+def process_filename(filename):
+    with open(filename) as f:
+        return process_file(f)
+
+opts, args = getopt.gnu_getopt(sys.argv[1:], "")
+
+for filename in args:
+    process_filename(filename)
