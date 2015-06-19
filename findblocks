@@ -74,6 +74,7 @@ def process_file(f):
 
         if nontor_isblocked != tor_isblocked:
             print "%s\t%s\t%s" % (nontor_class, tor_class, doc["input"])
+            sys.stdout.flush()
 
 def process_filename(filename):
     with open(filename) as f:
