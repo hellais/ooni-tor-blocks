@@ -13,15 +13,17 @@ import yaml
 
 from bs4 import BeautifulSoup
 
+# Return (is_block, description) tuple. 4?? and 5?? status codes are considered
+# blocks.
 def classify_blockpage(response):
     soup = BeautifulSoup(response["body"])
     title = soup.title
     code = response["code"]
     if code == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
-        return "403-CLOUDFLARE"
+        return True, "403-CLOUDFLARE"
     if code // 100 == 4 or code // 100 == 5:
-        return "%d-OTHER" % code
-    return "%d" % code
+        return True, "%d-OTHER" % code
+    return False, "%d" % code
 
 # Return a (nontor, tor) pair if there are exactly two requests and one is
 # nontor and one is tor, or else raise an exception.
@@ -67,10 +69,10 @@ def process_file(f):
             print >> sys.stderr, "%s: %s" % (doc["input"], str(e))
             continue
 
-        nontor_class = classify_blockpage(nontor["response"])
-        tor_class = classify_blockpage(tor["response"])
+        nontor_isblocked, nontor_class = classify_blockpage(nontor["response"])
+        tor_isblocked, tor_class = classify_blockpage(tor["response"])
 
-        if nontor_class is not None or tor_class is not None:
+        if nontor_isblocked != tor_isblocked:
             print "%s\t%s\t%s" % (nontor_class, tor_class, doc["input"])
 
 def process_filename(filename):
