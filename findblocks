@@ -16,9 +16,12 @@ from bs4 import BeautifulSoup
 def classify_blockpage(response):
     soup = BeautifulSoup(response["body"])
     title = soup.title
-    if response["code"] == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
-        return "CLOUDFLARE"
-    return None
+    code = response["code"]
+    if code == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
+        return "403-CLOUDFLARE"
+    if code // 100 == 4 or code // 100 == 5:
+        return "%d-OTHER" % code
+    return "%d" % code
 
 # Return a (nontor, tor) pair if there are exactly two requests and one is
 # nontor and one is tor, or else raise an exception.
