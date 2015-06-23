@@ -8,6 +8,7 @@
 #   ./findblocks report-http_requests-XXXX.yamloo
 
 import getopt
+import gzip
 import sys
 import yaml
 
@@ -76,8 +77,15 @@ def process_file(f):
             print "%s\t%s\t%s" % (nontor_class, tor_class, doc["input"])
             sys.stdout.flush()
 
+# Open a file optionally with gzip decompression based on the filename
+# extension.
+def magic_open(filename):
+    if filename.endswith(".gz"):
+        return gzip.GzipFile(filename)
+    return open(filename)
+
 def process_filename(filename):
-    with open(filename) as f:
+    with magic_open(filename) as f:
         return process_file(f)
 
 opts, args = getopt.gnu_getopt(sys.argv[1:], "")
