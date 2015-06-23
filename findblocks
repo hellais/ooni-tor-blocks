@@ -54,12 +54,11 @@ def split_requests(requests):
 def process_file(f):
     yamloo = yaml.safe_load_all(f)
 
-    # First YAML doc in YAMLOO file is a header with a different format.
-    header = next(yamloo)
-    # Sanity check: make sure a header key is in there.
-    assert header["test_name"] == "http_requests"
-
     for doc in yamloo:
+        # Other types are "header" and "footer".
+        if doc["record_type"] != "entry":
+            continue
+
         if doc["control_failure"] is not None:
             print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
             continue
