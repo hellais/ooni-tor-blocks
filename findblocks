@@ -54,7 +54,7 @@ def process_file(f):
     # First YAML doc in YAMLOO file is a header with a different format.
     header = next(yamloo)
     # Sanity check: make sure a header key is in there.
-    assert "input_hashes" in header
+    assert header["test_name"] == "http_requests"
 
     for doc in yamloo:
         if doc["control_failure"] is not None:
