@@ -7,6 +7,9 @@
 # Then,
 #   ./findblocks report-http_requests-XXXX.yamloo
 
+# Should look for timeout blocks.
+
+import csv
 import getopt
 import gzip
 import re
@@ -53,12 +56,23 @@ def split_requests(requests):
     if tor is None:
         raise ValueError("missing is_tor:true request")
     return nontor, tor
-    
+
+def boolf(v):
+    if v:
+        return "T"
+    else:
+        return "F"
+
 def process_file(f):
     yamloo = yaml.safe_load_all(f)
 
+    header = None
     for doc in yamloo:
-        # Other types are "header" and "footer".
+        if doc["record_type"] == "header":
+            assert header is None
+            header = doc
+            continue
+
         if doc["record_type"] != "entry":
             continue
 
@@ -78,9 +92,18 @@ def process_file(f):
         nontor_isblocked, nontor_class = classify_blockpage(nontor["response"])
         tor_isblocked, tor_class = classify_blockpage(tor["response"])
 
-        if nontor_isblocked != tor_isblocked:
-            print "%s\t%s\t%s" % (nontor_class, tor_class, doc["input"])
-            sys.stdout.flush()
+        csvw.writerow({
+            "report_id": header["report_id"],
+            "probe_cc": header["probe_cc"],
+            "url": doc["input"],
+            "nontor_isblocked": boolf(nontor_isblocked),
+            "nontor_status": nontor["response"]["code"],
+            "nontor_class": nontor_class,
+            "tor_isblocked": boolf(tor_isblocked),
+            "tor_status": tor["response"]["code"],
+            "tor_class": tor_class,
+        })
+        sys.stdout.flush()
 
 # Open a file optionally with gzip decompression based on the filename
 # extension.
@@ -94,6 +117,9 @@ def process_filename(filename):
         return process_file(f)
 
 opts, args = getopt.gnu_getopt(sys.argv[1:], "")
+
+csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"])
+csvw.writeheader()
 
 for filename in args:
     process_filename(filename)
