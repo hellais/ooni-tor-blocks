@@ -35,7 +35,7 @@ def classify_blockpage(response):
     if code == 403 and title is not None and re.match(ur'^M\d+-\d+$', title.get_text().strip()) and soup.iframe:
         return True, "403-IRAN"
     if code == 404 and title is not None and title == u"Access Denied" and re.search(r'You don\'t have permission to access ".*" on this server\.<P>', response["body"]):
-        # Seen on www.foxnews.com.
+        # Seen on www.foxnews.com. Server is AkamaiGHost.
         return True, "404-ACCESSDENIED"
     if code // 100 == 4 or code // 100 == 5:
         return True, "%d-OTHER" % code
