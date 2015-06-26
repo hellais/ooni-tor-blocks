@@ -24,6 +24,17 @@ import yaml
 
 from bs4 import BeautifulSoup
 
+class options(object):
+    save_blocks_dir = None
+
+def usage(f=sys.stdout):
+    f.write("""\
+Usage: %s *-http_requests-v1-probe.yaml.gz
+
+  --save-blocks=DIR  save block pages to directory DIR.
+  -h, --help         show this help.
+""" % sys.argv[0])
+
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
 # blocks.
 def classify_blockpage(response):
@@ -95,7 +106,7 @@ def boolf(v):
 
 def make_save_filename(header, response, url, classname):
     url = urlparse.urlparse(url)
-    return os.path.join("blocks", classname, urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe=""))
+    return os.path.join(options.save_blocks_dir, classname, urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe=""))
 
 def process_file(f):
     yamloo = yaml.safe_load_all(f)
@@ -139,10 +150,11 @@ def process_file(f):
         })
         sys.stdout.flush()
 
-        if nontor_isblocked:
-            save_response_filename(make_save_filename(header, nontor["response"], doc["input"], nontor_class), nontor["response"])
-        if tor_isblocked:
-            save_response_filename(make_save_filename(header, tor["response"], doc["input"], tor_class), tor["response"])
+        if options.save_blocks_dir is not None:
+            if nontor_isblocked:
+                save_response_filename(make_save_filename(header, nontor["response"], doc["input"], nontor_class), nontor["response"])
+            if tor_isblocked:
+                save_response_filename(make_save_filename(header, tor["response"], doc["input"], tor_class), tor["response"])
 
 # Open a file optionally with gzip decompression based on the filename
 # extension.
@@ -155,7 +167,13 @@ def process_filename(filename):
     with magic_open(filename) as f:
         return process_file(f)
 
-opts, args = getopt.gnu_getopt(sys.argv[1:], "")
+opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["save-blocks=", "help"])
+for o, a in opts:
+    if o == "--save-blocks":
+        options.save_blocks_dir = a
+    elif o == "-h" or o == "--help":
+        usage()
+        sys.exit()
 
 csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"], lineterminator="\n")
 csvw.writeheader()
