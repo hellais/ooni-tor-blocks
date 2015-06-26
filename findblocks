@@ -121,6 +121,8 @@ def process_file(f):
         if doc["record_type"] != "entry":
             continue
 
+        assert header is not None
+
         if doc["control_failure"] is not None:
             print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
             continue
