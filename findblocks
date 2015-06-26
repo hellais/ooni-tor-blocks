@@ -105,9 +105,9 @@ def save_response_filename(filename, response):
 
 # Save a response with an automatically generated filename.
 def save_response_filename_auto(header, request, response, class_):
-    url = urlparse.urlparse(request["url"])
-    filename = urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe="")
-    filename = os.path.join(options.save_blocks_dir, class_, filename)
+    url = urlparse.urlsplit(request["url"])
+    filename = "%s-%s-%s%s" % (header["report_id"], url.scheme, url.netloc, urlparse.urlunsplit((None, None, url.path, url.query, None)))
+    filename = os.path.join(options.save_blocks_dir, class_, urllib.quote(filename, safe=""))
     return save_response_filename(filename, response)
 
 def boolf(v):
