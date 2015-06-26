@@ -157,7 +157,7 @@ def process_filename(filename):
 
 opts, args = getopt.gnu_getopt(sys.argv[1:], "")
 
-csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"])
+csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"], lineterminator="\n")
 csvw.writeheader()
 
 for filename in args:
