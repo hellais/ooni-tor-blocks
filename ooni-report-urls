@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+import datetime
+import getopt
+import json
+import re
+import sys
+
+def usage(f=sys.stdout):
+    f.write("""\
+Usage: %s [-t testname,testname] [reports.json]
+
+testname is e.g. "http_requests".
+reports.json is a JSON index of OONI reports as downloaded from
+http://api.ooni.io/api/reports.
+""" % sys.argv[0])
+
+TEST_NAMES = None
+
+# Returns (date, asn, test_name) typle.
+def parse_report_filename(filename):
+    m = re.match(ur'^([0-9]{8}T[0-9]{6}Z)-(AS.*)-(.*)-v1-probe.yaml', filename)
+    if not m:
+        raise ValueError("cannot parse report filename %r" % filename)
+    date = datetime.datetime.strptime(m.group(1), "%Y%m%dT%H%M%SZ")
+    return date, m.group(2), m.group(3)
+
+# Some older reports have different names for the same(?) test.
+def canonicalize_test_name(test_name):
+    if test_name in ("http_requests_test", "tor_http_requests_test"):
+        test_name = "http_requests"
+    return test_name
+
+def match_test_name(x):
+    if TEST_NAMES is None:
+        return True
+    if canonicalize_test_name(x.get("test_name")) in TEST_NAMES:
+        return True
+    # Test name can also just be hidden in the filename sometimes.
+    _, _, test_name = parse_report_filename(x["report_filename"])
+    if canonicalize_test_name(test_name) in TEST_NAMES:
+        return True
+    return False
+
+def make_url(filename):
+    date, _, _ = parse_report_filename(filename)
+    datestr = date.strftime("%Y-%m-%d")
+    return "http://api.ooni.io/reportFiles/%s/%s.gz" % (datestr, filename)
+
+opts, args = getopt.gnu_getopt(sys.argv[1:], "ht:", "--help")
+for o, a in opts:
+    if o == "-t":
+        TEST_NAMES = a.split(",")
+    elif o == "-h" or o == "--help":
+        usage()
+        sys.exit()
+
+for filename in args:
+    with open(filename) as f:
+        j = json.load(f)
+        for x in j:
+            if match_test_name(x):
+                print make_url(x["report_filename"])
