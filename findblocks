@@ -49,9 +49,9 @@ def split_requests(requests):
                 raise ValueError("more than one is_tor:true request")
             tor = request
     if nontor is None:
-        raise ValueError("no is_tor:false request")
+        raise ValueError("missing is_tor:false request")
     if tor is None:
-        raise ValueError("no is_tor:true request")
+        raise ValueError("missing is_tor:true request")
     return nontor, tor
     
 def process_file(f):
