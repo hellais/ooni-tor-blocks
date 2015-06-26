@@ -96,9 +96,28 @@ def boolf(v):
     else:
         return "F"
 
-def process_file(f):
+def yaml_load_sloppy(f):
     # This is much faster than yaml.safe_load_all.
-    yamloo = yaml.load_all(f, Loader=yaml.CSafeLoader)
+    y = yaml.load_all(f, Loader=yaml.CSafeLoader)
+    while True:
+        while True:
+            try:
+                doc = next(y)
+                break
+            except StopIteration:
+                return
+            except yaml.scanner.ScannerError, e:
+                # Skip ahead to the next line.
+                while True:
+                    line = f.readline()
+                    if not line or line == "...\n":
+                        break
+                print >> sys.stderr, "%s, skipping ahead" % e
+                y = yaml.load_all(f, Loader=yaml.CSafeLoader)
+        yield doc
+
+def process_file(f):
+    yamloo = yaml_load_sloppy(f)
 
     header = None
     for doc in yamloo:
