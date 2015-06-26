@@ -37,7 +37,7 @@ Usage: %s *-http_requests-v1-probe.yaml.gz
 
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
 # blocks.
-def classify_blockpage(response):
+def classify_response(response):
     soup = BeautifulSoup(response["body"])
     title = soup.title
     code = response["code"]
@@ -134,8 +134,8 @@ def process_file(f):
             print >> sys.stderr, "%s: %s" % (doc["input"], str(e))
             continue
 
-        nontor_isblocked, nontor_class = classify_blockpage(nontor["response"])
-        tor_isblocked, tor_class = classify_blockpage(tor["response"])
+        nontor_isblocked, nontor_class = classify_response(nontor["response"])
+        tor_isblocked, tor_class = classify_response(tor["response"])
 
         csvw.writerow({
             "report_id": header["report_id"],
