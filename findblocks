@@ -141,13 +141,6 @@ def process_file(f):
                 if isblocked:
                     save_response_filename_auto(header, request["request"], request["response"], class_)
 
-        if doc["control_failure"] is not None:
-            print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
-            continue
-        if doc["experiment_failure"] is not None:
-            print >> sys.stderr, "%s: experiment_failure=%s" % (doc["input"], doc["experiment_failure"])
-            continue
-
         try:
             nontor, tor = split_requests(doc["requests"])
         except ValueError, e:
