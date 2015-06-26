@@ -35,25 +35,38 @@ Usage: %s *-http_requests-v1-probe.yaml.gz
   -h, --help         show this help.
 """ % sys.argv[0])
 
+# Get the first header value for the given key, or None if the header does not
+# appear.
+def get_header(response, fieldname):
+    for name, values in response["headers"]:
+        if name.lower() == fieldname.lower():
+            return values[0]
+    return None
+
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
-# blocks.
+# blocks. See the sample-blocks directory for the source files that led to these
+# classifier rules.
 def classify_response(response):
+    status = response["code"]
+
     body = response["body"]
     if body is None:
         body = ""
-    soup = BeautifulSoup(body)
-    title = soup.title
-    code = response["code"]
-    if code == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
-        return True, "403-CLOUDFLARE"
-    if code == 403 and title is not None and re.match(ur'^M\d+-\d+$', title.get_text().strip()) and soup.iframe:
-        return True, "403-IRAN"
-    if code == 404 and title is not None and title == u"Access Denied" and re.search(r'You don\'t have permission to access ".*" on this server\.<P>', body):
-        # Seen on www.foxnews.com. Server is AkamaiGHost.
-        return True, "404-ACCESSDENIED"
-    if code // 100 == 4 or code // 100 == 5:
-        return True, "%d-OTHER" % code
-    return False, "%d" % code
+    elif type(body) == unicode:
+        body = body.encode("utf-8")
+
+    if status == 403:
+        if get_header(response, "Server") == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
+            return True, "403-CLOUDFLARE"
+        if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
+            return True, "403-IRAN"
+    if status == 404:
+        if get_header(response, "Server") == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
+            return True, "404-AKAMAI"
+
+    if status // 100 == 4 or status // 100 == 5:
+        return True, "%d-OTHER" % status
+    return False, "%d" % status
 
 # Return a (nontor, tor) pair if there are exactly two requests and one is
 # nontor and one is tor, or else raise an exception.
