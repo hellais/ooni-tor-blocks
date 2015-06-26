@@ -1,0 +1,64 @@
+This directory contains samples of each type of block page we know how
+to detect.
+
+The HTTP status-line and header are reconstructed from OONI reports and
+are not fully representative of the original pages. For example, we do
+not know the original response-phrase (e.g. "OK" or "Not Found") nor the
+original header ordering.
+
+
+== 403-CLOUDFLARE
+
+The famous "Attention Required!" CloudFlare captcha.
+
+
+== 403-IRAN
+
+Block page used in Iran. There are two places where it may vary. The
+first is in the title, which is of the form "M<digit>-<digit>". Looking
+at 2462 samples from June 2015, I found this distribution of titles:
+
+	$ grep -h -o '<title>.*' * | sed -e 's/^<title>//' | sort | uniq -c
+	     78 M1-1
+	     36 M1-2
+	    101 M1-3
+	     58 M1-4
+	     35 M1-5
+	     63 M1-6
+	     51 M1-7
+	     59 M1-8
+	     61 M7-1
+	     83 M7-2
+	     77 M7-3
+	     69 M7-4
+	     77 M7-5
+	     66 M7-6
+	     67 M7-7
+	     67 M7-8
+	    192 M8-1
+	    242 M8-2
+	    195 M8-3
+	    149 M8-4
+	    187 M8-5
+	    164 M8-6
+	    172 M8-7
+	    113 M8-8
+
+The second place it may vary is in the source of the iframe. It may be
+either of these:
+	"http://10.10.34.34?type=Invalid Site&policy=MainPolicy "
+	"http://10.10.34.34?type=Invalid Keyword&policy=MainPolicy "
+It seems like the "Invalid Keyword" can only happen when the requested
+URL has a query string.
+
+Citizen Lab has a variation from 2014 with type="", rather than
+type="Invalid Site" or type="Invalid Keyword"; also the source of the
+referenced iframe:
+https://github.com/citizenlab/blockpages/blob/master/html/ir.html
+https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
+
+
+== 404-AKAMAI
+
+A black page with "Server: AkamaiGHost". It has the characteristic
+Akamai "Reference&#32;&#35;" string.
