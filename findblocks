@@ -38,14 +38,17 @@ Usage: %s *-http_requests-v1-probe.yaml.gz
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
 # blocks.
 def classify_response(response):
-    soup = BeautifulSoup(response["body"])
+    body = response["body"]
+    if body is None:
+        body = ""
+    soup = BeautifulSoup(body)
     title = soup.title
     code = response["code"]
     if code == 403 and title is not None and title.get_text() == u"Attention Required! | CloudFlare":
         return True, "403-CLOUDFLARE"
     if code == 403 and title is not None and re.match(ur'^M\d+-\d+$', title.get_text().strip()) and soup.iframe:
         return True, "403-IRAN"
-    if code == 404 and title is not None and title == u"Access Denied" and re.search(r'You don\'t have permission to access ".*" on this server\.<P>', response["body"]):
+    if code == 404 and title is not None and title == u"Access Denied" and re.search(r'You don\'t have permission to access ".*" on this server\.<P>', body):
         # Seen on www.foxnews.com. Server is AkamaiGHost.
         return True, "404-ACCESSDENIED"
     if code // 100 == 4 or code // 100 == 5:
@@ -85,7 +88,9 @@ def save_response(f, response):
     # Unicode, guess the encoding was UTF-8. It might be possible to scrape the
     # Content-Type for the encoding.
     body = response["body"]
-    if type(body) == unicode:
+    if body is None:
+        body = ""
+    elif type(body) == unicode:
         body = body.encode("utf-8")
     f.write(body)
 
@@ -123,6 +128,16 @@ def process_file(f):
 
         assert header is not None
 
+        if options.save_blocks_dir is not None:
+            for request in doc["requests"]:
+                try:
+                    isblocked, class_ = classify_response(request["response"])
+                except KeyError, e:
+                    # No response.
+                    continue
+                if isblocked:
+                    save_response_filename(make_save_filename(header, request["response"], doc["input"], class_), request["response"])
+
         if doc["control_failure"] is not None:
             print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
             continue
@@ -151,12 +166,6 @@ def process_file(f):
             "tor_class": tor_class,
         })
         sys.stdout.flush()
-
-        if options.save_blocks_dir is not None:
-            if nontor_isblocked:
-                save_response_filename(make_save_filename(header, nontor["response"], doc["input"], nontor_class), nontor["response"])
-            if tor_isblocked:
-                save_response_filename(make_save_filename(header, tor["response"], doc["input"], tor_class), tor["response"])
 
 # Open a file optionally with gzip decompression based on the filename
 # extension.
