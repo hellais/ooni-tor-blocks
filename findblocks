@@ -13,10 +13,10 @@
 import csv
 import errno
 import getopt
-import gzip
 import os
 import os.path
 import re
+import subprocess
 import sys
 import urllib
 import urlparse
@@ -143,11 +143,17 @@ def process_file(f):
         })
         sys.stdout.flush()
 
+# Wow! Python's gzip module is slow! Uncompress with zcat instead. (Also has the
+# advantage that decompression can use a separate core.)
+def open_zcat(filename):
+    p = subprocess.Popen(["zcat", filename], stdout=subprocess.PIPE)
+    return p.stdout
+
 # Open a file optionally with gzip decompression based on the filename
 # extension.
 def magic_open(filename):
     if filename.endswith(".gz"):
-        return gzip.GzipFile(filename)
+        return open_zcat(filename)
     return open(filename)
 
 def process_filename(filename):
