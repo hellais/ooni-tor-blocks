@@ -187,16 +187,17 @@ def process_filename(filename):
     with magic_open(filename) as f:
         return process_file(f)
 
-opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["save-blocks=", "help"])
-for o, a in opts:
-    if o == "--save-blocks":
-        options.save_blocks_dir = a
-    elif o == "-h" or o == "--help":
-        usage()
-        sys.exit()
+if __name__ == "__main__":
+    opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["save-blocks=", "help"])
+    for o, a in opts:
+        if o == "--save-blocks":
+            options.save_blocks_dir = a
+        elif o == "-h" or o == "--help":
+            usage()
+            sys.exit()
 
-csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"], lineterminator="\n")
-csvw.writeheader()
+    csvw = csv.DictWriter(sys.stdout, fieldnames=["report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"], lineterminator="\n")
+    csvw.writeheader()
 
-for filename in args:
-    process_filename(filename)
+    for filename in args:
+        process_filename(filename)
