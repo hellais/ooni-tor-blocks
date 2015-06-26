@@ -10,10 +10,15 @@
 # Should look for timeout blocks.
 
 import csv
+import errno
 import getopt
 import gzip
+import os
+import os.path
 import re
 import sys
+import urllib
+import urlparse
 import yaml
 
 from bs4 import BeautifulSoup
@@ -57,11 +62,39 @@ def split_requests(requests):
         raise ValueError("missing is_tor:true request")
     return nontor, tor
 
+def save_response(f, response):
+    f.write("HTTP/1.0 %d xxx\r\n" % response["code"])
+    for name, values in response["headers"]:
+        for value in values:
+            f.write("%s: %s\r\n" % (name, value))
+    f.write("\r\n")
+    # YAMLOO can give us either a binary string (type str) or a Unicode string
+    # (type unicode, with unspecified original encoding) for the body. If it's
+    # Unicode, guess the encoding was UTF-8. It might be possible to scrape the
+    # Content-Type for the encoding.
+    body = response["body"]
+    if type(body) == unicode:
+        body = body.encode("utf-8")
+    f.write(body)
+
+def save_response_filename(filename, response):
+    try:
+        os.makedirs(os.path.dirname(filename))
+    except OSError, e:
+        if e.errno != errno.EEXIST:
+            raise
+    with open(filename, "w") as f:
+        return save_response(f, response)
+
 def boolf(v):
     if v:
         return "T"
     else:
         return "F"
+
+def make_save_filename(header, response, url, classname):
+    url = urlparse.urlparse(url)
+    return os.path.join("blocks", classname, urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe=""))
 
 def process_file(f):
     yamloo = yaml.safe_load_all(f)
@@ -104,6 +137,11 @@ def process_file(f):
             "tor_class": tor_class,
         })
         sys.stdout.flush()
+
+        if nontor_isblocked:
+            save_response_filename(make_save_filename(header, nontor["response"], doc["input"], nontor_class), nontor["response"])
+        if tor_isblocked:
+            save_response_filename(make_save_filename(header, tor["response"], doc["input"], tor_class), tor["response"])
 
 # Open a file optionally with gzip decompression based on the filename
 # extension.
