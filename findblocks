@@ -97,7 +97,10 @@ def boolf(v):
         return "F"
 
 def process_file(f):
-    yamloo = yaml.safe_load_all(f)
+    # yaml.load_all is supposed to not be safe with untrusted inputs. But
+    # yaml.safe_load_all does not take the Loader argument, and yaml.CLoader is
+    # so much faster.
+    yamloo = yaml.load_all(f, Loader=yaml.CLoader)
 
     header = None
     for doc in yamloo:
