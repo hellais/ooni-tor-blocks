@@ -103,15 +103,18 @@ def save_response_filename(filename, response):
     with open(filename, "w") as f:
         return save_response(f, response)
 
+# Save a response with an automatically generated filename.
+def save_response_filename_auto(header, request, response, class_):
+    url = urlparse.urlparse(request["url"])
+    filename = urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe="")
+    filename = os.path.join(options.save_blocks_dir, class_, filename)
+    return save_response_filename(filename, response)
+
 def boolf(v):
     if v:
         return "T"
     else:
         return "F"
-
-def make_save_filename(header, response, url, classname):
-    url = urlparse.urlparse(url)
-    return os.path.join(options.save_blocks_dir, classname, urllib.quote("%s-%s%s" % (header["report_id"], url.netloc, url.path), safe=""))
 
 def process_file(f):
     yamloo = yaml.safe_load_all(f)
@@ -136,7 +139,7 @@ def process_file(f):
                     # No response.
                     continue
                 if isblocked:
-                    save_response_filename(make_save_filename(header, request["response"], doc["input"], class_), request["response"])
+                    save_response_filename_auto(header, request["request"], request["response"], class_)
 
         if doc["control_failure"] is not None:
             print >> sys.stderr, "%s: control_failure=%s" % (doc["input"], doc["control_failure"])
