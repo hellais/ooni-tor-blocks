@@ -1,0 +1,20 @@
+This directory is about mining historical OONI scans to find past
+instances of Tor exit discrimination.
+
+Download index of reports.
+
+$ wget -O reports.json http://api.ooni.io/api/reports
+
+Get a list of URLs of http_requests reports. There are other report
+types than http_requests but we are not interested in them.
+
+$ ./ooni-report-urls -t http_requests reports.json > urls.txt
+
+Download a subset of the reports.
+
+$ tail -n 100 urls.txt | wget -i -
+
+Output a CSV file that shows success/failure status of each request and
+save block pages to a blocks directory.
+
+$ ./findblocks --save-blocks blocks *-http_requests-v1-probe.yaml.gz | tee findblocks.csv
