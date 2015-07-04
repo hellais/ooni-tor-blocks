@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# This test script makes sure that the classify_response functino correctly
+# This test script makes sure that the classify_response function correctly
 # classifies the sample block pages in the sample-blocks directory.
 
 import os
