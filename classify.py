@@ -33,6 +33,9 @@ def classify_response(response):
     if status == 406:
         if re.search("This request has been denied for security reasons\.", body):
             return True, "406-SITE5"
+    if status == 503:
+        if re.search("<p>Please retry your request and <a href=\"mailto:feedback\\+unavailable@yelp.com\\?subject=IP%20Block%20Message%3A%20[\\d.]+\">contact Yelp</a> if you continue experiencing issues\\.</p>", body):
+            return True, "503-YELP"
 
     if status // 100 == 4 or status // 100 == 5:
         return True, "%d-OTHER" % status
