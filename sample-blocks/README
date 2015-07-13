@@ -12,6 +12,13 @@ original header ordering.
 The famous "Attention Required!" CloudFlare captcha.
 
 
+== 403-GOOGLE-SORRY
+
+The Google page "We're sorry... but your computer or network may be
+sending automated queries." This one does not give you an opportunity to
+solve a captcha.
+
+
 == 403-IRAN
 
 Block page used in Iran. There are two places where it may vary. The
