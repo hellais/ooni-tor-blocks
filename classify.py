@@ -25,6 +25,8 @@ def classify_response(response):
             return True, "403-CLOUDFLARE"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
+        if get_header(response, "Server").startswith("GFE/") and re.search("<h1>We're sorry\.\.\.</h1><p>\.\.\. but your computer or network may be sending automated queries\.", body):
+            return True, "403-GOOGLE-SORRY"
     if status == 404:
         if get_header(response, "Server") == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "404-AKAMAI"
