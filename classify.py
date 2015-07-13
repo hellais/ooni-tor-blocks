@@ -27,9 +27,9 @@ def classify_response(response):
             return True, "403-IRAN"
         if get_header(response, "Server").startswith("GFE/") and re.search("<h1>We're sorry\.\.\.</h1><p>\.\.\. but your computer or network may be sending automated queries\.", body):
             return True, "403-GOOGLE-SORRY"
-    if status == 404:
+    if status == 403 or status == 404:
         if get_header(response, "Server") == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
-            return True, "404-AKAMAI"
+            return True, "%d-AKAMAI" % status
     if status == 406:
         if re.search("This request has been denied for security reasons\.", body):
             return True, "406-SITE5"
