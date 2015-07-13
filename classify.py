@@ -25,13 +25,13 @@ def classify_response(response):
             return True, "403-CLOUDFLARE"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
-        if get_header(response, "Server").startswith("GFE/") and re.search("<h1>We're sorry\.\.\.</h1><p>\.\.\. but your computer or network may be sending automated queries\.", body):
+        if get_header(response, "Server").startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
             return True, "403-GOOGLE-SORRY"
     if status == 403 or status == 404:
         if get_header(response, "Server") == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
     if status == 406:
-        if re.search("This request has been denied for security reasons\.", body):
+        if re.search("This request has been denied for security reasons\\.", body):
             return True, "406-SITE5"
     if status == 503:
         if re.search("<p>Please retry your request and <a href=\"mailto:feedback\\+unavailable@yelp.com\\?subject=IP%20Block%20Message%3A%20[\\d.]+\">contact Yelp</a> if you continue experiencing issues\\.</p>", body):
