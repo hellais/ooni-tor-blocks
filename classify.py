@@ -29,6 +29,8 @@ def classify_response(response):
             return True, "403-IRAN"
         if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
             return True, "403-GOOGLE-SORRY"
+        if re.search("This IP has been automatically blocked\\.\nIf you have questions, please email: blocks-\w+@craigslist\\.org\n", body):
+            return True, "403-CRAIGSLIST"
     if status == 403 or status == 404:
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
