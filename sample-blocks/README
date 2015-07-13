@@ -91,3 +91,11 @@ comes from sites on a hosting company called Site5.
 	this was in error, please contact support.'"
 The message may come with a variety of Server header values, and may be
 chunked or non-chunked.
+
+
+== 503-YELP
+
+A custom block page of yelp.com. It contains the HTML
+	<h2>Sorry, you're not allowed to access this page.</h2>
+	<p>Your IP address is: X.X.X.X</p>
+	<p>Please retry your request and <a href="mailto:feedback+unavailable@yelp.com?subject=IP%20Block%20Message%3A%20X.X.X.X">contact Yelp</a> if you continue experiencing issues.</p>
