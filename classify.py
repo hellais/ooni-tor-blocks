@@ -20,15 +20,17 @@ def classify_response(response):
     elif type(body) == unicode:
         body = body.encode("utf-8")
 
+    server = get_header(response, "Server")
+
     if status == 403:
-        if get_header(response, "Server") == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
+        if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
             return True, "403-CLOUDFLARE"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
-        if get_header(response, "Server").startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
+        if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
             return True, "403-GOOGLE-SORRY"
     if status == 403 or status == 404:
-        if get_header(response, "Server") == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
+        if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
     if status == 406:
         if re.search("This request has been denied for security reasons\\.", body):
