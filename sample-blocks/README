@@ -65,10 +65,10 @@ https://github.com/citizenlab/blockpages/blob/master/html/ir.html
 https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
 
 
-== 404-AKAMAI
+== 403-AKAMAI, 404-AKAMAI
 
 A block page with "Server: AkamaiGHost". It has the characteristic
-Akamai "Reference&#32;&#35;" string.
+Akamai "Reference&#32;&#35;" string. It can have HTTP status 403 or 404.
 
 
 == 406-SITE5
