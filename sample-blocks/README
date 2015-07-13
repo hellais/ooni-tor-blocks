@@ -11,7 +11,11 @@ original header ordering.
 
 Bad Behavior (http://bad-behavior.ioerror.us/about/) is a PHP plugin
 that does heuristic spam detection. Its HTTP status-text is "Bad
-Behavior" but the OONI data does not include the status-text.
+Behavior" but the OONI data does not include the status-text. The text
+may say:
+	"An invalid request was received from your browser. This may be caused by a malfunctioning proxy server or browser privacy software."
+or it may say:
+	"You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer."
 
 
 == 403-CLOUDFLARE
