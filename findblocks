@@ -180,7 +180,7 @@ def magic_open(filename):
 
 # Returns (date, asn, test_name) typle.
 def parse_report_filename(filename):
-    m = re.match(ur'^([0-9]{8}T[0-9]{6}Z)-(AS.*)-(.*)-v1-probe.yaml', filename)
+    m = re.match(ur'^([0-9]{8}T[0-9]{6}Z)-(AS.*)-(.*)-v1-probe.yaml', os.path.basename(filename))
     if not m:
         raise ValueError("cannot parse report filename %r" % filename)
     date = datetime.datetime.strptime(m.group(1), "%Y%m%dT%H%M%SZ")
