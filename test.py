@@ -50,5 +50,15 @@ class TestClassifyResponse(unittest.TestCase):
                 _, class_ = classify_response(response)
                 self.assertEqual(class_, dirname, "got %s but wanted %s for %s" % (class_, dirname, basename))
 
+    def testEmpty(self):
+        for code in range(0, 600):
+            response = {"code": code, "headers": [], "body": ""}
+            isblock, class_ = classify_response(response)
+            if isblock:
+                expected_class = "%d-OTHER" % code
+            else:
+                expected_class = "%d" % code
+            self.assertEqual(class_, expected_class, "got class %s but wanted %s" % (class_, expected_class))
+
 if __name__ == "__main__":
     unittest.main()
