@@ -1,0 +1,6 @@
+HTTP/1.0 403 xxx
+Set-Cookie: cl_b=yqo9cmMd5RGhmsYXH8qC2A89nAs;path=/;domain=.craigslist.org;expires=Fri, 01-Jan-2038 00:00:00 GMT
+Content-Length: 117
+
+This IP has been automatically blocked.
+If you have questions, please email: blocks-b1425464111040905@craigslist.org

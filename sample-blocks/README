@@ -12,6 +12,13 @@ original header ordering.
 The famous "Attention Required!" CloudFlare captcha.
 
 
+== 403-CRAIGSLIST
+
+Custom block page for craigslist.org. Usually the header contains only
+the fields Set-Cookie and Content-Length, but sometimes it additionally
+contains Date and Connection.
+
+
 == 403-GOOGLE-SORRY
 
 The Google page "We're sorry... but your computer or network may be
