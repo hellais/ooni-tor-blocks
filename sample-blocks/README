@@ -69,3 +69,25 @@ https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
 
 A block page with "Server: AkamaiGHost". It has the characteristic
 Akamai "Reference&#32;&#35;" string.
+
+
+== 406-SITE5
+
+It's the message "This request has been denied for security reasons. If
+you believe this was in error, please contact support." The source of
+the message is unclear, but evidence from web search indicates that it
+comes from sites on a hosting company called Site5.
+	http://forum.joomla.org/viewtopic.php?t=855169
+	"This has very probably nothing to do with the problem, but...
+	where are you hosted? I'm on a site5.com VPS in London that is
+	due to be moved to a new location in a few days..."
+	https://wordpress.stackexchange.com/questions/135275/new-wordpress-error-message-not-seen-this-before
+	"If you're using site5 hosting, they block simple passwords i.e.
+	'123'. Changing the password to something complicated fixed it."
+	https://www.webhostingtalk.com/showthread.php?t=1466724
+	"I just purchased a hosting plan with Site5 and I can't access
+	my site. Also when I go on the Site5 site, I get.... 'This
+	request has been denied for security reasons. If you believe
+	this was in error, please contact support.'"
+The message may come with a variety of Server header values, and may be
+chunked or non-chunked.
