@@ -7,6 +7,13 @@ not know the original response-phrase (e.g. "OK" or "Not Found") nor the
 original header ordering.
 
 
+== 403-BADBEHAVIOR
+
+Bad Behavior (http://bad-behavior.ioerror.us/about/) is a PHP plugin
+that does heuristic spam detection. Its HTTP status-text is "Bad
+Behavior" but the OONI data does not include the status-text.
+
+
 == 403-CLOUDFLARE
 
 The famous "Attention Required!" CloudFlare captcha.
