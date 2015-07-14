@@ -7,6 +7,13 @@ not know the original response-phrase (e.g. "OK" or "Not Found") nor the
 original header ordering.
 
 
+== 403-ABERDEEN
+
+The block page of the University of Aberdeen's web content filter. I
+guess someone is running ooniprobe there. It tells you what the category
+of the blocked content is.
+
+
 == 403-BADBEHAVIOR
 
 Bad Behavior (http://bad-behavior.ioerror.us/about/) is a PHP plugin

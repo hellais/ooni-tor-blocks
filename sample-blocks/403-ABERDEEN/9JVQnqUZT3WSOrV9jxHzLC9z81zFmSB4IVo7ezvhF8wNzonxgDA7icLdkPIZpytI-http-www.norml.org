@@ -1,0 +1,256 @@
+HTTP/1.0 403 xxx
+Content-Length: 7453
+Content-Type: text/html; charset="utf-8"
+Connection: Close
+
+<HTML>
+  <HEAD>
+    <TITLE>
+      Web page unavailable
+    </TITLE>
+    <base href='http://www.abdn.ac.uk/'>
+  </HEAD>
+  <BODY bgcolor='#FFFFFF'>
+    <table width='100%' border='0' cellspacing='0' cellpadding='0'>
+      <tr>
+        <td colspan='2'>
+          <a href='/cgi-bin/betsie.cgi' style='color: #ffffff; font-size: 1px'>
+            Text only
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td align='left' valign='bottom'>
+          <a href='http://www.abdn.ac.uk/' title='links back to homepage' tabindex='2' accesskey='H'>
+            <img src='/central/images/unilogo_dept.gif' alt='University of Aberdeen' width='143' height='58' border='0' />
+          </a>
+        </td>
+        <td align='right' valign='bottom'>
+          <a href='./dit/'>
+            <img src='/central/headers/newsections/diss.gif' alt='Takes you to the main page for this section' border='0' />
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan='2'>
+          <table width='100%' border='0' cellpadding='0' cellspacing='0'>
+            <tr>
+              <td colspan='2'>
+                <img src='/central/headers/newsections/spacer.gif' width='8' height='1' alt=' ' />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src='/central/headers/newsections/spacer.gif' width='18' height='1' alt=' ' />
+              </td>
+              <td width='100%' bgcolor='#772244'>
+                <img src='/central/headers/newsections/spacer.gif' width='1' height='1' alt=' ' />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <h2>
+      <font face='Arial, Helvetica, sans-serif'>
+        Web content filter: Page unavailable 
+      </font>
+    </h2>
+    <table width='100%' border='0'>
+      <tr>
+        
+        <td width='22%'>
+          <font face='Arial, Helvetica, sans-serif'>
+            Requested URL:
+          </font>
+        </td>
+        <td width='78%'>
+          
+          <font face='Arial, Helvetica, sans-serif'>
+            
+            www.norml.org/
+          </font>
+        </td>
+      </tr>
+    </tr>
+    <tr>
+      
+      <td width='22%'>
+        <font face='Arial, Helvetica, sans-serif'>
+          Blocked category:
+        </font>
+      </td>
+      <td width='78%'>
+        
+        <font face='Arial, Helvetica, sans-serif'>
+          
+          Marijuana
+        </font>
+      </td>
+    </tr>
+  </table>
+  <p>
+    <font face='Arial, Helvetica, sans-serif'>
+      Access to this URL has been blocked 
+      by the University of Aberdeen Web Content Filter. 
+      <BR>
+    </font>
+  </p>
+  <HR size='1'>
+  <ADDRESS>
+    <font face='Arial, Helvetica, sans-serif'>
+      Directorate of Information 
+      Technology
+    </font>
+  </ADDRESS>
+  <hr size='1'>
+  <table width='100%' border='0'>
+    <tr bgcolor='#CCCCCC'>
+      
+      <td colspan='2' valign='top' nowrap>
+        
+        <div align='center'>
+          <font face='Arial, Helvetica, sans-serif'>
+            <b>
+              Web Content 
+              Filter
+            </b>
+          </font>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      
+      <td width='13%' valign='top' nowrap height='102'>
+        <font face='Arial, Helvetica, sans-serif'>
+          <b>
+            Explanation:
+          </b>
+        </font>
+      </td>
+      <td width='87%' valign='top' height='102'>
+        
+        <ul>
+          <li>
+            <font face='Arial, Helvetica, sans-serif'>
+			  Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service.
+              The URL (noted above) is currently included on a 
+              <i>
+                blacklist
+              </i>
+              of 
+              Web sites thought to contain 
+              <a href=/staffnet/documents/policy-zone-information-policies/DIT_e-publishing.pdf>
+                unsuitable
+              </a>
+              material. URLs are added 
+              to this blacklist automatically by a software robot designed to seek 
+              out and identify material in certain categories, such as pornography 
+              and gratuitous violence. The robotic nature of the software, however, 
+              does result in some unnecessary filtering (blocking) of URLs.
+            </font>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      
+      <td width='13%' valign='top' nowrap>
+        <b>
+          <font face='Arial, Helvetica, sans-serif'>
+            To 
+            request access:
+          </font>
+        </b>
+      </td>
+      <td width='87%' valign='top'>
+        
+        <ul>
+          <li>
+            <font face='Arial, Helvetica, sans-serif'>
+              If you believe that the 
+              URL you have tried to access has been unnecessarily blocked, please 
+              complete this 
+              <a href='/it/web-filter-intercept.php?reason=Classified_as_too_Marijuana&url=http://www.norml.org/'>
+                online form
+              </a>
+              giving details of the URL and what you understand to be the 
+              nature of its contents. It will then be reviewed and removed from the 
+              blacklist, if appropriate.
+            </font>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      
+      <td width='13%' valign='top' nowrap height='69'>
+        <font face='Arial, Helvetica, sans-serif'>
+          <b>
+            Please 
+            note:
+          </b>
+        </font>
+      </td>
+      <td width='87%' valign='top' height='69'>
+        
+        <ul>
+          <li>
+            <font face='Arial, Helvetica, sans-serif'>
+              If a URL is blocked (by 
+              the filter) then the relevant page is 
+              <b>
+                replaced
+              </b>
+              by the message 
+              you are now viewing. Failure to load a given URL is 
+              <b>
+                not
+              </b>
+              an indication 
+              that the URL is being blocked. The filter is not the cause of slow or 
+              unreliable connections to other web-sites.
+            </font>
+            <font face='Arial, Helvetica, sans-serif'>
+              
+            </font>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      
+      <td width='13%' valign='top' nowrap height='85'>
+        <b>
+          <font face='Arial, Helvetica, sans-serif'>
+            Caution:
+          </font>
+        </b>
+      </td>
+      <td width='87%' valign='top' height='85'>
+        
+        <ul>
+          <li>
+            <font face='Arial, Helvetica, sans-serif'>
+              <font color='#FF0000'>
+                The 
+                blacklist is not exhaustive. The fact that a URL is not blocked does 
+                not imply that it is permissible to access that site. Deliberate access 
+                to any offensive material, such as Web sites which are pornographic, 
+                racist, promote violence or other illegal activities, is a breach of 
+                the University's 
+                <a href='/staffnet/documents/policy-zone-information-policies/DIT_cond-IT.pdf'>
+                  Conditions for Using 
+                  IT Facilities
+                </a>
+                and may lead to disciplinary action. 
+              </font>
+            </font>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</BODY>
+</HTML>
+
