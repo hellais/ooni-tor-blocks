@@ -37,6 +37,8 @@ def classify_response(response):
             return True, "403-ABERDEEN"
         if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
             return True, "403-SONICWALL"
+        if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted.  If you feel this is in error please contact your hosting providers abuse department\\.", body):
+            return True, "403-BLUEHOST"
     if status == 403 or status == 404:
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
