@@ -88,7 +88,10 @@ def save_response_filename(filename, response):
 def save_response_filename_auto(header, request, response, class_):
     url = urlparse.urlsplit(request["url"])
     filename = "%s-%s-%s%s" % (header["report_id"], url.scheme, url.netloc, urlparse.urlunsplit((None, None, url.path, url.query, None)))
-    filename = os.path.join(options.save_blocks_dir, class_, urllib.quote(filename, safe=""))
+    filename = urllib.quote(filename, safe="")
+    # Truncate name to filesystem limits.
+    filename = filename[:255]
+    filename = os.path.join(options.save_blocks_dir, class_, filename)
     return save_response_filename(filename, response)
 
 def boolf(v):
