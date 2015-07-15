@@ -1,6 +1,6 @@
 library(ggplot2)
 
-palette <- c(UNBLOCKED="gray", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="orange", "BOTH-BLOCKED"="#3f3f3f")
+palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
 x <- read.csv("findblocks.csv", colClasses=list(
 	date="Date", report_id="factor", probe_cc="factor",
