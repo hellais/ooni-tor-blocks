@@ -25,6 +25,20 @@ or it may say:
 	"You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer."
 
 
+== 403-BLUEHOST
+
+A custom block page of the Bluehost web hosting company. It says:
+	"Access denied.  Your IP address [X.X.X.X] is blacklisted.  If you feel this is in error please contact your hosting providers abuse department."
+It apparently is produced by this Apache module:
+	https://github.com/bluehost/mod_rbld
+which contains a similar string in this file:
+	https://github.com/bluehost/mod_rbld/blob/d9be74f7cdc672c3a8bb803ccaebc10595af4dce/mod_rbld.conf
+	"Access denied.  Your IP address is blacklisted.  If you feel this is in error please contact your hosting provider's abuse department."
+(Notice, however, that the string in that file does not contain a
+placeholder for the remote IP address in square brackets. Perhaps they
+have customized it in deployment.)
+
+
 == 403-CLOUDFLARE
 
 The famous "Attention Required!" CloudFlare captcha.
