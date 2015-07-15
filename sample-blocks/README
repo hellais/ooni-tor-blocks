@@ -90,6 +90,14 @@ https://github.com/citizenlab/blockpages/blob/master/html/ir.html
 https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
 
 
+== 403-SONICWALL
+
+Graphics and text that say "Dell SonicWALL Network Security Appliance.
+This site has been blocked by the network administrator." It has been
+seen on only one site, www.schwarzreport.org, but it appears to be a
+generic block page.
+
+
 == 403-AKAMAI, 404-AKAMAI
 
 A block page with "Server: AkamaiGHost". It has the characteristic
