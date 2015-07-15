@@ -152,7 +152,7 @@ def process_file(f, date):
         tor_isblocked, tor_class = classify_response(tor["response"])
 
         csvw.writerow({
-            "date": date.strftime("%Y-%m-%d"),
+            "date": date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
             "url": doc["input"],
