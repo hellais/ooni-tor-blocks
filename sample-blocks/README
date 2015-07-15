@@ -7,6 +7,11 @@ not know the original response-phrase (e.g. "OK" or "Not Found") nor the
 original header ordering.
 
 
+== 403-4CHAN
+
+Custom CloudFlare captcha page of www.4chan.org.
+
+
 == 403-ABERDEEN
 
 The block page of the University of Aberdeen's web content filter. I
