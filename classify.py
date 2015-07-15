@@ -35,6 +35,8 @@ def classify_response(response):
             return True, "403-BADBEHAVIOR"
         if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
             return True, "403-ABERDEEN"
+        if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
+            return True, "403-SONICWALL"
     if status == 403 or status == 404:
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
