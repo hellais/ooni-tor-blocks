@@ -61,6 +61,10 @@ def classify_response(response):
     if status == 501:
         if body == "Not Implemented  Tor IP not allowed":
             return True, "501-CONVIO"
+        # Some of the OONI samples are missing the body, so do a specific test
+        # on the header format.
+        if len(response["headers"]) == 2 and get_header(response, "Content-Length") == "35" and get_header(response, "Connection") == "close":
+            return True, "501-CONVIO"
 
     if status == 503:
         if re.search("<div class=\"cf-browser-verification cf-im-under-attack\">", body):
