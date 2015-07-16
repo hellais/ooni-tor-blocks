@@ -52,10 +52,6 @@ def split_requests(requests):
             if tor is not None:
                 raise ValueError("more than one is_tor:true request")
             tor = request
-    if nontor is None:
-        raise ValueError("missing is_tor:false request")
-    if tor is None:
-        raise ValueError("missing is_tor:true request")
     return nontor, tor
 
 def save_response(f, response):
@@ -153,10 +149,12 @@ def process_file(f):
                 if isblocked:
                     save_response_filename_auto(header, request["request"], request["response"], class_)
 
-        try:
-            nontor, tor = split_requests(doc["requests"])
-        except ValueError, e:
-            print >> sys.stderr, "%s: %s" % (doc["input"], str(e))
+        nontor, tor = split_requests(doc["requests"])
+        if nontor is None:
+            print >> sys.stderr, "%s %s: missing is_tor:false request: %s" % (header["report_id"], doc["input"], doc["experiment_failure"])
+        if tor is None:
+            print >> sys.stderr, "%s %s: missing is_tor:true request: %s" % (header["report_id"], doc["input"], doc["control_failure"])
+        if nontor is None or tor is None:
             continue
 
         nontor_isblocked, nontor_class = classify_response(nontor["response"])
