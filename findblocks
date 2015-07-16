@@ -124,7 +124,7 @@ def yaml_load_sloppy(f):
                 y = yaml.load_all(f, Loader=yaml.CSafeLoader)
         yield doc
 
-def process_file(f):
+def process_file(f, filename):
     yamloo = yaml_load_sloppy(f)
 
     header = None
@@ -151,9 +151,9 @@ def process_file(f):
 
         nontor, tor = split_requests(doc["requests"])
         if nontor is None:
-            print >> sys.stderr, "%s %s: missing is_tor:false request: %s" % (header["report_id"], doc["input"], doc["experiment_failure"])
+            print >> sys.stderr, "%s %s: missing is_tor:false request: %s" % (filename, doc["input"], doc["experiment_failure"])
         if tor is None:
-            print >> sys.stderr, "%s %s: missing is_tor:true request: %s" % (header["report_id"], doc["input"], doc["control_failure"])
+            print >> sys.stderr, "%s %s: missing is_tor:true request: %s" % (filename, doc["input"], doc["control_failure"])
         if nontor is None or tor is None:
             continue
 
@@ -205,7 +205,7 @@ def parse_report_filename(filename):
 
 def process_filename(filename):
     with magic_open(filename) as f:
-        return process_file(f)
+        return process_file(f, filename)
 
 if __name__ == "__main__":
     opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["save-blocks=", "help"])
