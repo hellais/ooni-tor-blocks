@@ -145,6 +145,15 @@ The message may come with a variety of Server header values, and may be
 chunked or non-chunked.
 
 
+== 501-CONVIO
+
+A custom block page for sites hosted on convio.net. Based on the
+response body, it seems clearly a Tor-specific block:
+	"Not Implemented  Tor IP not allowed"
+The OONI data has a few cases that look erroneous and are missing the
+body (despite having a "Content-Length: 35" header).
+
+
 == 503-CLOUDFLARE
 
 These are block pages that run some kind of automated CloudFlare browser
