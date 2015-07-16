@@ -52,7 +52,7 @@ def classify_response(response):
         # https://ooni.torproject.org/post/eeep-greek-censorship/#ote:d0c495f4479395eff703b25df5d2e963
         # https://ooni.torproject.org/post/eeep-greek-censorship/#cosmote:d0c495f4479395eff703b25df5d2e963
         # It can have "Server: Apache" or "Server: Apache/2.2.15 (CentOS)".
-        if re.search("<TITLE>Μή Επιτρεπτή Πρόσβαση</TITLE>", body) and re.search("<BR><BR>Για περισσότερες πληροφορίες: <a href=\"http://www\\.gamingcommission\\.gov\\.gr/index.php/el/\">http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/</a><BR><BR>", body):
+        if re.search("<TITLE>Μή Επιτρεπτή Πρόσβαση</TITLE>", body) and re.search("<BR><BR>Για περισσότερες πληροφορίες: <a href=\"http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/\">http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/</a><BR><BR>", body):
             return True, "200-EEEP"
         # This is a catch-all designed to find other E.E.E.P. blocks that aren't
         # specifically enumerated above, for when new OONI reports are added.
