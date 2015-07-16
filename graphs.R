@@ -27,7 +27,7 @@ makegraph <- function(x, topn, title) {
 	}
 
 	p <- ggplot(x, aes(date, url, color=blocked))
-	p <- p + geom_point(size=2.5, alpha=0.5, position=position_jitter(width=0.1, height=0))
+	p <- p + geom_point(size=2.5, alpha=0.5)
 	p <- p + guides(color=guide_legend(override.aes=c(alpha=1)))
 	p <- p + scale_color_manual(values=palette)
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
