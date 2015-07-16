@@ -128,7 +128,7 @@ def yaml_load_sloppy(f):
                 y = yaml.load_all(f, Loader=yaml.CSafeLoader)
         yield doc
 
-def process_file(f, date):
+def process_file(f):
     yamloo = yaml_load_sloppy(f)
 
     header = None
@@ -162,8 +162,13 @@ def process_file(f, date):
         nontor_isblocked, nontor_class = classify_response(nontor["response"])
         tor_isblocked, tor_class = classify_response(tor["response"])
 
+        try:
+            test_date = datetime.datetime.utcfromtimestamp(doc["test_start_time"])
+        except KeyError:
+            # Some reports don't have individual test_start_time.
+            test_date = datetime.datetime.utcfromtimestamp(header["start_time"])
         csvw.writerow({
-            "date": date.strftime("%Y-%m-%d %H:%M:%S"),
+            "date": test_date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
             "url": canonicalize_url(doc["input"]),
@@ -201,9 +206,8 @@ def parse_report_filename(filename):
     return date, m.group(2), m.group(3)
 
 def process_filename(filename):
-    date, _, _ = parse_report_filename(filename)
     with magic_open(filename) as f:
-        return process_file(f, date)
+        return process_file(f)
 
 if __name__ == "__main__":
     opts, args = getopt.gnu_getopt(sys.argv[1:], "h", ["save-blocks=", "help"])
