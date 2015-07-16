@@ -15,6 +15,7 @@ from findblocks import canonicalize_url
 from classify import classify_response
 
 SAMPLE_BLOCKS_DIR = "sample-blocks"
+SAMPLE_NONBLOCKS_DIR = "sample-nonblocks"
 
 def build_response(f):
     response = {}
@@ -42,17 +43,24 @@ def build_response_filename(filename):
         return build_response(f)
 
 class TestClassifyResponse(unittest.TestCase):
-    def testSampleBlocks(self):
-        for dirname in os.listdir(SAMPLE_BLOCKS_DIR):
-            if not os.path.isdir(os.path.join(SAMPLE_BLOCKS_DIR, dirname)):
+    def sampleSub(self, path, block):
+        for dirname in os.listdir(path):
+            if not os.path.isdir(os.path.join(path, dirname)):
                 continue
-            for basename in os.listdir(os.path.join(SAMPLE_BLOCKS_DIR, dirname)):
-                filename = os.path.join(SAMPLE_BLOCKS_DIR, dirname, basename)
+            for basename in os.listdir(os.path.join(path, dirname)):
+                filename = os.path.join(path, dirname, basename)
                 if not os.path.isfile(filename):
                     continue
                 response = build_response_filename(filename)
-                _, class_ = classify_response(response)
+                isblock, class_ = classify_response(response)
+                self.assertEqual(isblock, block, "got isblocked=%s but wanted %s for %s" % (isblock, block, basename))
                 self.assertEqual(class_, dirname, "got %s but wanted %s for %s" % (class_, dirname, basename))
+
+    def testSampleBlocks(self):
+        self.sampleSub(SAMPLE_BLOCKS_DIR, True)
+
+    def testSampleNonBlocks(self):
+        self.sampleSub(SAMPLE_NONBLOCKS_DIR, False)
 
     def testEmpty(self):
         for code in range(0, 600):
