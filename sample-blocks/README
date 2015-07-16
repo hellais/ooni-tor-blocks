@@ -140,6 +140,11 @@ seen on only one site, www.schwarzreport.org, but it appears to be a
 generic block page.
 
 
+== 403-WITZA
+
+Custom block page of web host witza.com.
+
+
 == 403-AKAMAI, 404-AKAMAI
 
 A block page with "Server: AkamaiGHost". It has the characteristic

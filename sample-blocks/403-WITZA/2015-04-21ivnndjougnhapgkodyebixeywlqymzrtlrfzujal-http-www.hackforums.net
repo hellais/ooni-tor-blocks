@@ -1,0 +1,13 @@
+HTTP/1.0 403 xxx
+Transfer-Encoding: chunked
+Set-Cookie: __cfduid=da047756a7e521c804eccf4863b3c87481429575015; expires=Wed, 20-Apr-16 00:10:15 GMT; path=/; domain=.hackforums.net; HttpOnly
+Server: cloudflare-nginx
+Connection: close
+Date: Tue, 21 Apr 2015 00:10:15 GMT
+CF-RAY: 1da4dd65cc67046d-FRA
+Content-Type: text/html; charset=iso-8859-1
+
+87
+[403 Forbidden Error] - You might be blocked by your IP, Country, or ISP. You can try to contact us at http://www.witza.com/contact.php
+0
+
