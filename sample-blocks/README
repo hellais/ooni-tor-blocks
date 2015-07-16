@@ -210,6 +210,15 @@ The HTML title is usually "Just a moment..." but the page can be
 customized.
 
 
+== 503-DOD
+
+"Access to this website has been blocked for operational reasons by the
+DOD Enterprise-Level Protection System." This seems to be the output of
+a local web filter ("This is a DoD enterprise-level protection system
+intended to reduce risk to DoD users and protect DoD systems from
+intrusion") but it occurs sometimes for www.army.mil accessed over Tor.
+
+
 == 503-YELP
 
 A custom block page of yelp.com. It contains the HTML
