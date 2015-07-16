@@ -94,6 +94,14 @@ def save_response_filename_auto(header, request, response, class_):
     filename = os.path.join(options.save_blocks_dir, class_, filename)
     return save_response_filename(filename, response)
 
+# Canonicalize paths of "/" and "", which otherwise cause spurious URL
+# differences.
+def canonicalize_url(url):
+    u = urlparse.urlsplit(url)
+    if u.path == "/":
+        u = (u.scheme, u.netloc, "", u.query, u.fragment)
+    return urlparse.urlunsplit(u)
+
 def boolf(v):
     if v:
         return "T"
@@ -158,7 +166,7 @@ def process_file(f, date):
             "date": date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
-            "url": doc["input"],
+            "url": canonicalize_url(doc["input"]),
             "nontor_isblocked": boolf(nontor_isblocked),
             "nontor_status": nontor["response"]["code"],
             "nontor_class": nontor_class,

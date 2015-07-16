@@ -2,12 +2,16 @@
 
 # This test script makes sure that the classify_response function correctly
 # classifies the sample block pages in the sample-blocks directory.
+# It also tests other helper functions.
 
+import imp
 import os
 import os.path
 import re
 import unittest
 
+findblocks = imp.load_source("findblocks", "findblocks")
+from findblocks import canonicalize_url
 from classify import classify_response
 
 SAMPLE_BLOCKS_DIR = "sample-blocks"
@@ -59,6 +63,12 @@ class TestClassifyResponse(unittest.TestCase):
             else:
                 expected_class = "%d" % code
             self.assertEqual(class_, expected_class, "got class %s but wanted %s" % (class_, expected_class))
+
+class TestCanonicalizeURL(unittest.TestCase):
+    def testCanonicalizeURL(self):
+        self.assertEqual(canonicalize_url("http://example.com"), canonicalize_url("http://example.com/"))
+        self.assertNotEqual(canonicalize_url("http://example.com"), canonicalize_url("https://example.com/"))
+        self.assertNotEqual(canonicalize_url("http://example.com/foo"), canonicalize_url("http://example.com/bar"))
 
 if __name__ == "__main__":
     unittest.main()
