@@ -53,8 +53,8 @@ class TestClassifyResponse(unittest.TestCase):
                     continue
                 response = build_response_filename(filename)
                 isblock, class_ = classify_response(response)
-                self.assertEqual(isblock, block, "got isblocked=%s but wanted %s for %s" % (isblock, block, basename))
-                self.assertEqual(class_, dirname, "got %s but wanted %s for %s" % (class_, dirname, basename))
+                self.assertEqual(isblock, block, "got isblocked=%s but wanted %s for %s" % (isblock, block, os.path.join(path, dirname, basename)))
+                self.assertEqual(class_, dirname, "got %s but wanted %s for %s" % (class_, dirname, os.path.join(path, dirname, basename)))
 
     def testSampleBlocks(self):
         self.sampleSub(SAMPLE_BLOCKS_DIR, True)
