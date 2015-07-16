@@ -120,6 +120,8 @@ def classify_response(response):
             return True, "501-CONVIO"
 
     if status == 503:
+        if re.search("To discuss automated access to Amazon data please contact api-services-support@amazon\\.com\\.", body):
+            return True, "503-AMAZON"
         if re.search("<div class=\"cf-browser-verification cf-im-under-attack\">", body):
             return True, "503-CLOUDFLARE"
         if re.search("<title>\\s*qos-mission-critical-pan\\s*</title>", body):
