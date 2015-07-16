@@ -1,0 +1,47 @@
+HTTP/1.0 200 xxx
+Content-Length: 2631
+Accept-Ranges: bytes
+Server: Apache/2.2.15 (CentOS)
+Last-Modified: Wed, 07 Aug 2013 11:24:33 GMT
+Connection: close
+ETag: "81b85-a47-4e359c92631e1"
+Date: Sat, 02 May 2015 10:59:25 GMT
+Content-Type: text/html; charset=UTF-8
+
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+ <META content="IE=5.0000" http-equiv="X-UA-Compatible">
+ <TITLE>Μή Επιτρεπτή Πρόσβαση</TITLE> 
+<META http-equiv="Content-Type" content="text/html; charset=iso-8859-7">
+<LINK href="files/styles.css" rel="stylesheet" type="text/css">
+</HEAD> 
+<BODY text="#000000" topmargin="0" leftmargin="0" bgcolor="#eeeeee" marginheight='0"' marginwidth="0">
+<TABLE width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <TBODY>
+  <TR>
+    <TD align="center" valign="top"><BR><BR>
+      <TABLE width="700" style="border: 2px solid rgb(202, 202, 202);" 
+      cellspacing="0" cellpadding="0">
+        <TBODY>
+        <TR>
+          <TD>
+            <TABLE width="100%" border="0" cellspacing="0" cellpadding="0">
+              <TBODY>
+              <TR>
+                <TD width="650" height="70" align="center" background="files/BackHeader.gif" valign="middle" colspan=3><FONT class="blueTitle">ΜΗ ΕΠΙΤΡΕΠΤΗ ΠΡΟΣΒΑΣΗ</FONT><BR></TD></TR>
+              <TR></TR>
+              <TR>
+                <TD align="left" background="files/BackLeft.jpg" valign="bottom" style="background-position: left bottom; background-repeat: no-repeat;" bgcolor="#ffffff" colspan="2">
+                  <CENTER>
+                  <TABLE>
+                    <TBODY>
+                    <TR>
+                      <TD>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
+                      <TD><FONT class="blue">
+			<BR><BR>Με βάση απόφαση της ανεξάρτητης διοικητικής αρχής "Επιτροπή Εποπτείας και Ελέγχου Παιγνίων" (Ε.Ε.Ε.Π.), ο ιστότοπος που επιχειρείτε να επισκεφθείτε έχει εγγραφεί στον κατάλογο εκείνων που προσφέρουν υπηρεσίες τυχερών παιγνίων και στοιχημάτων χωρίς άδεια.
+			<BR><BR>Κατά συνέπεια, με βάση την κείμενη νομοθεσία, η πρόσβαση στον ιστότοπο αυτό δεν επιτρέπεται.
+			<BR><BR>Για περισσότερες πληροφορίες: <a href="http://www.gamingcommission.gov.gr/index.php/el/">http://www.gamingcommission.gov.gr/index.php/el/</a><BR><BR>
+			<BR><BR></FONT></TD>
+                      <TD>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</TD>
+ 		</TR></TBODY></TABLE></CENTER></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></BODY></HTML>

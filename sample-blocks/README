@@ -7,6 +7,20 @@ not know the original response-phrase (e.g. "OK" or "Not Found") nor the
 original header ordering.
 
 
+== 200-EEEP, 200-EEEP-OTHER
+
+These are block pages served in Greece for gambling web sites. The
+acronym E.E.E.P. stands for the Greek name of the Hellenic Gaming
+Commission. There is an OONI blog post about Greek blocking:
+https://ooni.torproject.org/post/eeep-greek-censorship/
+Every ISP implements its own blocking and block page.
+
+The 200-EEEP-OTHER class exists because there are many E.E.E.P.-related
+block pages, and we only have specific classifier for the ones we have
+seen so far. They should end up in a catchall class so they can get
+their own classifiers, rather than being treated as 200 non-blocks.
+
+
 == 403-4CHAN
 
 Custom CloudFlare captcha page of www.4chan.org.
