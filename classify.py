@@ -26,17 +26,15 @@ def classify_response(response):
     server = get_header(response, "Server")
 
     # Non-blocks, despite 4?? or 5?? response code.
-    if status == 520:
+    if status in (520, 521, 522, 523, 524):
+        # This is a special CloudFlare error codes that mean there was an error
+        # communicating with the origin server. We don't consider them blocks.
+        # https://support.cloudflare.com/hc/en-us/articles/200171936-Error-520-Web-server-is-returning-an-unknown-error
+        # https://support.cloudflare.com/hc/en-us/articles/200171916-Error-521-Web-server-is-down
+        # https://support.cloudflare.com/hc/en-us/articles/200171906-Error-522-Connection-timed-out
+        # https://support.cloudflare.com/hc/en-us/articles/200171946-Error-523-Origin-is-unreachable
+        # https://support.cloudflare.com/hc/en-us/articles/200171926-Error-524-A-timeout-occurred
         if server == "cloudflare-nginx":
-            # This is a special CloudFlare error code that means "web server is
-            # returning an unknown error." We don't consider that a block.
-            # https://support.cloudflare.com/hc/en-us/articles/200171936-Error-520-Web-server-is-returning-an-unknown-error
-            return False, "%d" % status
-    if status == 521:
-        if server == "cloudflare-nginx":
-            # This is a special CloudFlare error code that means "web server is
-            # down." We don't consider that a block.
-            # https://support.cloudflare.com/hc/en-us/articles/200171916-Error-521-Web-server-is-down
             return False, "%d" % status
 
     if status == 200:
