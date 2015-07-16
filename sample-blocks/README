@@ -135,9 +135,15 @@ be temporary, but also permanent."
 == 403-SONICWALL
 
 Graphics and text that say "Dell SonicWALL Network Security Appliance.
-This site has been blocked by the network administrator." It has been
-seen on only one site, www.schwarzreport.org, but it appears to be a
-generic block page.
+This site has been blocked by the network administrator." It gives the
+client IP address and a category such as "Gambling" or
+"Alcohol/Tobacco". There is an ooniprobe in AS2529 that is stuck behind
+one of these appliances (much like the 403-ABERDEEN case).
+However, the signature also appears commonly over all reports for
+www.schwarzreport.org, usually when accessed over Tor. In this case the
+block page is qualitatively different, with different line wrapping, and
+it lacks a blocking category. It oddly seems to be used for server-side
+blocking of clients, not client-side blocking of servers.
 
 
 == 403-WITZA
