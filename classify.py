@@ -41,15 +41,19 @@ def classify_response(response):
             return True, "403-BLUEHOST"
         if re.search("<title>4chan - Verification Required</title>", body):
             return True, "403-4CHAN"
+
     if status == 403 or status == 404:
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
+
     if status == 406:
         if re.search("This request has been denied for security reasons\\.", body):
             return True, "406-SITE5"
+
     if status == 501:
         if body == "Not Implemented  Tor IP not allowed":
             return True, "501-CONVIO"
+
     if status == 503:
         if re.search("<div class=\"cf-browser-verification cf-im-under-attack\">", body):
             return True, "503-CLOUDFLARE"
