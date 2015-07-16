@@ -84,6 +84,8 @@ def classify_response(response):
             return True, "403-PASTEBIN"
         if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
             return True, "403-SONICWALL"
+        if re.search("<title>Web Site Blocked</title>", body) and re.search("id=\"nsa_banner\" alt=\"SonicWALL Network Security Appliance\"", body):
+            return True, "403-SONICWALL"
         if re.search("\\[403 Forbidden Error\\] - You might be blocked by your IP, Country, or ISP\\. You can try to contact us at http://www\\.witza\\.com/contact\\.php\r\n", body):
             return True, "403-WITZA"
 
