@@ -27,7 +27,7 @@ def classify_response(response):
 
     # Non-blocks, despite 4?? or 5?? response code.
     if status in (520, 521, 522, 523, 524):
-        # This is a special CloudFlare error codes that mean there was an error
+        # These are special CloudFlare codes that mean there was an error
         # communicating with the origin server. We don't consider them blocks.
         # https://support.cloudflare.com/hc/en-us/articles/200171936-Error-520-Web-server-is-returning-an-unknown-error
         # https://support.cloudflare.com/hc/en-us/articles/200171916-Error-521-Web-server-is-down
