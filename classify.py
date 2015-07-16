@@ -26,6 +26,10 @@ def classify_response(response):
     server = get_header(response, "Server")
 
     # Non-blocks, despite 4?? or 5?? response code.
+    if status == 408:
+        # 408 is "Request Timeout", meaning the server timed out waiting for the
+        # client to send a request. This is probably measurement error.
+        return False, "%d" % status
     if status in (520, 521, 522, 523, 524, 525, 526):
         # These are special CloudFlare codes that mean there was an error
         # communicating with the origin server. We don't consider them blocks.
