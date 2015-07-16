@@ -1,0 +1,17 @@
+HTTP/1.0 503 xxx
+Content-Length: 1223
+Accept-Ranges: bytes
+Vary: Accept-Encoding,User-Agent
+Server: Server
+Last-Modified: Tue, 21 Oct 2014 21:13:33 GMT
+Connection: close
+ETag: "4c7-505f54dbe5940"
+Date: Tue, 23 Jun 2015 02:19:45 GMT
+X-Frame-Options: SAMEORIGIN
+Content-Type: text/html
+
+<!--
+        To discuss automated access to Amazon data please contact api-services-support@amazon.com.
+        For information about migrating to our APIs refer to our Marketplace APIs at https://developer.amazonservices.com.cn/index.html/ref=rm_5_sv, or our Product Advertising API at https://associates.amazon.cn/gp/advertising/api/detail/main.html/ref=rm_5_ac for advertising use cases.
+-->
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=utf-8"><title>亚马逊</title><body style="text-align:center;"><br><div style="width:600px;margin:0 auto;text-align:left;"><h2>意外错误</h2></div><br><div style="width:500px;margin:0 auto;text-align:left;"><font color="red">报歉，由于程序执行时，遇到意外错误，您刚刚操作没有执行成功，请稍后重试。或将此错误报告给我们的客服中心：<a href="mailto:service_bj@cs.amazon.cn">service_bj@cs.amazon.cn</a></font><br><br>推荐您<a href="javascript:history.back(1)">返回上一页</a>，确认您的操作无误后，再继续其他操作。<br>您可以通过亚马逊<a href="http://www.amazon.cn/help/ref=cs_503_link/" target="_blank">帮助中心</a>，获得更多的帮助。<br></div></body></html>﻿

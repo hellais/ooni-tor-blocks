@@ -201,6 +201,13 @@ The OONI data has a few cases that look erroneous and are missing the
 body (despite having a "Content-Length: 35" header).
 
 
+== 503-AMAZON
+
+This may be bot detection by Amazon because of the HTML comment:
+"To discuss automated access to Amazon data please contact api-services-support@amazon.com."
+It appears for both Tor and non-Tor requests.
+
+
 == 503-CLOUDFLARE
 
 These are block pages that run some kind of automated CloudFlare browser
