@@ -22,6 +22,14 @@ def classify_response(response):
 
     server = get_header(response, "Server")
 
+    # Non-blocks, despite 4?? or 5?? response code.
+    if status == 521:
+        if re.search(" \\| 521: Web server is down</title>", body):
+            # This is a special CloudFlare error code that means "web server is
+            # down." We don't consider that a block.
+            # https://support.cloudflare.com/hc/en-us/articles/200171916-Error-521-Web-server-is-down
+            return False, "%d" % status
+
     if status == 403:
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
             return True, "403-CLOUDFLARE"
