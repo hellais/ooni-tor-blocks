@@ -99,6 +99,14 @@ def classify_response(response):
         if re.search("This request has been denied for security reasons\\.", body):
             return True, "406-SITE5"
 
+    if status == 410:
+        # NB this check against the body depends on the input file processing
+        # not having decoded the "chunked" Transfer-Encoding.
+        if get_header(response, "X-Powered-By") == "Express" and get_header(response, "Transfer-Encoding") == "chunked" and body == "0\r\n\r\n":
+            return True, "410-MYSPACE"
+        if get_header(response, "X-Powered-By") == "Express" and get_header(response, "Content-Length") == "0" and body == "":
+            return True, "410-MYSPACE"
+
     if status == 501:
         if body == "Not Implemented  Tor IP not allowed":
             return True, "501-CONVIO"
