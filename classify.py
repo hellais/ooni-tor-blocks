@@ -26,7 +26,7 @@ def classify_response(response):
     server = get_header(response, "Server")
 
     # Non-blocks, despite 4?? or 5?? response code.
-    if status in (520, 521, 522, 523, 524):
+    if status in (520, 521, 522, 523, 524, 525, 526):
         # These are special CloudFlare codes that mean there was an error
         # communicating with the origin server. We don't consider them blocks.
         # https://support.cloudflare.com/hc/en-us/articles/200171936-Error-520-Web-server-is-returning-an-unknown-error
@@ -34,6 +34,8 @@ def classify_response(response):
         # https://support.cloudflare.com/hc/en-us/articles/200171906-Error-522-Connection-timed-out
         # https://support.cloudflare.com/hc/en-us/articles/200171946-Error-523-Origin-is-unreachable
         # https://support.cloudflare.com/hc/en-us/articles/200171926-Error-524-A-timeout-occurred
+        # https://support.cloudflare.com/hc/en-us/articles/200278659-Error-525-SSL-handshake-failed
+        # https://support.cloudflare.com/hc/en-us/articles/200721975-Error-526-Invalid-SSL-certificate
         if server == "cloudflare-nginx":
             return False, "%d" % status
 
