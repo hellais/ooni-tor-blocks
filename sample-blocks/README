@@ -132,6 +132,12 @@ unnatural browsing behavior. Depending on the violation, the block could
 be temporary, but also permanent."
 
 
+== 403-SUCURI
+
+Block page of the Sucuri CloudProxy web application firewall
+(https://sucuri.net/website-firewall/).
+
+
 == 403-SONICWALL
 
 Graphics and text that say "Dell SonicWALL Network Security Appliance.
