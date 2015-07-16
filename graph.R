@@ -36,14 +36,16 @@ makegraph <- function(x, topn, title) {
 	p
 }
 
-x$url <- reorder(x$url, x$url, length)
+# Sort first by number of TOR-BLOCKED, then by number of observations.
+x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="TOR-BLOCKED", sum)
 p <- makegraph(x, NULL, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
 ggsave("ooni-tor-blocked.pdf", p, width=12, height=180, limitsize=F)
 p <- makegraph(x, 100, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
 ggsave("ooni-tor-blocked-top-100.pdf", p, width=12, height=12, limitsize=F)
 
-x$url <- reorder(x$url, x$url, length)
+# Sort first by number of NONTOR-BLOCKED, then by number of observations.
+x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="NONTOR-BLOCKED", sum)
 p <- makegraph(x, NULL, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
 ggsave("ooni-nontor-blocked.pdf", p, width=12, height=180, limitsize=F)
