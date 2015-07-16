@@ -123,6 +123,15 @@ https://github.com/citizenlab/blockpages/blob/master/html/ir.html
 https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
 
 
+== 403-PASTEBIN
+
+"Censor Kitty denies access". Pastebin in on CloudFlare, so you may get
+a CloudFlare captcha, or you may get their custom block page: "We have
+blocked your IP from accessing our website because we have detected
+unnatural browsing behavior. Depending on the violation, the block could
+be temporary, but also permanent."
+
+
 == 403-SONICWALL
 
 Graphics and text that say "Dell SonicWALL Network Security Appliance.
