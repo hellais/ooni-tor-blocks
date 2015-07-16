@@ -185,6 +185,13 @@ The message may come with a variety of Server header values, and may be
 chunked or non-chunked.
 
 
+== 410-MYSPACE
+
+A zero-byte document with status code 410 and "X-Powered-By: Express".
+Sometimes it is an empty document with chunked Transfer-Encoding;
+sometimes it is an empty docuemnt with zero Content-Length.
+
+
 == 501-CONVIO
 
 A custom block page for sites hosted on convio.net. Based on the
