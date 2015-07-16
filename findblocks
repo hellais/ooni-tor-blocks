@@ -172,6 +172,9 @@ def process_file(f, date):
             "nontor_class": nontor_class,
             "tor_isblocked": boolf(tor_isblocked),
             "tor_status": tor["response"]["code"],
+            # Sometimes exit_ip and exit_name are missing.
+            "tor_exit_ip": tor["request"]["tor"].get("exit_ip", ""),
+            "tor_exit_nickname": tor["request"]["tor"].get("exit_name", ""),
             "tor_class": tor_class,
         })
         sys.stdout.flush()
@@ -211,7 +214,7 @@ if __name__ == "__main__":
             usage()
             sys.exit()
 
-    csvw = csv.DictWriter(sys.stdout, fieldnames=["date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "url"], lineterminator="\n")
+    csvw = csv.DictWriter(sys.stdout, fieldnames=["date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "tor_exit_ip", "tor_exit_nickname", "url"], lineterminator="\n")
     csvw.writeheader()
 
     for filename in args:
