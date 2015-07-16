@@ -122,6 +122,8 @@ def classify_response(response):
     if status == 503:
         if re.search("<div class=\"cf-browser-verification cf-im-under-attack\">", body):
             return True, "503-CLOUDFLARE"
+        if re.search("<title>\\s*qos-mission-critical-pan\\s*</title>", body):
+            return True, "503-DOD"
         if re.search("<p>Please retry your request and <a href=\"mailto:feedback\\+unavailable@yelp.com\\?subject=IP%20Block%20Message%3A%20[\\d.]+\">contact Yelp</a> if you continue experiencing issues\\.</p>", body):
             return True, "503-YELP"
 
