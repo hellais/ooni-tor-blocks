@@ -60,30 +60,30 @@ def classify_response(response):
             return True, "200-EEEP-OTHER"
 
     if status == 403:
+        if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
+            return True, "403-ABERDEEN"
+        if re.search("<p>You can use this key to <a href=\"http://www\\.ioerror\\.us/bb2-support-key\\?key=[\\w-]+\">fix this problem yourself</a>\\.</p>", body):
+            return True, "403-BADBEHAVIOR"
+        if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted.  If you feel this is in error please contact your hosting providers abuse department\\.", body):
+            return True, "403-BLUEHOST"
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
             return True, "403-CLOUDFLARE"
         if server == "cloudflare-nginx" and re.search("<title>4chan - Verification Required</title>", body):
             # 4chan.org customizes its CloudFlare block pages.
             return True, "403-CLOUDFLARE"
-        if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
-            return True, "403-IRAN"
-        if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
-            return True, "403-GOOGLE-SORRY"
         if re.search("This IP has been automatically blocked\\.\nIf you have questions, please email: blocks-\\w+@craigslist\\.org\n", body):
             return True, "403-CRAIGSLIST"
-        if re.search("<p>You can use this key to <a href=\"http://www\\.ioerror\\.us/bb2-support-key\\?key=[\\w-]+\">fix this problem yourself</a>\\.</p>", body):
-            return True, "403-BADBEHAVIOR"
-        if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
-            return True, "403-ABERDEEN"
-        if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
-            return True, "403-SONICWALL"
-        if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted.  If you feel this is in error please contact your hosting providers abuse department\\.", body):
-            return True, "403-BLUEHOST"
+        if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
+            return True, "403-GOOGLE-SORRY"
+        if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
+            return True, "403-IRAN"
         if re.search("<title>Pastebin\\.com - Access Denied Warning</title>\r", body):
             # "Censor Kitty denies access"
             # Pastebin is also on CloudFlare, so you could get a CloudFlare
             # captcha or their own custom block page.
             return True, "403-PASTEBIN"
+        if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
+            return True, "403-SONICWALL"
 
     if status == 403 or status == 404:
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
