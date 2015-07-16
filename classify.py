@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import re
 
 # Get the first header value for the given key, or None if the header does not
@@ -9,8 +11,9 @@ def get_header(response, fieldname):
     return None
 
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
-# blocks. See the sample-blocks directory for the source files that led to these
-# classifier rules.
+# blocks, along with selected other status codes when the reponse matches (some
+# block pages are HTTP 200, for example). See the sample-blocks directory for
+# the source files that led to these classifier rules.
 def classify_response(response):
     status = response["code"]
 
@@ -29,6 +32,26 @@ def classify_response(response):
             # down." We don't consider that a block.
             # https://support.cloudflare.com/hc/en-us/articles/200171916-Error-521-Web-server-is-down
             return False, "%d" % status
+
+    if status == 200:
+        # These are all blocks of gambling web sites from a blacklist of the
+        # Hellenic Gaming Commission (E.E.E.P.). Blocking is up to the ISP and
+        # they do it variously.
+        # https://ooni.torproject.org/post/eeep-greek-censorship/
+        # Similar to but not the same as
+        # https://ooni.torproject.org/post/eeep-greek-censorship/#cyta:d0c495f4479395eff703b25df5d2e963
+        if re.search("<title>Access not allowed</title>", body) and re.search("<p>Για περισσότερες πληροφορίες:</p>\n                <p><a href=\"http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/\">Επιτροπή Εποπτείας και Ελέγχου Παιγνίων \\(Ε\\.Ε\\.Ε\\.Π\\.\\) </a></p>", body):
+            return True, "200-EEEP"
+        # This one looks like one of:
+        # https://ooni.torproject.org/post/eeep-greek-censorship/#ote:d0c495f4479395eff703b25df5d2e963
+        # https://ooni.torproject.org/post/eeep-greek-censorship/#cosmote:d0c495f4479395eff703b25df5d2e963
+        # It can have "Server: Apache" or "Server: Apache/2.2.15 (CentOS)".
+        if re.search("<TITLE>Μή Επιτρεπτή Πρόσβαση</TITLE>", body) and re.search("<BR><BR>Για περισσότερες πληροφορίες: <a href=\"http://www\\.gamingcommission\\.gov\\.gr/index.php/el/\">http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/</a><BR><BR>", body):
+            return True, "200-EEEP"
+        # This is a catch-all designed to find other E.E.E.P. blocks that aren't
+        # specifically enumerated above, for when new OONI reports are added.
+        if re.search("gamingcommission\\.gov\\.gr", body):
+            return True, "200-EEEP-OTHER"
 
     if status == 403:
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
