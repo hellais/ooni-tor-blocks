@@ -1,0 +1,32 @@
+HTTP/1.0 408 xxx
+Content-Length: 644
+Expires: Wed, 08 Jul 2015 05:00:44 GMT
+Server: Footprint 4.10/FPMCP
+Date: Wed, 08 Jul 2015 05:00:44 GMT
+Content-Type: text/html
+Mime-Version: 1.0
+
+<HTML><HEAD>
+<TITLE>ERROR: The requested URL could not be retrieved</TITLE>
+</HEAD><BODY>
+<H1>ERROR</H1>
+<H2>The requested URL could not be retrieved</H2>
+<HR>
+<P>
+While trying to retrieve the requested URL the following error was encountered:
+<UL>
+<LI>
+<STRONG>
+Connection Lifetime Expired
+</STRONG>
+</UL>
+
+<P>
+Footprint has terminated the request because it has exceeded the maximum
+connection lifetime.
+</P>
+<a href="http://www.footprint.net">Footprint 4.10/FPMCP</a>
+<br clear="all">
+<hr noshade size=1>
+Generated Wed, 08 Jul 2015 05:00:44 GMT by 192.221.126.254 (<a href="http://www.footprint.net">Footprint 4.10/FPMCP</a>)
+</BODY></HTML>
