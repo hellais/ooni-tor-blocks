@@ -35,6 +35,13 @@ p <- p + theme_bw()
 p <- p + labs(title="Number of request pairs and blocking by country\n(UNBLOCKED request pairs not shown)", x="Country", y="Number of request pairs")
 ggsave("ooni-blocked-cc.pdf", p, width=7, height=7)
 
+p <- ggplot(x, aes(as.Date(date), fill=blocked))
+p <- p + geom_bar(binwidth=1)
+p <- p + scale_fill_manual(values=palette)
+p <- p + theme_bw()
+p <- p + labs(title="Number of request pairs and blocking per day", x=NULL, y="Number of request pairs")
+ggsave("ooni-blocked-date-all.pdf", p, width=7, height=4)
+
 
 # Make a graph of the top URLs according to the current order of the "url"
 # column. Pass NULL for topn to get all URLs.
