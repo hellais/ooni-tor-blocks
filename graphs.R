@@ -16,6 +16,26 @@ x$blocked <- ifelse(x$nontor_isblocked,
 	ifelse(x$tor_isblocked, "TOR-BLOCKED", "UNBLOCKED")
 )
 
+
+x$probe_cc <- reorder(x$probe_cc, x$probe_cc, length)
+
+p <- ggplot(x, aes(probe_cc, fill=blocked))
+p <- p + geom_histogram()
+p <- p + scale_fill_manual(values=palette)
+p <- p + coord_flip()
+p <- p + theme_bw()
+p <- p + labs(title="Number of request pairs and blocking by country", x="Country", y="Number of request pairs")
+ggsave("ooni-blocked-cc-all.pdf", p, width=7, height=7)
+
+p <- ggplot(x[x$blocked!="UNBLOCKED", ], aes(probe_cc, fill=blocked))
+p <- p + geom_histogram()
+p <- p + scale_fill_manual(values=palette)
+p <- p + coord_flip()
+p <- p + theme_bw()
+p <- p + labs(title="Number of request pairs and blocking by country\n(UNBLOCKED request pairs not shown)", x="Country", y="Number of request pairs")
+ggsave("ooni-blocked-cc.pdf", p, width=7, height=7)
+
+
 # Make a graph of the top URLs according to the current order of the "url"
 # column. Pass NULL for topn to get all URLs.
 makegraph <- function(x, topn, title) {
