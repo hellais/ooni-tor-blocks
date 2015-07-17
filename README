@@ -8,7 +8,7 @@ $ wget -O reports.json http://api.ooni.io/api/reports
 Get a list of URLs of http_requests reports. There are other report
 types than http_requests but we are not interested in them.
 
-$ ./ooni-report-urls -t http_requests reports.json | sort > urls.txt
+$ ./ooni-report-urls -t http_requests reports.json | sort | uniq > urls.txt
 
 Download a subset of the reports.
 
