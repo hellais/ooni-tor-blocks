@@ -68,7 +68,7 @@ def classify_response(response):
             return True, "403-ABERDEEN"
         if re.search("<p>You can use this key to <a href=\"http://www\\.ioerror\\.us/bb2-support-key\\?key=[\\w-]+\">fix this problem yourself</a>\\.</p>", body):
             return True, "403-BADBEHAVIOR"
-        if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted.  If you feel this is in error please contact your hosting providers abuse department\\.", body):
+        if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted\\.  If you feel this is in error please contact your hosting providers abuse department", body):
             return True, "403-BLUEHOST"
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
             return True, "403-CLOUDFLARE"
