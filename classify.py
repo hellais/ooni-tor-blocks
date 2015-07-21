@@ -85,6 +85,8 @@ def classify_response(response):
             return True, "403-CLOUDFLARE"
         if re.search("This IP has been automatically blocked\\.\nIf you have questions, please email: blocks-\\w+@craigslist\\.org\n", body):
             return True, "403-CRAIGSLIST"
+        if re.search("<title>EzineArticles Submission", body):
+            return True, "403-EZINEARTICLES"
         if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
             return True, "403-GOOGLE-SORRY"
         if "domain=.groupon.com" in get_header(response, "Set-Cookie", "") and get_header(response, "Content-Encoding") == "gzip":
