@@ -2,6 +2,21 @@ library(ggplot2)
 
 palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
+blocker.palette <- c(
+	"Akamai"="#0098cc",
+	"Amazon"="red",
+	"Bluehost"="#3575c0",
+	"CloudFlare"="#fe8d1b",
+	"Convio"="darkkhaki",
+	"Craigslist"="#800080",
+	"Google"="#02a05b",
+	"Site5"="#f93c74",
+	"SonicWALL"="green",
+	"Yelp"="#c41200",
+	"other"="#202020",
+	"UNBLOCKED"="gray85"
+)
+
 x <- read.csv("findblocks.csv", colClasses=list(
 	report_id="factor", probe_cc="factor",
 	nontor_isblocked="logical", nontor_status="integer", nontor_class="factor",
@@ -79,41 +94,48 @@ ggsave("ooni-nontor-blocked.pdf", p, width=12, height=400, limitsize=F)
 p <- makegraph(x, 100, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
 ggsave("ooni-nontor-blocked-top-100.pdf", p, width=12, height=12, limitsize=F)
 
-levels(x$tor_class) <- list(
-	"Akamai"=c("403-AKAMAI", "404-AKAMAI"),
-	"Amazon"=c("503-AMAZON"),
-	"Bluehost"=c("403-BLUEHOST"),
-	"CloudFlare"=c("403-CLOUDFLARE", "503-CLOUDFLARE"),
-	"Convio"=c("501-CONVIO"),
-	"Craigslist"=c("403-CRAIGSLIST"),
-	"Google"=c("403-GOOGLE-SORRY"),
-	"Site5"=c("406-SITE5"),
-	"SonicWALL"=c("403-SONICWALL"),
-	"Yelp"=c("503-YELP"),
-	"other"=c("403-OTHER", "404-OTHER", "405-OTHER", "406-OTHER", "500-OTHER", "502-OTHER", "503-DOD", "503-OTHER")
+blockers <- c(
+	"403-AKAMAI"="Akamai",
+	"404-AKAMAI"="Akamai",
+	"503-AMAZON"="Amazon",
+	"403-BLUEHOST"="Bluehost",
+	"403-CLOUDFLARE"="CloudFlare",
+	"503-CLOUDFLARE"="CloudFlare",
+	"501-CONVIO"="Convio",
+	"403-CRAIGSLIST"="Craigslist",
+	"403-GOOGLE-SORRY"="Google",
+	"406-SITE5"="Site5",
+	"403-SONICWALL"="SonicWALL",
+	"503-YELP"="Yelp",
+
+	"503-DOD"="other",
+
+	"400-OTHER"="other",
+	"403-OTHER"="other",
+	"404-OTHER"="other",
+	"405-OTHER"="other",
+	"406-OTHER"="other",
+	"500-OTHER"="other",
+	"502-OTHER"="other",
+	"503-OTHER"="other",
+	"504-OTHER"="other"
 )
 
-palette <- c(
-	"Akamai"="#0098cc",
-	"Amazon"="#232f3e",
-	"Bluehost"="#3575c0",
-	"CloudFlare"="#fe8d1b",
-	"Convio"="#470e6d",
-	"Craigslist"="#800080",
-	"Google"="#202020",
-	"Site5"="#f93c74",
-	"SonicWALL"="green",
-	"Yelp"="#c41200",
-	"other"="#202020"
-)
+class_to_blocker <- function(class) {
+	ifelse(class %in% names(blockers), blockers[class], class)
+}
+
+x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"))
+levels(droplevels(x[x$url %in% rev(levels(x$url))[1:100], ])$tor_blocker)
+blocker.palette
 
 x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="TOR-BLOCKED", sum)
-p <- ggplot(x[x$blocked=="TOR-BLOCKED" & x$url %in% rev(levels(x$url))[1:100], ], aes(date, url, color=tor_class))
+p <- ggplot(x[x$url %in% rev(levels(x$url))[1:100], ], aes(date, url, color=tor_blocker))
 p <- p + geom_point(size=2.5, alpha=0.5)
 p <- p + guides(color=guide_legend(override.aes=c(alpha=1)))
-p <- p + scale_color_manual(values=palette)
+p <- p + scale_color_manual(values=blocker.palette)
 p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 p <- p + theme_bw()
 p <- p + labs(title="Tor blocking type", x=NULL, y=NULL)
-ggsave("tor-blocked-type-top-100.pdf", p, width=12, height=12, limitsize=F)
+ggsave("ooni-tor-blocked-type-top-100.pdf", p, width=12, height=12, limitsize=F)
