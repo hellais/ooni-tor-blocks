@@ -4,11 +4,11 @@ import re
 
 # Get the first header value for the given key, or None if the header does not
 # appear.
-def get_header(response, fieldname):
+def get_header(response, fieldname, default=None):
     for name, values in response["headers"]:
         if name.lower() == fieldname.lower():
             return values[0]
-    return None
+    return default
 
 # Return (is_block, description) tuple. 4?? and 5?? status codes are considered
 # blocks, along with selected other status codes when the reponse matches (some
@@ -85,6 +85,11 @@ def classify_response(response):
             return True, "403-CRAIGSLIST"
         if server is not None and server.startswith("GFE/") and re.search("<h1>We're sorry\\.\\.\\.</h1><p>\\.\\.\\. but your computer or network may be sending automated queries\\.", body):
             return True, "403-GOOGLE-SORRY"
+        if "domain=.groupon.com" in get_header(response, "Set-Cookie", "") and get_header(response, "Content-Encoding") == "gzip":
+            return True, "403-GROUPON"
+        if get_header(response, "X-Treatment-Name") is not None and get_header(response, "X-Bucket-Value") is not None and get_header(response, "Content-Encoding") == "gzip":
+            # These weird headers seem to be unique to Groupon.
+            return True, "403-GROUPON"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
         if re.search("<title>Pastebin\\.com - Access Denied Warning</title>\r", body):
