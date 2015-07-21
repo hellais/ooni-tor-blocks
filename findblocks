@@ -45,13 +45,18 @@ def split_requests(requests):
         if request.get("failure") is not None:
             continue
         if not request["request"]["tor"]["is_tor"]:
-            if nontor is not None:
-                raise ValueError("more than one is_tor:false request")
-            nontor = request
+            # It's possible for there to be more than one request of each type
+            # (even with different User-Agents). I suppose it is a bug in
+            # earlier ooniprobe that would reschedule both the Tor and non-Tor
+            # retrieval if either of them failed. The first instance of this is
+            # on 2013-05-02. It may be related to:
+            # https://gitweb.torproject.org/ooni-probe.git/commit/?id=0bbd9a1e0c2f3f04120264fddabc3020692e4c01
+            # https://gitweb.torproject.org/ooni-probe.git/commit/?id=3d2b9025ca372ca0fcdb88ce6e2cb050c1cf6e64
+            if nontor is None:
+                nontor = request
         else:
-            if tor is not None:
-                raise ValueError("more than one is_tor:true request")
-            tor = request
+            if tor is None:
+                tor = request
     return nontor, tor
 
 def save_response(f, response):
