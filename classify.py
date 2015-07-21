@@ -17,13 +17,8 @@ def get_header(response, fieldname, default=None):
 def classify_response(response):
     status = response["code"]
 
-    body = response["body"]
-    if body is None:
-        body = ""
-    elif type(body) == unicode:
-        body = body.encode("utf-8")
-
     server = get_header(response, "Server")
+    body = response["body"]
 
     # Non-blocks, despite 4?? or 5?? response code.
     if status == 408:

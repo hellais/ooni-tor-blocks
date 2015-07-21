@@ -65,16 +65,7 @@ def save_response(f, response):
         for value in values:
             f.write("%s: %s\r\n" % (name, value))
     f.write("\r\n")
-    # YAMLOO can give us either a binary string (type str) or a Unicode string
-    # (type unicode, with unspecified original encoding) for the body. If it's
-    # Unicode, guess the encoding was UTF-8. It might be possible to scrape the
-    # Content-Type for the encoding.
-    body = response["body"]
-    if body is None:
-        body = ""
-    elif type(body) == unicode:
-        body = body.encode("utf-8")
-    f.write(body)
+    f.write(response["body"])
 
 def save_response_filename(filename, response):
     try:
@@ -178,6 +169,22 @@ def fixup_entry(doc):
                 doc["control_failure"] = failure
             else:
                 doc["experiment_failure"] = failure
+
+    for request in doc["requests"]:
+        try:
+            response = request["response"]
+        except KeyError:
+            continue
+
+        # YAMLOO can give us either a binary string (type str) or a Unicode string
+        # (type unicode, with unspecified original encoding) for the body. If it's
+        # Unicode, guess the encoding was UTF-8. It might be possible to scrape the
+        # Content-Type for the encoding.
+        body = response["body"]
+        if body is None:
+            response["body"] = ""
+        elif type(body) == unicode:
+            response["body"] = body.encode("utf-8")
 
     return doc
 
