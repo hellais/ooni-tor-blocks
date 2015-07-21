@@ -68,6 +68,8 @@ def classify_response(response):
     if status == 403:
         if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
             return True, "403-ABERDEEN"
+        if get_header(response, "X-Amz-Cf-Id") is not None and re.search("<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>", body):
+            return True, "403-AMAZON-CLOUDFRONT"
         if re.search("<p>You can use this key to <a href=\"http://www\\.ioerror\\.us/bb2-support-key\\?key=[\\w-]+\">fix this problem yourself</a>\\.</p>", body):
             return True, "403-BADBEHAVIOR"
         if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted\\.  If you feel this is in error please contact your hosting providers abuse department", body):
