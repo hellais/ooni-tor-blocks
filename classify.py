@@ -92,6 +92,8 @@ def classify_response(response):
         if get_header(response, "X-Treatment-Name") is not None and get_header(response, "X-Bucket-Value") is not None and get_header(response, "Content-Encoding") == "gzip":
             # These weird headers seem to be unique to Groupon.
             return True, "403-GROUPON"
+        if get_header(response, "X-Iinfo") is not None:
+            return True, "403-INCAPSULA"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
         if re.search("<li>McAfee Global Threat Intelligence has determined</li>", body):
