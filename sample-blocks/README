@@ -81,6 +81,18 @@ sending automated queries." This one does not give you an opportunity to
 solve a captcha.
 
 
+== 403-GROUPON
+
+Custom block page of www.groupon.com. It gets served with
+"Content-Encoding: gzip" so there may be multiple. Uncompressing one of
+them says:
+	<title>403 Something broke...</title>
+	<h2>Oops! Internal Error</h2>
+	<p>
+	  Something went wrong with the page you requested. Try refreshing. If that doesn't work, click the button below to browse all of our amazing deals.
+	</p>
+
+
 == 403-IRAN
 
 Block page used in Iran. There are two places where it may vary. The
