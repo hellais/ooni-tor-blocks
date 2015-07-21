@@ -139,6 +139,18 @@ https://github.com/citizenlab/blockpages/blob/master/html/ir.html
 https://github.com/citizenlab/blockpages/blob/master/html/ir-iframe.html
 
 
+== 403-MCAFEE
+
+Block page of McAfee Global Threat Intelligence, a reputation-based
+firewall.
+	<li>McAfee Global Threat Intelligence has determined</li>
+	    <ul>
+	      <li>this destination to have  a suspicious or malicious reputation at this time </li>
+	      <li>something in the connection that matches a threat defense signature </li>
+	      <li>malware, spyware or other content should be blocked</li>
+It has only been seen on www.defcon.org.
+
+
 == 403-PASTEBIN
 
 "Censor Kitty denies access". Pastebin in on CloudFlare, so you may get

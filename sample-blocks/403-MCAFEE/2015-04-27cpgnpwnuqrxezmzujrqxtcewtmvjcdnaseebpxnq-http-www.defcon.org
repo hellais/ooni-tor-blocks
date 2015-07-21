@@ -1,0 +1,57 @@
+HTTP/1.0 403 xxx
+Connection: close
+Content-Type: text/html
+Content-Length: 1300
+
+<html>
+<head>
+<title>Access Denied</title>
+<style type="text/css">
+<!--
+.container {
+        background-color: #FFFFFF;
+        border: 5px solid #999999;
+        font-family:Tahoma,Helvetica,Arial,sans-serif;
+        font-size:14px;
+        margin: 20px;
+        padding-top: 20px;
+        padding-right: 45px;
+        padding-bottom: 20px;
+        padding-left: 45px;
+}
+body,td,th {
+        color: #000000;
+}
+body {
+        background-color: #5e6a71;
+}
+h1{
+        font-size:22px;
+        font-weight:bold;
+        color:#8a0e1f;
+}
+-->
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>Access Denied</h1>
+An access request has been blocked due to one of the following reasons:
+<ul>
+  <li>You do not have sufficient privileges to access this destination</li>
+
+  <li>Your corporate IT policies prohibit access to this content or application</li>
+  <li>McAfee Global Threat Intelligence has determined</li>
+      <ul>
+        <li>this destination to have  a suspicious or malicious reputation at this time </li>
+        <li>something in the connection that matches a threat defense signature </li>
+        <li>malware, spyware or other content should be blocked</li>
+
+      </ul>
+  </ul>
+   <strong>Please contact your administrator if you feel this is incorrect. </strong>
+</div>
+</body>
+</html>
+
