@@ -1,0 +1,69 @@
+HTTP/1.0 200 xxx
+Content-Length: 3429
+Accept-Ranges: bytes
+Server: Apache
+Last-Modified: Mon, 09 Sep 2013 12:44:47 GMT
+Connection: close
+ETag: "40e99-d65-4e5f2c0d6edc0"
+Date: Fri, 10 Apr 2015 14:45:18 GMT
+Content-Type: text/html; charset=UTF-8
+
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0037)http://www.cyta.gr/misc/eeep_noaccess -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html
+lang="el" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <title>Μη δυνατή 
+πρόσβαση</title>
+    <meta scheme="" name="DESCRIPTION" content="cyta">
+    <meta scheme="" name="KEYWORDS" content="cyta">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="CODE_LANGUAGE" content="C#">
+    <meta name="vs_defaultClientScript" content="JavaScript">
+    <meta name="vs_targetSchema" content="http://schemas.microsoft.com/intellisense/ie5">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="index_files/style.css" media="all">
+    <link rel="Stylesheet" type="text/css" href="index_files/forms.css" media="all">
+    <link rel="stylesheet" type="text/css" href="index_files/print.css" media="print">
+    <!--[if lte IE 7]><link rel="stylesheet" href="/css/cyta/ie7.css" type="text/css" media="screen, projection" /><![endif]-->
+    <!-- Icon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/img/cyta/favicon.ico">
+    <!-- Js -->
+    <link rel="stylesheet" type="text/css" href="index_files/VisitorIdentification.css">
+    <meta name="GENERATOR" content="MSHTML 9.00.8112.16496">
+</head>
+<body>
+    <form id="mainform" method="post" name="mainform" action="eeep_noaccess">
+        <div class="wrapper">
+            <div style="padding: 20px 0px 400px;" class="errorpage">
+                <img src="index_files/eeep_noaccess.png">
+                <h3 style="margin-top: 50px;">Δεν είναι δυνατή η πρόσβαση στον ιστότοπο.</h3>
+                <p style="font-size: 14px;">
+                    Η απαγόρευση της πρόσβασης επιβάλλεται από το νόμο 
+4.002/2011 και τις αποφάσεις της Επιτροπής Εποπτείας και Ελέγχου Παιγνίων 
+(Ε.Ε.Ε.Π.), τυχόν παραβίαση των οποίων επισύρει αυστηρές διοικητικές και 
+ποινικές κυρώσεις.
+                </p>
+                <p style="font-size: 14px;">
+                    Για περισσότερες πληροφορίες απευθυνθείτε στην 
+ιστοσελίδα της Ε.Ε.Ε.Π.: <a href="http://www.gamingcommission.gov.gr/index.php/el/" target="_blank">http://www.gamingcommission.gov.gr/index.php/el/</a>
+                </p>
+            </div>
+        </div>
+    </form>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-43814796-1', 'cyta.gr');
+        ga('send', 'pageview');
+    </script>
+</body>
+</html>

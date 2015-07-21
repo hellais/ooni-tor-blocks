@@ -58,6 +58,8 @@ def classify_response(response):
         # It can have "Server: Apache" or "Server: Apache/2.2.15 (CentOS)".
         if re.search("<TITLE>Μή Επιτρεπτή Πρόσβαση</TITLE>", body) and re.search("<BR><BR>Για περισσότερες πληροφορίες: <a href=\"http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/\">http://www\\.gamingcommission\\.gov\\.gr/index\\.php/el/</a><BR><BR>", body):
             return True, "200-EEEP"
+        if re.search("<title>Μη δυνατή \r\nπρόσβαση</title>", body) and re.search("                    Η απαγόρευση της πρόσβασης επιβάλλεται από το νόμο \r\n4.002/2011 και τις αποφάσεις της Επιτροπής Εποπτείας και Ελέγχου Παιγνίων", body):
+            return True, "200-EEEP"
         # This is a catch-all designed to find other E.E.E.P. blocks that aren't
         # specifically enumerated above, for when new OONI reports are added.
         if re.search("gamingcommission\\.gov\\.gr", body):
