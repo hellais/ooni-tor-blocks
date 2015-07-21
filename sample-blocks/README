@@ -133,6 +133,13 @@ unnatural browsing behavior. Depending on the violation, the block could
 be temporary, but also permanent."
 
 
+== 403-PINTEREST
+
+A custom 403 page, says it's bot detection.
+	<h1>Uh oh! We've found a bot</h1>
+	<p>It looks like there's a bot running on your network. <a class="link" href="//help.pinterest.com/entries/22914692">Send us a message</a> with your IP address and we'll help you get going again.</p>
+
+
 == 403-RACKSPACE
 
 Just the HTML message: "<h2>Forbidden</h2>". Seen on
