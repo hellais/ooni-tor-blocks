@@ -86,6 +86,8 @@ def classify_response(response):
             # Pastebin is also on CloudFlare, so you could get a CloudFlare
             # captcha or their own custom block page.
             return True, "403-PASTEBIN"
+        if re.search("href=\"//help\\.pinterest\\.com/entries/22914692\"", body):
+            return True, "403-PINTEREST"
         if body == "<h2>Forbidden</h2>\n":
             return True, "403-RACKSPACE"
         if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
