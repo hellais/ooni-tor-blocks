@@ -21,11 +21,6 @@ seen so far. They should end up in a catchall class so they can get
 their own classifiers, rather than being treated as 200 non-blocks.
 
 
-== 403-4CHAN
-
-Custom CloudFlare captcha page of www.4chan.org.
-
-
 == 403-ABERDEEN
 
 The block page of the University of Aberdeen's web content filter. I
@@ -61,7 +56,15 @@ lacks a placeholder for the IP address and has an apostrophe in
 
 == 403-CLOUDFLARE
 
-The famous "Attention Required!" CloudFlare captcha.
+Various block pages of CloudFlare. The most common is the famous
+"Attention Required!" that shows a captcha. It appears that some sites
+provide their own custom markup for this page, e.g.
+	<title>4chan - Verification Required</title>
+	<title>Hack Forums - Site Challenge</title>
+There is a variation that does not show a captcha, but simply denies
+access. Based on the text, it may be a manually configured block.
+	<title>Access denied | [domain] used CloudFlare to restrict access</title>
+	The owner of this website ([domain]) has banned your IP address ([IP]).
 
 
 == 403-CRAIGSLIST
