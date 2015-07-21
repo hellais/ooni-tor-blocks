@@ -74,8 +74,12 @@ def classify_response(response):
             return True, "403-BLUEHOST"
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
             return True, "403-CLOUDFLARE"
-        if server == "cloudflare-nginx" and re.search("<title>4chan - Verification Required</title>", body):
-            # 4chan.org customizes its CloudFlare block pages.
+        if server == "cloudflare-nginx" and re.search("<noscript id=\"cf-captcha-bookmark\" class=\"cf-captcha-info\">", body):
+            # A customized captcha page.
+            return True, "403-CLOUDFLARE"
+        if server == "cloudflare-nginx" and re.search("<title>Access denied \\| [^ ]* used CloudFlare to restrict access</title>", body):
+            # With this one you don't get a captcha. May be controlled by the
+            # site operator.
             return True, "403-CLOUDFLARE"
         if re.search("This IP has been automatically blocked\\.\nIf you have questions, please email: blocks-\\w+@craigslist\\.org\n", body):
             return True, "403-CRAIGSLIST"
