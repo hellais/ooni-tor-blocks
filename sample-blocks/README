@@ -195,6 +195,14 @@ it lacks a blocking category. It oddly seems to be used for server-side
 blocking of clients, not client-side blocking of servers.
 
 
+== 403-TYPEPAD
+
+Custom block page of www.typepad.com. It is served with a status of 403;
+however the text in the body makes it sound more like a 404:
+	<img alt="404 page not found" title="404 page not found"
+	<p>The page you visited could not be found.</p>
+
+
 == 403-WILDAPRICOT
 
 "403.6 - Access denied." Custom block page of Wild Apricot, some kind of
