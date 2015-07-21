@@ -124,6 +124,58 @@ def yaml_load_sloppy(f):
                 y = yaml.load_all(f, Loader=yaml.CSafeLoader)
         yield doc
 
+# Fix some disparate entry formats so they are common enough to work with.
+def fixup_entry(doc):
+    assert doc["record_type"] == "entry"
+
+    report = doc.get("report")
+    if report is not None:
+        # Some old OONI reports have some of the fields one level deeper under a
+        # "report" key.
+        for k, v in report.items():
+            assert k not in doc
+            doc[k] = v
+        del doc["report"]
+
+    # Some failures can lead to there being to requests array. For example,
+    #   failure: Router $BD1907CD4E72F940F934FF932549599D886F9044 not in consensus.
+    doc.setdefault("requests", [])
+
+    for request in doc["requests"]:
+        try:
+            is_tor = request["request"]["tor"]
+            # Some reports have tor:true and tor_false instead of having a
+            # sub-table.
+            if type(is_tor) == bool:
+                request["request"]["tor"] = {"is_tor": is_tor}
+        except KeyError:
+            # Some older reports indicate the use of Tor by a special "shttp"
+            # URL scheme.
+            # https://gitweb.torproject.org/ooni-probe.git/tree/ooni/templates/httpt.py?id=7888084a8be52bdee4df69ac650b84ddb90e084e#n46
+            # "To perform requests over Tor you will have to use the special URL
+            # schema 'shttp'. For example to request / on example.com you will
+            # have to do specify as URL 'shttp://example.com/'."
+            if request["request"]["url"].startswith("shttp"):
+                request["request"]["url"] = "http" + request["request"]["url"][5:]
+                request["request"]["tor"] = {"is_tor": True}
+            else:
+                request["request"]["tor"] = {"is_tor": False}
+
+    # Older reports don't summarize the individual request errors into toplevel
+    # control_failure and experiment_failure members.
+    # https://gitweb.torproject.org/ooni-probe.git/commit/?id=f8b13b0b9cb1fd453c77a887726318b04ffe148e
+    doc.setdefault("control_failure", None)
+    doc.setdefault("experiment_failure", None)
+    for request in doc["requests"]:
+        failure = request.get("failure")
+        if failure is not None:
+            if request["request"]["tor"]["is_tor"]:
+                doc["control_failure"] = failure
+            else:
+                doc["experiment_failure"] = failure
+
+    return doc
+
 def process_file(f, filename):
     yamloo = yaml_load_sloppy(f)
 
@@ -138,6 +190,7 @@ def process_file(f, filename):
             continue
 
         assert header is not None
+        doc = fixup_entry(doc)
 
         if options.save_blocks_dir is not None:
             for request in doc["requests"]:
