@@ -168,6 +168,13 @@ it lacks a blocking category. It oddly seems to be used for server-side
 blocking of clients, not client-side blocking of servers.
 
 
+== 403-WILDAPRICOT
+
+"403.6 - Access denied." Custom block page of Wild Apricot, some kind of
+hosting service for clubs. It says "Your IP address has been flagged for
+unauthorized access."
+
+
 == 403-WITZA
 
 Custom block page of web host witza.com.
