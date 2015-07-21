@@ -148,9 +148,9 @@ ggsave("ooni-tor-blocked.pdf", p, width=12, height=400, limitsize=F)
 p <- make.blocked.graph(x, 100, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
 ggsave("ooni-tor-blocked-top-100.pdf", p, width=12, height=12, limitsize=F)
 
-p <- make.tor_blocker.graph(x, NULL, "Type of Tor blocks (Tor is blocked, non-Tor is unblocked).")
+p <- make.tor_blocker.graph(x, NULL, "Type of Tor blocks (Tor is blocked).")
 ggsave("ooni-tor-blocked-type.pdf", p, width=12, height=400, limitsize=F)
-p <- make.tor_blocker.graph(x, 100, "Type of Tor blocks (Tor is blocked, non-Tor is unblocked).")
+p <- make.tor_blocker.graph(x, 100, "Type of Tor blocks (Tor is blocked).")
 ggsave("ooni-tor-blocked-type-top-100.pdf", p, width=12, height=12, limitsize=F)
 
 
