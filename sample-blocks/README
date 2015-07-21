@@ -133,6 +133,14 @@ unnatural browsing behavior. Depending on the violation, the block could
 be temporary, but also permanent."
 
 
+== 403-RACKSPACE
+
+Just the HTML message: "<h2>Forbidden</h2>". Seen on
+www.womensmediacenter.com, www.upci.org, heroin.org,
+www.gaytravelnet.com. A traceroute to these domains suggests they are
+hosted on Rackspace.
+
+
 == 403-SUCURI
 
 Block page of the Sucuri CloudProxy web application firewall
