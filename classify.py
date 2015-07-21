@@ -96,6 +96,8 @@ def classify_response(response):
             return True, "403-SONICWALL"
         if server == "Sucuri/Cloudproxy":
             return True, "403-SUCURI"
+        if server == "WA" and re.search("<title>403.6 - Access denied.</title>", body):
+            return True, "403-WILDAPRICOT"
         if re.search("\\[403 Forbidden Error\\] - You might be blocked by your IP, Country, or ISP\\. You can try to contact us at http://www\\.witza\\.com/contact\\.php\r\n", body):
             return True, "403-WITZA"
 
