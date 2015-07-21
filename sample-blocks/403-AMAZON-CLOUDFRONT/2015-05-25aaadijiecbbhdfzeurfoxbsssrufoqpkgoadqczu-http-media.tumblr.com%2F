@@ -1,0 +1,15 @@
+HTTP/1.0 403 xxx
+Via: 1.1 8f460f85e7788562e9f2e44d0aedb11b.cloudfront.net (CloudFront)
+X-Cache: Error from cloudfront
+Transfer-Encoding: chunked
+Server: AmazonS3
+Connection: close
+X-Amz-Cf-Id: 0gUrZnnEHw3YzcbtTtJUVcGIPr9eXpSu00JNtacU2kcldo3KtVjzuA==
+Date: Mon, 25 May 2015 22:00:47 GMT
+Content-Type: application/xml
+
+e7
+<?xml version="1.0" encoding="UTF-8"?>
+<Error><Code>AccessDenied</Code><Message>Access Denied</Message><RequestId>F6CCAAFB9E7C3778</RequestId><HostId>+oB7h9rtlkA9s/Zq+Rgt44mfipG5NE+Z4fFmpPgw6qSpDIlOo5KTrzuCtTnOswp+</HostId></Error>
+0
+

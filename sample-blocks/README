@@ -28,6 +28,16 @@ guess someone is running ooniprobe there. It tells you what the category
 of the blocked content is.
 
 
+== 403-AMAZON-CLOUDFRONT
+
+This block page may ultimately come either from Amazon S3 (storage
+service) or Amazon CloudFront (content delivery network). It has the
+headers:
+	Server: AmazonS3
+	X-Amz-Cf-Id: ...
+The response body is XML that says "AccessDenied".
+
+
 == 403-BADBEHAVIOR
 
 Bad Behavior (http://bad-behavior.ioerror.us/about/) is a PHP plugin
