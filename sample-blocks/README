@@ -84,6 +84,18 @@ the fields Set-Cookie and Content-Length, but sometimes it additionally
 contains Date and Connection.
 
 
+== 403-EZINEARTICLES
+
+Custom block page of ezinearticles.com. There are two variations. One of
+them mentions Tor specifically:
+	"It appears that you are using Tor anonymizing software.
+	No Problem! We just need you to enter a Captcha so we
+	can confirm that you are a person and not a bot."
+The other looks like a generic threshold:
+	"There is an excessive amount of traffic coming from your
+	Region."
+
+
 == 403-GOOGLE-SORRY
 
 The Google page "We're sorry... but your computer or network may be
