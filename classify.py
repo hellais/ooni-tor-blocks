@@ -92,6 +92,8 @@ def classify_response(response):
             return True, "403-GROUPON"
         if re.search("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1256\"><title>M[0-9]-[0-9]\n", body):
             return True, "403-IRAN"
+        if re.search("<li>McAfee Global Threat Intelligence has determined</li>", body):
+            return True, "403-MCAFEE"
         if re.search("<title>Pastebin\\.com - Access Denied Warning</title>\r", body):
             # "Censor Kitty denies access"
             # Pastebin is also on CloudFlare, so you could get a CloudFlare
