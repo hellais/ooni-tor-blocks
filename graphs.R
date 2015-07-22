@@ -97,7 +97,7 @@ class_to_blocker <- function(class) {
 	ifelse(class %in% names(blockers), blockers[class], class)
 }
 
-x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"), levels=names(blocker.palette))
+x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"))
 write.csv(sort(table(x$tor_class)), "", quote=F)
 write.csv(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_class)), "", quote=F)
 write.csv(sort(table(x$tor_blocker)), "", quote=F)
