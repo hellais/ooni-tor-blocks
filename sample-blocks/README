@@ -7,6 +7,15 @@ not know the original response-phrase (e.g. "OK" or "Not Found") nor the
 original header ordering.
 
 
+== 200-BRITISHTELECOM
+
+A block page of the ISP British Telecom. This page with used for at
+least thepiratebay.se in 2012.
+
+http://www.cnet.com/news/u-k-s-largest-isp-blocks-the-pirate-bay-but-to-no-avail/
+https://en.wikipedia.org/wiki/Web_blocking_in_the_United_Kingdom#Copyright
+
+
 == 200-EEEP, 200-EEEP-OTHER
 
 These are block pages served in Greece for gambling web sites. The
