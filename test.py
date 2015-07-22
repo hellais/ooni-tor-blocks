@@ -8,8 +8,10 @@ import imp
 import os
 import os.path
 import re
+import sys
 import unittest
 
+sys.dont_write_bytecode = True # Don't write a "findblocksc" file.
 findblocks = imp.load_source("findblocks", "findblocks")
 from findblocks import canonicalize_url
 from classify import classify_response
