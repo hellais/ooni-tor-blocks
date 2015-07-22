@@ -78,6 +78,13 @@ write.csv(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_class)), "", quote=F)
 write.csv(sort(table(x$tor_blocker)), "", quote=F)
 
 
+p <- ggplot(data.frame(urlfreq=as.vector(sort(table(x$url)))), aes(urlfreq))
+p <- p + stat_ecdf()
+p <- p + theme_bw()
+p <- p + labs(title="CDF of number of times each URL was probed", x="Number of probes", y="Fraction of URLs probed x times or less")
+ggsave("ooni-url-cdf.pdf", p, width=7, height=5)
+
+
 x$probe_cc <- reorder(x$probe_cc, x$probe_cc, length)
 
 p <- ggplot(x, aes(probe_cc, fill=blocked))
