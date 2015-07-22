@@ -1,0 +1,18 @@
+HTTP/1.0 200 xxx
+X-Powered-By: PHP/5.3.29
+Transfer-Encoding: chunked
+Set-Cookie: __cfduid=d7c6039026da6fbd84bd274ca2c3229871419991251; expires=Thu, 31-Dec-15 02:00:51 GMT; path=/; domain=.hackforums.net; HttpOnly
+Set-Cookie: mybb[lastvisit]=1419991251; expires=Thu, 31-Dec-2015 02:00:51 GMT; path=/; domain=.hackforums.net
+Set-Cookie: mybb[lastactive]=1419991251; expires=Thu, 31-Dec-2015 02:00:51 GMT; path=/; domain=.hackforums.net
+Set-Cookie: sid=6bad3e184492c79882f64aff5d68d595; path=/; domain=.hackforums.net; HttpOnly
+Vary: Accept-Encoding,User-Agent
+Server: cloudflare-nginx
+Connection: close
+Date: Wed, 31 Dec 2014 02:00:51 GMT
+CF-RAY: 1a12e2c95e2d1479-AMS
+Content-Type: text/html
+
+3c
+Your datacenter is blocked. Please disable any VPN or proxy.
+0
+

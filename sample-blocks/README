@@ -21,6 +21,12 @@ seen so far. They should end up in a catchall class so they can get
 their own classifiers, rather than being treated as 200 non-blocks.
 
 
+== 200-HACKFORUMS
+
+"Your datacenter is blocked. Please disable any VPN or proxy." This page
+has only been seen on www.hackforums.net.
+
+
 == 403-ABERDEEN
 
 The block page of the University of Aberdeen's web content filter. I
