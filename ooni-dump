@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+
+# Dumps the HTTP responses from an OONI http_requests report.
+
+import errno
+import getopt
+import os
+import os.path
+import sys
+import urllib
+import urlparse
+
+from ooni import ooni_open_file
+
+OUTPUT_DIR = "dump"
+
+def save_response(f, response):
+    f.write("HTTP/1.0 %d xxx\r\n" % response["code"])
+    for name, values in response["headers"]:
+        for value in values:
+            f.write("%s: %s\r\n" % (name, value))
+    f.write("\r\n")
+    f.write(response["body"])
+
+def save_response_filename(filename, response):
+    try:
+        os.makedirs(os.path.dirname(filename))
+    except OSError, e:
+        if e.errno != errno.EEXIST:
+            raise
+    with open(filename, "w") as f:
+        return save_response(f, response)
+
+# Save a response with an automatically generated filename.
+def save_response_filename_auto(header, request, response):
+    url = urlparse.urlsplit(request["url"])
+    filename = "%s-%s-%s-%s%s" % (header["report_id"], request["tor"]["is_tor"] and "tor" or "nontor", url.scheme, url.netloc, urlparse.urlunsplit((None, None, url.path, url.query, None)))
+    filename = urllib.quote(filename, safe="")
+    # Truncate name to filesystem limits.
+    filename = filename[:255]
+    filename = os.path.join(OUTPUT_DIR, urllib.quote(url.netloc, safe=""), filename)
+    print filename
+    return save_response_filename(filename, response)
+
+def process_file(yamloo):
+    header = None
+    for doc in yamloo:
+        if doc["record_type"] == "header":
+            header = doc
+            continue
+
+        if doc["record_type"] != "entry":
+            continue
+
+        for request in doc["requests"]:
+            if request.get("failure") is not None:
+                continue
+
+            save_response_filename_auto(header, request["request"], request["response"])
+
+if __name__ == "__main__":
+    opts, args = getopt.gnu_getopt(sys.argv[1:], "d:")
+    for o, a in opts:
+        if o == "-d":
+            OUTPUT_DIR = a
+
+    for filename in args:
+        yamloo = ooni_open_file(filename)
+        process_file(yamloo)
