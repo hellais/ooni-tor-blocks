@@ -186,6 +186,12 @@ def fixup_entry(doc):
         elif type(body) == unicode:
             response["body"] = body.encode("utf-8")
 
+        # And some web sites use non-ASCII in headers.
+        for key, values in response["headers"]:
+            for i in range(len(values)):
+                if type(values[i]) == unicode:
+                    values[i] = values[i].encode("utf-8")
+
     return doc
 
 def process_file(f, filename):
