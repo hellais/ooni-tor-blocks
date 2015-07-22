@@ -65,6 +65,9 @@ def classify_response(response):
         if re.search("gamingcommission\\.gov\\.gr", body):
             return True, "200-EEEP-OTHER"
 
+        if re.search("Your datacenter is blocked\\. Please disable any VPN or proxy\\.", body):
+            return True, "200-HACKFORUMS"
+
     if status == 403:
         if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
             return True, "403-ABERDEEN"
