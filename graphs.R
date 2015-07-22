@@ -180,20 +180,20 @@ x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="TOR-BLOCKED", sum)
 
 p <- make.blocked.graph(x, NULL, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
-ggsave("ooni-tor-blocked.pdf", p, width=12, height=400, limitsize=F)
+ggsave("ooni-tor-blocked.pdf", p, width=12*8, height=400, limitsize=F)
 p <- make.blocked.graph(x, 200, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
-ggsave("ooni-tor-blocked-top-200.pdf", p, width=12, height=12*2, limitsize=F)
+ggsave("ooni-tor-blocked-top-200.pdf", p, width=12*8, height=12*2, limitsize=F)
 
 p <- make.tor_blocker.graph(x, NULL, "Type of Tor blocks (Tor is blocked).")
-ggsave("ooni-tor-blocked-type.pdf", p, width=12, height=400, limitsize=F)
+ggsave("ooni-tor-blocked-type.pdf", p, width=12*8, height=400, limitsize=F)
 p <- make.tor_blocker.graph(x, 200, "Type of Tor blocks (Tor is blocked).")
-ggsave("ooni-tor-blocked-type-top-200.pdf", p, width=12, height=12*2, limitsize=F)
+ggsave("ooni-tor-blocked-type-top-200.pdf", p, width=12*8, height=12*2, limitsize=F)
 
 
 # Sort first by number of NONTOR-BLOCKED, then by number of observations.
 x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="NONTOR-BLOCKED", sum)
 p <- make.blocked.graph(x, NULL, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
-ggsave("ooni-nontor-blocked.pdf", p, width=12, height=400, limitsize=F)
+ggsave("ooni-nontor-blocked.pdf", p, width=12*8, height=400, limitsize=F)
 p <- make.blocked.graph(x, 200, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
-ggsave("ooni-nontor-blocked-top-200.pdf", p, width=12, height=12*2, limitsize=F)
+ggsave("ooni-nontor-blocked-top-200.pdf", p, width=12*8, height=12*2, limitsize=F)
