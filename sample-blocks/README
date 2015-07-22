@@ -311,9 +311,8 @@ intended to reduce risk to DoD users and protect DoD systems from
 intrusion") but it occurs sometimes for www.army.mil accessed over Tor.
 
 
-== 503-YELP
+== 403-YELP, 503-YELP
 
-A custom block page of yelp.com. It contains the HTML
-	<h2>Sorry, you're not allowed to access this page.</h2>
-	<p>Your IP address is: X.X.X.X</p>
-	<p>Please retry your request and <a href="mailto:feedback+unavailable@yelp.com?subject=IP%20Block%20Message%3A%20X.X.X.X">contact Yelp</a> if you continue experiencing issues.</p>
+A custom block page of yelp.com. "Sorry, you're not allowed to access
+this page." The current version (2015) of the block page is a 503.
+Before that it was a 403.
