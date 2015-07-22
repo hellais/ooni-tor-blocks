@@ -20,6 +20,7 @@ blocker.palette <- c(
 blockers <- c(
 	"403-AKAMAI"="Akamai",
 	"404-AKAMAI"="Akamai",
+	"403-AMAZON-CLOUDFRONT"="Amazon",
 	"503-AMAZON"="Amazon",
 	"403-BLUEHOST"="Bluehost",
 	"403-CLOUDFLARE"="CloudFlare",
@@ -32,26 +33,50 @@ blockers <- c(
 	"503-YELP"="Yelp",
 
 	"403-BADBEHAVIOR"="other",
+	"503-DOD"="other",
+	"403-EZINEARTICLES"="other",
+	"403-GROUPON"="other",
+	"403-INCAPSULA"="other",
+	"403-MCAFEE"="other",
+	"410-MYSPACE"="other",
 	"403-PASTEBIN"="other",
 	"403-PINTEREST"="other",
-	"403-SUCURI"="other",
 	"403-RACKSPACE"="other",
+	"403-SUCURI"="other",
+	"403-TYPEPAD"="other",
 	"403-WILDAPRICOT"="other",
-	"410-MYSPACE"="other",
-	"503-DOD"="other",
+	"403-WITZA"="other",
 
 	"400-OTHER"="other",
 	"401-OTHER"="other",
+	"402-OTHER"="other",
 	"403-OTHER"="other",
 	"404-OTHER"="other",
 	"405-OTHER"="other",
 	"406-OTHER"="other",
+	"409-OTHER"="other",
 	"410-OTHER"="other",
+	"412-OTHER"="other",
 	"413-OTHER"="other",
+	"415-OTHER"="other",
+	"418-OTHER"="other",
+	"421-OTHER"="other",
+	"424-OTHER"="other",
+	"456-OTHER"="other",
+	"499-OTHER"="other",
 	"500-OTHER"="other",
+	"501-OTHER"="other",
 	"502-OTHER"="other",
 	"503-OTHER"="other",
-	"504-OTHER"="other"
+	"504-OTHER"="other",
+	"508-OTHER"="other",
+	"509-OTHER"="other",
+	"522-OTHER"="other",
+
+	# Probably client-side censorship.
+	"200-EEEP"="other",
+	"200-EEEP-OTHER"="other",
+	"403-IRAN"="other"
 )
 
 x <- read.csv("findblocks.csv", colClasses=list(
