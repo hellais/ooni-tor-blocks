@@ -1,0 +1,81 @@
+HTTP/1.0 200 xxx
+Content-Length: 2395
+Accept-Ranges: bytes
+Server: Tellas HTTP Server
+Last-Modified: Wed, 04 Sep 2013 06:55:41 GMT
+Connection: close
+ETag: "1cf689-95b-4b277540"
+Date: Fri, 04 Jul 2014 00:00:08 GMT
+Content-Type: text/html
+
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>.: Απαγόρευση Πρόσβασης :.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+body {
+	padding:0px;
+	margin:0px;
+	font-family:Tahoma;
+	font-size:11pt;
+	background-image:  url(/img/wind_new_bg.jpg);
+	background-repeat:repeat-x;
+	background-position: center top; 
+}
+
+a {
+	color:#02578E;
+	cursor: pointer; cursor: hand;
+}
+
+Top {
+	margin:0;
+	height:125px;
+	width:970px;
+	margin-bottom:20px;
+}
+
+Logo{
+	float:left;
+	width:188px;
+}
+
+.style1 {
+	font-size: 11pt;
+	font-weight: bold;
+}
+
+.style2 {color: #02578E}
+
+.main {
+	margin: 30px 10px 10px 20px;
+	padding:10pt auto;
+	line-spacing: 110%;
+	font-size: 11pt;
+	text-align: justify;
+}
+
+.uline{
+	text-decoration:underline;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body class="body">
+	<div class="Top">
+		<div class="Logo"><img src="/img/wind_logo.jpg"></div>
+	</div>
+	<div class="main">
+			<p><span class="style1">Σημαντική ενημέρωση:</span></p>
+			<p>Με βάση την 65/8/24.7.2013 απόφαση της <strong>Επιτροπής Εποπτείας και Ελέγχου Παιγνίων (Ε.Ε.Ε.Π.)</strong>, ο ιστότοπος που επιχειρείτε να επισκεφθείτε <strong>προσφέρει υπηρεσίες τυχερών παιγνίων και στοιχημάτων <span class='uline'>χωρίς άδεια</span></strong> στην Ελλάδα.</p>
+			<p>Κατά συνέπεια, <strong>η πρόσβαση στον ιστότοπο αυτό δεν είναι επιτρεπτή</strong>, όπως και σε κάθε ιστότοπο που περιλαμβάνεται στον σχετικό κατάλογο της Ε.Ε.Ε.Π. Περισσότερες λεπτομέρειες σχετικά με τα παραπάνω καθώς και τον πλήρη κατάλογο των απαγορευμένων από την Ε.Ε.Ε.Π. ιστοτόπων μπορείτε να βρείτε εδώ:  <a href='http://www.gamingcommission.gov.gr/index.php/el' target='_new'>http://www.gamingcommission.gov.gr/index.php/el/</a></p>
+			<p>Με εκτίμηση,<br />
+			WIND Ελλάς
+			</p>
+	</div>
+</body>
+</html>

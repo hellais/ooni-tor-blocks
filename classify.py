@@ -55,6 +55,11 @@ def classify_response(response):
             return True, "200-EEEP"
         if re.search("<title>Μη δυνατή \r\nπρόσβαση</title>", body) and re.search("                    Η απαγόρευση της πρόσβασης επιβάλλεται από το νόμο \r\n4.002/2011 και τις αποφάσεις της Επιτροπής Εποπτείας και Ελέγχου Παιγνίων", body):
             return True, "200-EEEP"
+        # This looks like one of:
+        # https://ooni.torproject.org/post/eeep-greek-censorship/#wind:d0c495f4479395eff703b25df5d2e963
+        # https://ooni.torproject.org/post/eeep-greek-censorship/#wind-mobile:d0c495f4479395eff703b25df5d2e963
+        if re.search("<title>.: Απαγόρευση Πρόσβασης :.</title>", body):
+            return True, "200-EEEP"
         # This is a catch-all designed to find other E.E.E.P. blocks that aren't
         # specifically enumerated above, for when new OONI reports are added.
         if re.search("gamingcommission\\.gov\\.gr", body):
