@@ -256,7 +256,7 @@ def process_file(f, filename):
 # Wow! Python's gzip module is slow! Uncompress with gzip instead. (Also has the
 # advantage that decompression can use a separate core.)
 def open_zcat(filename):
-    p = subprocess.Popen(["gzip", "-dc", filename], stdout=subprocess.PIPE)
+    p = subprocess.Popen(["gzip", "-dc", filename], stdout=subprocess.PIPE, bufsize=-1)
     return p.stdout
 
 # Open a file optionally with gzip decompression based on the filename
