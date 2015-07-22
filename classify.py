@@ -83,7 +83,7 @@ def classify_response(response):
             # With this one you don't get a captcha. May be controlled by the
             # site operator.
             return True, "403-CLOUDFLARE"
-        if re.search("This IP has been automatically blocked\\.\nIf you have questions, please email: blocks-\\w+@craigslist\\.org\n", body):
+        if re.search("This IP has been automatically blocked\\.\n(Questions:|If you have questions, please email:) blocks-\\w+@craigslist\\.org", body):
             return True, "403-CRAIGSLIST"
         if re.search("<title>EzineArticles Submission", body):
             return True, "403-EZINEARTICLES"
