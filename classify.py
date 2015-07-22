@@ -39,6 +39,9 @@ def classify_response(response):
             return False, "%d" % status
 
     if status == 200:
+        if re.search("Error - site blocked", body):
+            return True, "200-BRITISHTELECOM"
+
         # These are all blocks of gambling web sites from a blacklist of the
         # Hellenic Gaming Commission (E.E.E.P.). Blocking is up to the ISP and
         # they do it variously.
