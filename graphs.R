@@ -100,6 +100,7 @@ p <- ggplot(x, aes(as.Date(date), fill=blocked))
 p <- p + geom_bar(binwidth=1)
 p <- p + scale_fill_manual(values=palette)
 p <- p + theme_bw()
+p <- p + theme(panel.grid.major=element_blank(), panel.grid.minor=element_blank())
 p <- p + labs(title="Number of request pairs and blocking per day", x=NULL, y="Number of request pairs")
 ggsave("ooni-blocked-date-all.pdf", p, width=7, height=4)
 
