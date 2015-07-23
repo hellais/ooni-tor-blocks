@@ -25,6 +25,24 @@ def classify_response(response):
         # 408 is "Request Timeout", meaning the server timed out waiting for the
         # client to send a request. This is probably measurement error.
         return False, "%d" % status
+
+    if status == 502:
+        # 502 is "Bad Gateway". It means that a CDN server or proxy got a bad
+        # response from the upstream server.
+        if server == "cloudflare-nginx" or get_header(response, "CF-RAY") is not None:
+            return False, "%d" % status
+
+    if status == 504:
+        # 504 is "Gateway Timeout". It means that a CDN server or proxy has
+        # timed out waiting for the upstream server. This is pretty common, but
+        # to be on the safe side we only recognize a few whitelisted pages. In
+        # any case, even if it does indicate censorship, it is client-side
+        # censorship.
+        if server == "AkamaiGHost":
+            return False, "%d" % status
+        if server == "cloudflare-nginx" or get_header(response, "CF-RAY") is not None:
+            return False, "%d" % status
+
     if status in (520, 521, 522, 523, 524, 525, 526):
         # These are special CloudFlare codes that mean there was an error
         # communicating with the origin server. We don't consider them blocks.
