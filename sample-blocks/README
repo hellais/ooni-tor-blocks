@@ -234,6 +234,22 @@ www.gaytravelnet.com. A traceroute to these domains suggests they are
 hosted on Rackspace.
 
 
+== 403-SKYDNS
+
+Block page of SkyDNS (https://www.skydns.ru/), a cloud-based client-side
+content blocking service. The text is in Russian:
+	Содержимое заблокировано
+	Доступ всё ещё закрыт!
+	Cайт [domain] все еще заблокирован, так как настройки применяются не
+	мгновенно. Пожалуйста, подождите минуту и обновите страницу. Рекомендуем
+	перегрузить браузер для обновления закешированных данных.
+("Content is blocked
+Access is still closed!
+Site [domain] still blocked, as the settings are not applied
+immediately. Please wait a minute and refresh the page. Recommended
+restart the browser to update cached data.")
+
+
 == 403-SUCURI
 
 Block page of the Sucuri CloudProxy web application firewall
