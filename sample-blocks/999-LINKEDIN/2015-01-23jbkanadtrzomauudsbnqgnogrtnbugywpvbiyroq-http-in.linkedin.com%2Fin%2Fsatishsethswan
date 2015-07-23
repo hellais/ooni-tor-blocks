@@ -1,0 +1,39 @@
+HTTP/1.0 999 xxx
+Content-Length: 956
+X-Li-Pop: prod-lva1
+X-LI-UUID: +QjHBoojvBOgBaHX7CoAAA==
+Server: ATS
+Date: Fri, 23 Jan 2015 22:04:18 GMT
+Content-Type: text/html
+
+<html><head>
+<script type="text/javascript">
+window.onload = function() {
+  var newLocation = "";
+  if (window.location.protocol == "http:") {
+    var cookies = document.cookie.split("; ");
+    for (var i = 0; i < cookies.length; ++i) {
+      if ((cookies[i].indexOf("sl=") == 0) && (cookies[i].length > 3)) {
+        newLocation = "https:" + window.location.href.substring(window.location.protocol.length);
+      }
+    }
+  }
+
+  if (newLocation.length == 0) {
+    var domain = location.host;
+    var newDomainIndex = 0;
+    if (domain.substr(0, 6) == "touch.") {
+      newDomainIndex = 6;
+    }
+    else if (domain.substr(0, 7) == "tablet.") {
+      newDomainIndex = 7;
+    }
+    if (newDomainIndex) {
+      domain = domain.substr(newDomainIndex);
+    }
+    newLocation = "https://" + domain +  "/uas/login?trk=sentinel_org_block&session_redirect=" + encodeURIComponent(window.location)
+  }
+  window.location.href = newLocation;
+}
+</script>
+</head></html>

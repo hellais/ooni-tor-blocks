@@ -394,6 +394,15 @@ Block pages seen only on www.victoriassecret.com. They both simply say
 "<h1>File not found</h1>".
 
 
+== 999-LINKEDIN
+
+A LinkedIn block page, probably anti-bot or anti-scraper. One of them
+says, "Sorry, we are unable to serve your request at this time due to
+unusual traffic from your network connection." Another one may simply be
+a request to log in; it redirects to a URL containing
+"/uas/login?trk=sentinel_org_block".
+
+
 == 999-YAHOO
 
 An error message from Yahoo services. The text hints that the block may
