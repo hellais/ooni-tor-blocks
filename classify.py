@@ -205,6 +205,10 @@ def classify_response(response):
         if re.search("<p>Please retry your request and <a href=\"mailto:feedback\\+unavailable@yelp.com\\?subject=IP%20Block%20Message%3A%20[\\d.]+\">contact Yelp</a> if you continue experiencing issues\\.</p>", body):
             return True, "503-YELP"
 
+    if status in (910, 920):
+        if body == "<h1>File not found</h1>":
+            return True, "%d-VICTORIASSECRET" % status
+
     if status >= 400:
         return True, "%d-OTHER" % status
     return False, "%d" % status
