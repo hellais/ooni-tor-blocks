@@ -280,6 +280,15 @@ A block page with "Server: AkamaiGHost". It has the characteristic
 Akamai "Reference&#32;&#35;" string. It can have HTTP status 403 or 404.
 
 
+== 404-LIVEJOURNAL-451
+
+This is a 404, though the title of the page is "Error 451". Status 451
+is a semi-standard code used to indicate censorship:
+https://en.wikipedia.org/wiki/HTTP_451. The page also has the message
+"The page is blocked due to the decision of the authorities in your
+area." It has only been seen for alstrangers.livejournal.com.
+
+
 == 406-SITE5
 
 It's the message "This request has been denied for security reasons. If
