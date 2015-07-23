@@ -1,0 +1,164 @@
+HTTP/1.0 403 xxx
+Transfer-Encoding: chunked
+Set-Cookie: __cfduid=d8630a6388074fb984935dc7bc70853c81367750340; expires=Mon, 23-Dec-2019 23:50:00 GMT; path=/; domain=.lenduong.net
+Expires: Sun, 05 May 2013 10:39:02 GMT
+Server: cloudflare-nginx
+Connection: close
+Cache-Control: max-age=2
+Date: Sun, 05 May 2013 10:39:00 GMT
+CF-RAY: 69ccded29d8018e
+Content-Type: text/html
+
+2289
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <!--[if lte IE 8]>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <![endif]-->
+    <!--[if IE 7]>
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <![endif]-->
+    <title>Attention required!</title>
+        <link media="screen" rel="stylesheet" href="/cdn-cgi/styles/challenge.css" />
+    
+</head>
+<body>
+    <input id="Host" type="hidden" value="lenduong.net" />
+    <div id="Challenge">
+        <div id="RecaptchaTip" class="tip hidden">
+            <span>
+                This field helps us determine that you are human, and not an automated program trying to compromise the security system.            </span>
+        </div> <!-- #RecaptchaTip.tip.hidden -->
+        <div id="SuperHead" class="container_12">
+                        <ul id="Languages">
+                <li><a href="?lang=english" class="us flag border color_3" title="English"></a></li>
+                <li><a href="?lang=french" class="fr flag border color_3" title="French"></a></li>
+                <li><a href="?lang=german" class="de flag border color_3" title="German"></a></li>
+                <li><a href="?lang=spanish" class="es flag border color_3" title="Spanish"></a></li>
+                <li><a href="?lang=chinese" class="cn flag border color_3" title="Chinese"></a></li>
+                <li><a href="?lang=italian" class="it flag border color_3" title="Italian"></a></li>
+                <li><a href="?lang=portuguese" class="pt flag border color_3" title="Portuguese"></a></li>
+                <li><a href="?lang=czech" class="cz flag border color_3" title="Czech"></a></li>
+                <li><a href="?lang=norwegian" class="no flag border color_3" title="Norwegian"></a></li>
+                <li><a href="?lang=dutch" class="nl flag border color_3" title="Dutch"></a></li>
+                <li><a href="?lang=turkish" class="tr flag border color_3" title="Turkish"></a></li>
+                <li><a href="?lang=urdu" class="pk flag border color_3" title="Urdu"></a></li>
+                <li><a href="?lang=malay" class="my flag border color_3" title="Malay"></a></li>
+                <li><a href="?lang=indonesian" class="id flag border color_3" title="Indonesian"></a></li>
+                <li><a href="?lang=ukrainian" class="ua flag border color_3" title="Ukrainian"></a></li>
+                <li><a href="?lang=estonian" class="ee flag border color_3" title="Estonian"></a></li>
+                <li><a href="?lang=marathi" class="in flag border color_3" title="Marathi"></a></li>
+                                            </ul> <!-- #Languages -->
+        </div> <!-- #SuperHead -->
+
+        <div id="Warnings">
+            <noscript>
+                <div class="container_12">
+                    <div class="grid_12">
+                        <h2 class="error">JavaScript must be enabled to use this page.</h2> <!-- .error -->
+                    </div> <!-- .grid_12 -->
+                </div> <!-- .container_12 -->
+            </noscript>
+            <div id="CookieWarning" class="hidden">
+                <div class="container_12">
+                    <div class="grid_12">
+                        <h2 class="error">Cookies must be enabled to use this page.</h2> <!-- .error -->
+                    </div> <!-- .grid_12 -->
+                </div> <!-- .container_12 -->
+            </div> <!-- #CookieWarning.hidden -->
+
+        </div> <!-- #Warnings -->
+        <div id="Marquee" class="container_12">
+            <div id="Headline" class="grid_12">
+                <h1 class="text color_5">One more step to access <span class="emphasis">www.lenduong.net</span><!-- .emphasis --></h1>
+            </div> <!-- #Headline.grid_12 -->
+            <div id="Captcha" class="grid_5">
+
+                <form id="CaptchaForm" action="http://www.lenduong.net/" method="post">
+
+                    <div id="RecaptchaContainer" class="grid_5 alpha omega">
+
+                        <h4>CAPTCHA:</h4>
+
+                        <!-- RECAPTCHA -->
+                        <div id="RecaptchaWidget" class="border color_2">
+                            <div class="arrow"></div> <!-- .arrow -->
+                            <div id="recaptcha_image"></div> <!-- #recaptcha_image -->
+                            <input type="text" id="recaptcha_response_field" name="recaptcha_response_field" class="grid_3 push_1 alpha omega" />
+                            <ul id="RecaptchaButtonContainer" class="prefix_1 grid_1">
+                                <li id="recaptcha_reload" onclick="javascript:Recaptcha.reload();"></li>
+                                <li id="recaptcha_switch_audio" class="recaptcha_only_if_image" onclick="javascript:Recaptcha.switch_type('audio');"></li>
+                                <li id="recaptcha_switch_image" class="recaptcha_only_if_audio" onclick="javascript:Recaptcha.switch_type('image');"></li>
+                                <li id="recaptcha_whatsthis"></li>
+                            </ul>
+                        </div> <!-- #RecaptchaWidget.border.color_2 -->
+                        <script type="text/javascript">
+                            var RecaptchaOptions = {
+                                theme: 'custom',
+                                custom_theme_widget: 'RecaptchaWidget'
+                            };
+                        </script>
+                        <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LeT6gcAAAAAAAZ_yDmTMqPH57dJQZdQcu6VFqog"></script>
+                        <noscript>
+                            <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LeT6gcAAAAAAAZ_yDmTMqPH57dJQZdQcu6VFqog" height="300" width="500" frameborder="0"></iframe><br>
+                            <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+                            <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+                        </noscript>
+                        <!-- END RECAPTCHA -->
+
+                    </div> <!-- #RecaptchaContainer.grid_5.alpha.omega -->
+                    <div id="OptionalMessage" class="grid_5 alpha omega">
+
+                        <h4>Optional message for site owner (<span id="OptionalMessageStatus">100 characters max</span>):</h4>
+                        <textarea id="Message" name="message" rows="6" cols="50"></textarea>
+                        <input type="hidden" id="act" name="act" value="captcha">
+
+                    </div> <!-- #OptionalMessage.grid_5.alpha.omega -->
+                    <div id="Submit" class="grid_5 alpha omega">
+
+                        <div class="button">
+                            <div class="color"></div> <!-- .color -->
+                            <div class="mask"></div> <!-- .mask -->
+                        </div> <!-- .button -->
+                    </div> <!-- #Submit.grid_5.alpha.omega -->
+                </form>
+            </div> <!-- #Captcha.grid_5 -->
+            <div id="Screenshot" class="push_1 grid_6">
+
+                <img src="http://cdn-static.cloudflare.com/images/thumbs/458-www.lenduong.net.png" style="background: #ccc;" width="458" height="300" alt="www.lenduong.net" class="border color_2" /> <!-- .border.color_2 -->
+            </div> <!-- #Screenshot.push_1.grid_6 -->
+        </div> <!-- #Marquee -->
+        <div id="Resource1" class="container_12 resourceContainer">
+        </div> <!-- #Resource1.container_12.resourceContainer -->
+        <div id="Evidence">
+        </div> <!-- #Evidence -->
+        <div id="LowerFold" class="container_12">
+
+            <div class="grid_6">
+                <h2>Why am I seeing this page?</h2>
+                <p>Your IP address based on the country, region or network has been flagged by the website owner.</p>
+            </div> <!-- #ChallengeInformation.grid_8 -->
+                    </div> <!-- #LowerFold -->
+        <div id="Resource2" class="container_12 resourceContainer">
+        </div> <!-- #Resource1.container_12.resourceContainer -->
+        <div id="Footer" class="container_12">
+
+            <div class="grid_6 push_3">
+
+                Your IP: <a id="FooterIP" href="http://projecthoneypot.org/ip_202.151.165.204">202.151.165.204</a>&nbsp;&nbsp;<b>&middot;</b>&nbsp;&nbsp;<a id="FooterHelp" href="http://www.cloudflare.com/help" target="_blank">Help</a>&nbsp;&nbsp;<b>&middot;</b>&nbsp;&nbsp;Performance & Security by <a id="FooterCloudFlare" href="https://www.cloudflare.com" target="_blank">CloudFlare</a>
+
+            </div> <!-- .grid_6.push_3 -->
+
+        </div> <!-- #Footer -->
+    </div> <!-- #Challenge -->
+
+    <script type="text/javascript" src="/cdn-cgi/scripts/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="/cdn-cgi/scripts/cf_challenge.js"></script>
+
+</body>
+</html>
+
+0
+

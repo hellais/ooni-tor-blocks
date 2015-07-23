@@ -103,9 +103,9 @@ def classify_response(response):
             return True, "403-BADBEHAVIOR"
         if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted\\.  If you feel this is in error please contact your hosting providers abuse department", body):
             return True, "403-BLUEHOST"
-        if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>", body):
+        if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>|One more step to access", body):
             return True, "403-CLOUDFLARE"
-        if server == "cloudflare-nginx" and re.search("<noscript id=\"cf-captcha-bookmark\" class=\"cf-captcha-info\">", body):
+        if server == "cloudflare-nginx" and re.search("<noscript id=\"cf-captcha-bookmark\" class=\"cf-captcha-info\">|<button type=\"submit\" class=\"cf-captcha-submit\">", body):
             # A customized captcha page.
             return True, "403-CLOUDFLARE"
         if server == "cloudflare-nginx" and re.search("<title>Access denied \\| [^ ]* used CloudFlare to restrict access</title>", body):
