@@ -89,9 +89,21 @@ def classify_response(response):
         if re.search("Your datacenter is blocked\\. Please disable any VPN or proxy\\.", body):
             return True, "200-HACKFORUMS"
 
-        if re.search("The URL you requested has been blocked", body):
-            return True, "200-INDIA"
+        # These are all ISP-specific block pages for URLs blocked by the
+        # government of India at the end of 2014.
+        # https://securityinabox.org/en/blog/22-02-2015/observations-recent-india-censorship
         if re.search("<!--This is a comment\\. Comments are not displayed in the browser-->", body):
+            return True, "200-INDIA"
+        # http://chaoslab.in/goiblocks/block_4.png
+        if re.search("The requested url is blocked, based on the blocking Instruction order received from the Department of Telecommunications, Ministry of Communications & IT, Government of India\\.", body):
+            return True, "200-INDIA"
+        # http://chaoslab.in/goiblocks/block_5.png
+        # There's also a variation that includes the domain.
+        if re.search("HTTP Error 404 - File or Directory not found", body):
+            return True, "200-INDIA"
+        # This one is not found on the above blog post, however it looks like it
+        # is from India and the same bunch of pastebin sites.
+        if re.search("The URL you requested has been blocked", body):
             return True, "200-INDIA"
 
     if status == 403:
