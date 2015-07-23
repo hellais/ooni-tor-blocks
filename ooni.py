@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import yaml
 
 def yaml_load_sloppy(f):
