@@ -38,19 +38,24 @@ has only been seen on www.hackforums.net.
 
 == 200-INDIA
 
-Various block pages from Indian ISPs (which ISP isn't known).
+Various block pages from Indian ISPs relating to government blocking at
+the end of 2014.
+https://securityinabox.org/en/blog/22-02-2015/observations-recent-india-censorship
+There are several different pages, some with variations.
 
-One is from the pastebin blocking incident at the end of 2014.
-	"The URL you requested has been blocked"
-http://www.zdnet.com/article/india-blocks-32-websites-including-github-internet-archive-pastebin-vimeo/
-https://twitter.com/pranesh_prakash/status/550196008416600064/photo/1
+"The URL you requested has been blocked"
+"The URL you requested has been blocked as per DOT/HIGH COURT guidelines"
+
+"<!--This is a comment. Comments are not displayed in the browser-->"
+
+"HTTP Error 404 - File or Directory not found"
+
+"The requested url is blocked, based on the blocking Instruction order
+received from the Department of Telecommunications, Ministry of
+Communications & IT, Government of India."
+
 The OONI reports do not appear to have a sample of the mentioned "the
 site is blocked as per the instructions of Competent Authority" page.
-
-Another is a nearly blank HTML page containing the comment:
-	<!--This is a comment. Comments are not displayed in the browser-->
-https://superuser.com/questions/578471/youtube-is-not-working-on-my-computer-for-the-past-few-days
-"I am Located in Agra India."
 
 
 == 403-ABERDEEN
