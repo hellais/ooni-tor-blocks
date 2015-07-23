@@ -211,6 +211,12 @@ def classify_response(response):
         if body == "<h1>File not found</h1>":
             return True, "%d-VICTORIASSECRET" % status
 
+    if status == 999:
+        if re.search("<title>999: request failed</title>", body):
+            return True, "999-LINKEDIN"
+        if re.search("/uas/login\\?trk=sentinel_org_block", body):
+            return True, "999-LINKEDIN"
+
     if status >= 400:
         return True, "%d-OTHER" % status
     return False, "%d" % status
