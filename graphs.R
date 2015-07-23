@@ -30,13 +30,17 @@ blockers <- c(
 	"403-GOOGLE-SORRY"="Google",
 	"406-SITE5"="Site5",
 	"403-SONICWALL"="SonicWALL",
+	"403-YELP"="Yelp",
 	"503-YELP"="Yelp",
 
+	"406-ARIANNELINGERIE"="other",
 	"403-BADBEHAVIOR"="other",
 	"503-DOD"="other",
 	"403-EZINEARTICLES"="other",
 	"403-GROUPON"="other",
+	"200-HACKFORUMS"="other",
 	"403-INCAPSULA"="other",
+	"999-LINKEDIN"="other",
 	"403-MCAFEE"="other",
 	"410-MYSPACE"="other",
 	"403-PASTEBIN"="other",
@@ -44,8 +48,11 @@ blockers <- c(
 	"403-RACKSPACE"="other",
 	"403-SUCURI"="other",
 	"403-TYPEPAD"="other",
+	"910-VICTORIASSECRET"="other",
+	"920-VICTORIASSECRET"="other",
 	"403-WILDAPRICOT"="other",
 	"403-WITZA"="other",
+	"999-YAHOO"="other",
 
 	"400-OTHER"="other",
 	"401-OTHER"="other",
@@ -72,10 +79,16 @@ blockers <- c(
 	"508-OTHER"="other",
 	"509-OTHER"="other",
 	"522-OTHER"="other",
+	"600-OTHER"="other",
+	"800-OTHER"="other",
+	"910-OTHER"="other",
+	"920-OTHER"="other",
+	"999-OTHER"="other",
 
 	# Probably client-side censorship.
 	"200-EEEP"="other",
 	"200-EEEP-OTHER"="other",
+	"200-INDIA"="other",
 	"403-IRAN"="other"
 )
 
