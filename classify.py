@@ -148,7 +148,7 @@ def classify_response(response):
             return True, "403-TYPEPAD"
         if server == "WA" and re.search("<title>403.6 - Access denied.</title>", body):
             return True, "403-WILDAPRICOT"
-        if re.search("\\[403 Forbidden Error\\] - You might be blocked by your IP, Country, or ISP\\. You can try to contact us at http://www\\.witza\\.com/contact\\.php\r\n", body):
+        if re.search("\\[403 Forbidden Error\\] - You might be blocked by your IP, Country, or ISP\\. You can try to contact us at http://www\\.witza\\.com/contact\\.php", body):
             return True, "403-WITZA"
         if re.search("<p>Please retry your request and <a href=\"mailto:feedback\\+forbidden@yelp\\.com", body):
             return True, "403-YELP"
