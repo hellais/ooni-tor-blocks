@@ -150,6 +150,8 @@ def classify_response(response):
             return True, "403-PINTEREST"
         if body == "<h2>Forbidden</h2>\n":
             return True, "403-RACKSPACE"
+        if re.search("<title>Доступ всё ещё закрыт!</title>", body):
+            return True, "403-SKYDNS"
         if get_header(response, "Window-target") == "_top" and re.search("<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/><meta name=\"id\" content=\"siteBlocked\"/><title>Web Site Blocked</title>", body):
             return True, "403-SONICWALL"
         if re.search("<title>Web Site Blocked</title>", body) and re.search("id=\"nsa_banner\" alt=\"SonicWALL Network Security Appliance\"", body):
