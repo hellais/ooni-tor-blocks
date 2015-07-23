@@ -392,3 +392,10 @@ Before that it was a 403.
 
 Block pages seen only on www.victoriassecret.com. They both simply say
 "<h1>File not found</h1>".
+
+
+== 999-YAHOO
+
+An error message from Yahoo services. The text hints that the block may
+be heuristic: "You may want to scan your system for spyware and
+viruses," "This problem may be due to unusual network activity."
