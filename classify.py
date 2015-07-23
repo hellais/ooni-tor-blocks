@@ -35,7 +35,7 @@ def classify_response(response):
         # https://support.cloudflare.com/hc/en-us/articles/200171926-Error-524-A-timeout-occurred
         # https://support.cloudflare.com/hc/en-us/articles/200278659-Error-525-SSL-handshake-failed
         # https://support.cloudflare.com/hc/en-us/articles/200721975-Error-526-Invalid-SSL-certificate
-        if server == "cloudflare-nginx":
+        if server == "cloudflare-nginx" or get_header(response, "CF-RAY") is not None:
             return False, "%d" % status
 
     if status == 200:
