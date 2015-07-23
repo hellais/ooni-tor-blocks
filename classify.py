@@ -178,6 +178,8 @@ def classify_response(response):
     if status == 406:
         if re.search("This request has been denied for security reasons\\.", body):
             return True, "406-SITE5"
+        if re.search("<meta http-equiv=\"refresh\" content=\"0;url=http://www\\.ariannelingerie\\.com/shop/\">\n", body):
+            return True, "406-ARIANNELINGERIE"
 
     if status == 410:
         # NB this check against the body depends on the input file processing
