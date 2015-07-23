@@ -386,3 +386,9 @@ intrusion") but it occurs sometimes for www.army.mil accessed over Tor.
 A custom block page of yelp.com. "Sorry, you're not allowed to access
 this page." The current version (2015) of the block page is a 503.
 Before that it was a 403.
+
+
+== 910-VICTORIASSECRET, 920-VICTORIASSECRET
+
+Block pages seen only on www.victoriassecret.com. They both simply say
+"<h1>File not found</h1>".
