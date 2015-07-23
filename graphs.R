@@ -1,4 +1,5 @@
 library(ggplot2)
+library(grid)
 
 palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
@@ -162,10 +163,12 @@ make.blocked.graph <- function(x, topn, title) {
 
 	p <- ggplot(x, aes(date, url, color=blocked))
 	p <- p + geom_point(size=2.5, alpha=0.5)
-	p <- p + guides(color=guide_legend(override.aes=c(alpha=1)))
-	p <- p + scale_color_manual(values=palette)
+	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
+	# sprintf is to add extra space around legend labels.
+	p <- p + scale_color_manual(values=palette, labels=sprintf("%s   ", names(palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
+	p <- p + theme(legend.position="top")
 	p <- p + labs(title=title, x=NULL, y=NULL)
 	p
 }
@@ -180,10 +183,11 @@ make.tor_blocker.graph <- function(x, topn, title) {
 
 	p <- ggplot(x, aes(date, url, color=tor_blocker))
 	p <- p + geom_point(size=2.5, alpha=0.5)
-	p <- p + guides(color=guide_legend(override.aes=c(alpha=1)))
-	p <- p + scale_color_manual(values=blocker.palette)
+	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
+	p <- p + scale_color_manual(values=blocker.palette, labels=sprintf("%s   ", names(blocker.palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
+	p <- p + theme(legend.position="top")
 	p <- p + labs(title=title, x=NULL, y=NULL)
 	p
 }
@@ -195,18 +199,18 @@ x$url <- reorder(x$url, x$blocked=="TOR-BLOCKED", sum)
 p <- make.blocked.graph(x, NULL, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
 ggsave("ooni-tor-blocked.pdf", p, width=14, height=400, limitsize=F)
 p <- make.blocked.graph(x, 200, "OONI URLs sorted by frequency of Tor blocking (Tor is blocked, non-Tor is unblocked).")
-ggsave("ooni-tor-blocked-top-200.pdf", p, width=14, height=12*2, limitsize=F)
+ggsave("ooni-tor-blocked-top-200.pdf", p, width=12, height=12*2, limitsize=F)
 
 p <- make.tor_blocker.graph(x, NULL, "Type of Tor blocks (Tor is blocked).")
 ggsave("ooni-tor-blocked-type.pdf", p, width=14, height=400, limitsize=F)
 p <- make.tor_blocker.graph(x, 200, "Type of Tor blocks (Tor is blocked).")
-ggsave("ooni-tor-blocked-type-top-200.pdf", p, width=14, height=12*2, limitsize=F)
+ggsave("ooni-tor-blocked-type-top-200.pdf", p, width=12, height=12*2, limitsize=F)
 
 
 # Sort first by number of NONTOR-BLOCKED, then by number of observations.
 x$url <- reorder(x$url, x$blocked, length)
 x$url <- reorder(x$url, x$blocked=="NONTOR-BLOCKED", sum)
 p <- make.blocked.graph(x, NULL, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
-ggsave("ooni-nontor-blocked.pdf", p, width=14, height=400, limitsize=F)
+ggsave("ooni-nontor-blocked.pdf", p, width=12, height=400, limitsize=F)
 p <- make.blocked.graph(x, 200, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
-ggsave("ooni-nontor-blocked-top-200.pdf", p, width=14, height=12*2, limitsize=F)
+ggsave("ooni-nontor-blocked-top-200.pdf", p, width=12, height=12*2, limitsize=F)
