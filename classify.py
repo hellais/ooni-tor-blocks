@@ -216,6 +216,8 @@ def classify_response(response):
             return True, "999-LINKEDIN"
         if re.search("/uas/login\\?trk=sentinel_org_block", body):
             return True, "999-LINKEDIN"
+        if re.search("Yahoo! - 999 Unable to process request at this time -- error 999", body):
+            return True, "999-YAHOO"
 
     if status >= 400:
         return True, "%d-OTHER" % status
