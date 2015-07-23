@@ -87,8 +87,6 @@ def save_response_filename_auto(header, request, response, class_):
 # Canonicalize paths of "/" and "", which otherwise cause spurious URL
 # differences.
 def canonicalize_url(url):
-    if type(url) == unicode:
-        url = url.encode("utf-8")
     u = urlparse.urlsplit(url)
     if u.path == "/":
         u = (u.scheme, u.netloc, "", u.query, u.fragment)

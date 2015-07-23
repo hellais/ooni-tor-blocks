@@ -39,6 +39,10 @@ def fixup_entry(doc):
     doc.setdefault("requests", [])
 
     for request in doc["requests"]:
+        if type(request["request"]["url"]) == unicode:
+            request["request"]["url"] = request["request"]["url"].encode("utf-8")
+
+    for request in doc["requests"]:
         try:
             is_tor = request["request"]["tor"]
             # Some reports have tor:true and tor_false instead of having a
