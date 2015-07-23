@@ -108,8 +108,6 @@ def ooni_open(f):
             doc = fixup_entry(doc)
         yield doc
 
-# Wow! Python's gzip module is slow! Uncompress with gzip instead. (Also has the
-# advantage that decompression can use a separate core.)
 def open_zcat(filename):
     p = subprocess.Popen(["gzip", "-dc", filename], stdout=subprocess.PIPE, bufsize=-1)
     return p.stdout
