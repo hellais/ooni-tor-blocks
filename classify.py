@@ -157,6 +157,10 @@ def classify_response(response):
         if server == "AkamaiGHost" and re.search("<H1>Access Denied</H1>\n \nYou don't have permission to access \"[^\"]*\" on this server\\.<P>\nReference&#32;&#35;", body):
             return True, "%d-AKAMAI" % status
 
+    if status == 404:
+        if re.search("<title>Error 451</title>", body):
+            return True, "404-LIVEJOURNAL-451"
+
     if status == 406:
         if re.search("This request has been denied for security reasons\\.", body):
             return True, "406-SITE5"
