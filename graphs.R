@@ -1,6 +1,9 @@
 library(ggplot2)
 library(grid)
 
+# URLs probed fewer than this many times will be ignored.
+min.probes.required = 100
+
 palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
 blocker.palette <- c(
@@ -101,6 +104,9 @@ x <- read.csv("findblocks.csv", colClasses=list(
 ))
 x$date <- as.POSIXct(x$date, tz="GMT")
 Encoding(x$url) <- "latin1"
+
+# Remove URLs probed only a few times.
+x <- x[table(x$url)[x$url] >= min.probes.required, ]
 
 x$blocked <- ifelse(x$nontor_isblocked,
 	ifelse(x$tor_isblocked, "BOTH-BLOCKED", "NONTOR-BLOCKED"),
