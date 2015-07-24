@@ -7,9 +7,9 @@ min.probes.required = 100
 palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
 blocker.palette <- c(
-	"Akamai"="skyblue", # "#0098cc",
+	"Akamai"="#0098cc",
 	"Amazon"="red",
-	"Bluehost"="#3575c0",
+	"Bluehost"="blue", # "#3575c0",
 	"CloudFlare"="#fe8d1b",
 	"Convio"="darkkhaki",
 	"Craigslist"="#800080",
