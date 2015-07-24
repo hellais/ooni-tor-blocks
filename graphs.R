@@ -118,6 +118,8 @@ cat("\nFrequency of tor_class (TOR-BLOCKED only)\n")
 write.csv(rev(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_class))), "", quote=F)
 cat("\nFrequency of tor_blocker\n")
 write.csv(rev(sort(table(x$tor_blocker))), "", quote=F)
+cat("\nFrequency of tor_blocker (TOR-BLOCKED only)\n")
+write.csv(rev(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_blocker))), "", quote=F)
 
 
 p <- ggplot(data.frame(urlfreq=as.vector(sort(table(x$url)))), aes(urlfreq))
