@@ -112,9 +112,12 @@ class_to_blocker <- function(class) {
 }
 
 x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"))
-write.csv(sort(table(x$tor_class)), "", quote=F)
-write.csv(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_class)), "", quote=F)
-write.csv(sort(table(x$tor_blocker)), "", quote=F)
+cat("\nFrequency of tor_class\n")
+write.csv(rev(sort(table(x$tor_class))), "", quote=F)
+cat("\nFrequency of tor_class (TOR-BLOCKED only)\n")
+write.csv(rev(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_class))), "", quote=F)
+cat("\nFrequency of tor_blocker\n")
+write.csv(rev(sort(table(x$tor_blocker))), "", quote=F)
 
 
 p <- ggplot(data.frame(urlfreq=as.vector(sort(table(x$url)))), aes(urlfreq))
