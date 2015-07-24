@@ -151,6 +151,13 @@ p <- p + labs(title="Number of request pairs and blocking per week", x=NULL, y="
 ggsave("ooni-blocked-date-all.pdf", p, width=7, height=4)
 
 
+# Given a character vector c("foo", "bar"), return the named character vector
+# c("foo"="foo  ", "bar"="bar  "); i.e., add space padding on the right for
+# better appearance in a horizontally aligned legend.
+padlabel <- function(label) {
+	structure(sprintf("%s  ", label), names=label)
+}
+
 # Make a graph of the top URLs according to the current order of the "url"
 # column. Pass NULL for topn to get all URLs.
 make.blocked.graph <- function(x, topn, title) {
@@ -164,8 +171,7 @@ make.blocked.graph <- function(x, topn, title) {
 	p <- ggplot(x, aes(date, url, color=blocked))
 	p <- p + geom_point(size=2.5, alpha=0.5)
 	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
-	# sprintf is to add extra space around legend labels.
-	p <- p + scale_color_manual(values=palette, labels=sprintf("%s   ", names(palette)))
+	p <- p + scale_color_manual(values=palette, labels=padlabel(names(palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
 	p <- p + theme(legend.position="top")
@@ -184,7 +190,7 @@ make.tor_blocker.graph <- function(x, topn, title) {
 	p <- ggplot(x, aes(date, url, color=tor_blocker))
 	p <- p + geom_point(size=2.5, alpha=0.5)
 	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
-	p <- p + scale_color_manual(values=blocker.palette, labels=sprintf("%s   ", names(blocker.palette)))
+	p <- p + scale_color_manual(values=blocker.palette, labels=padlabel(names(blocker.palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
 	p <- p + theme(legend.position="top")
