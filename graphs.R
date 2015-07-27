@@ -131,9 +131,6 @@ breaks = c(1, 2, 5, 10, 20, 50, 100, 200, 300, 500)
 data.frame(breaks=breaks, numurls=(1.0-ecdf(table(x$url))(breaks-1))*length(unique(x$url)))
 
 
-stop()
-
-
 # Remove URLs probed only a few times.
 x <- x[table(x$url)[x$url] >= min.probes.required, ]
 
