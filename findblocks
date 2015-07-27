@@ -93,7 +93,9 @@ def canonicalize_url(url):
     return urlparse.urlunsplit(u)
 
 def boolf(v):
-    if v:
+    if v is None:
+        return None
+    elif v:
         return "T"
     else:
         return "F"
@@ -121,16 +123,36 @@ def process_file(yamloo, filename):
                 if isblocked:
                     save_response_filename_auto(header, request["request"], request["response"], class_)
 
-        nontor, tor = split_requests(doc["requests"])
-        if nontor is None:
-            print >> sys.stderr, "%s %s: missing is_tor:false request: %s" % (filename, doc["input"], doc["experiment_failure"])
-        if tor is None:
-            print >> sys.stderr, "%s %s: missing is_tor:true request: %s" % (filename, doc["input"], doc["control_failure"])
-        if nontor is None or tor is None:
-            continue
+        url = None
+        nontor_isblocked = None
+        nontor_status = None
+        nontor_class = None
+        tor_isblocked = None
+        tor_status = None
+        tor_class = None
+        tor_exit_ip = None
+        tor_exit_nickname = None
 
-        nontor_isblocked, nontor_class = classify_response(nontor["response"])
-        tor_isblocked, tor_class = classify_response(tor["response"])
+        nontor, tor = split_requests(doc["requests"])
+        if nontor is not None:
+            if url is None:
+                url = nontor["request"]["url"]
+            nontor_isblocked, nontor_class = classify_response(nontor["response"])
+            nontor_status = nontor["response"]["code"]
+
+        if tor is not None:
+            if url is None:
+                url = tor["request"]["url"]
+            tor_isblocked, tor_class = classify_response(tor["response"])
+            tor_status = tor["response"]["code"]
+            # Sometimes exit_ip and exit_name are missing.
+            tor_exit_ip = tor["request"]["tor"].get("exit_ip")
+            tor_exit_nickname = tor["request"]["tor"].get("exit_name")
+
+        if url is None and isinstance(doc["input"], basestring):
+            url = doc["input"]
+        if url is not None:
+            url = canonicalize_url(url)
 
         try:
             test_date = datetime.datetime.utcfromtimestamp(doc["test_start_time"])
@@ -141,16 +163,15 @@ def process_file(yamloo, filename):
             "date": test_date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
-            "url": canonicalize_url(nontor["request"]["url"]),
+            "url": url,
             "nontor_isblocked": boolf(nontor_isblocked),
-            "nontor_status": nontor["response"]["code"],
+            "nontor_status": nontor_status,
             "nontor_class": nontor_class,
             "tor_isblocked": boolf(tor_isblocked),
-            "tor_status": tor["response"]["code"],
-            # Sometimes exit_ip and exit_name are missing.
-            "tor_exit_ip": tor["request"]["tor"].get("exit_ip", ""),
-            "tor_exit_nickname": tor["request"]["tor"].get("exit_name", ""),
+            "tor_status": tor_status,
             "tor_class": tor_class,
+            "tor_exit_ip": tor_exit_ip,
+            "tor_exit_nickname": tor_exit_nickname,
         })
         sys.stdout.flush()
 
