@@ -105,9 +105,6 @@ x <- read.csv("findblocks.csv", colClasses=list(
 x$date <- as.POSIXct(x$date, tz="GMT")
 Encoding(x$url) <- "latin1"
 
-# Remove URLs probed only a few times.
-x <- x[table(x$url)[x$url] >= min.probes.required, ]
-
 x$blocked <- ifelse(x$nontor_isblocked,
 	ifelse(x$tor_isblocked, "BOTH-BLOCKED", "NONTOR-BLOCKED"),
 	ifelse(x$tor_isblocked, "TOR-BLOCKED", "UNBLOCKED")
@@ -118,6 +115,29 @@ class_to_blocker <- function(class) {
 }
 
 x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"))
+
+x <- x[as.Date(x$date) >= as.Date("2014-09-01"), ]
+
+
+p <- ggplot(data.frame(urlfreq=as.vector(sort(table(x$url)))), aes(urlfreq))
+p <- p + stat_ecdf()
+p <- p + theme_bw()
+p <- p + scale_y_continuous(breaks=0:10/10)
+p <- p + scale_x_log10(breaks=c(1, 2, 5, 10, 20, 50, 100, 200, 300, 500, 1000, 2000, 4000), minor_breaks=c())
+p <- p + labs(title="CDF of number of times each URL was probed", x="Number of probes", y="Fraction of URLs probed x times or less")
+ggsave("ooni-url-cdf.pdf", p, width=7, height=5)
+
+breaks = c(1, 2, 5, 10, 20, 50, 100, 200, 300, 500)
+data.frame(breaks=breaks, numurls=(1.0-ecdf(table(x$url))(breaks-1))*length(unique(x$url)))
+
+
+stop()
+
+
+# Remove URLs probed only a few times.
+x <- x[table(x$url)[x$url] >= min.probes.required, ]
+
+
 cat("\nFrequency of tor_class\n")
 write.csv(rev(sort(table(x$tor_class))), "", quote=F)
 cat("\nFrequency of tor_class (TOR-BLOCKED only)\n")
@@ -127,12 +147,6 @@ write.csv(rev(sort(table(x$tor_blocker))), "", quote=F)
 cat("\nFrequency of tor_blocker (TOR-BLOCKED only)\n")
 write.csv(rev(sort(table(x[x$blocked=="TOR-BLOCKED", ]$tor_blocker))), "", quote=F)
 
-
-p <- ggplot(data.frame(urlfreq=as.vector(sort(table(x$url)))), aes(urlfreq))
-p <- p + stat_ecdf()
-p <- p + theme_bw()
-p <- p + labs(title="CDF of number of times each URL was probed", x="Number of probes", y="Fraction of URLs probed x times or less")
-ggsave("ooni-url-cdf.pdf", p, width=7, height=5)
 
 
 x$probe_cc <- reorder(x$probe_cc, x$probe_cc, length)
