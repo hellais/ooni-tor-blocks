@@ -104,7 +104,7 @@ x <- read.csv("findblocks.csv", colClasses=list(
 	url="character"
 ))
 x$date <- as.POSIXct(x$date, tz="GMT")
-Encoding(x$url) <- "latin1"
+Encoding(x$url) <- "UTF-8"
 
 x$blocked <- ifelse(x$nontor_isblocked,
 	ifelse(x$tor_isblocked, "BOTH-BLOCKED", "NONTOR-BLOCKED"),
