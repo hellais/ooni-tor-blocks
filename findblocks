@@ -84,12 +84,13 @@ def save_response_filename_auto(header, request, response, class_):
     filename = os.path.join(options.save_blocks_dir, class_, filename)
     return save_response_filename(filename, response)
 
-# Canonicalize paths of "/" and "", which otherwise cause spurious URL
-# differences.
+# Canonicalize domain capitalization and paths of "/" and "", which otherwise
+# cause spurious URL differences.
 def canonicalize_url(url):
     u = urlparse.urlsplit(url)
+    u = urlparse.urlsplit(urlparse.urlunsplit((u.scheme, u.netloc.lower(), u.path, u.query, u.fragment)))
     if u.path == "/":
-        u = (u.scheme, u.netloc, "", u.query, u.fragment)
+        u = urlparse.urlsplit(urlparse.urlunsplit((u.scheme, u.netloc, "", u.query, u.fragment)))
     return urlparse.urlunsplit(u)
 
 def boolf(v):
