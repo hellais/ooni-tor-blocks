@@ -4,7 +4,7 @@ library(grid)
 # URLs probed fewer than this many times will be ignored.
 min.probes.required = 100
 
-palette <- c(UNBLOCKED="gray85", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
+palette <- c(UNBLOCKED="gray80", "TOR-BLOCKED"="blue", "NONTOR-BLOCKED"="darkorange", "BOTH-BLOCKED"="brown")
 
 blocker.palette <- c(
 	"Akamai"="#0098cc",
@@ -18,7 +18,7 @@ blocker.palette <- c(
 	"SonicWALL"="green",
 	"Yelp"="#c41200",
 	"other"="#202020",
-	"UNBLOCKED"="gray85"
+	"UNBLOCKED"="gray80"
 )
 
 blockers <- c(
@@ -192,8 +192,8 @@ make.blocked.graph <- function(x, topn, title) {
 	}
 
 	p <- ggplot(x, aes(date, url, color=blocked))
-	p <- p + geom_point(size=2.5, alpha=0.5)
-	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
+	p <- p + geom_point(size=3, alpha=0.8, shape=124)
+	p <- p + guides(color=guide_legend(override.aes=c(alpha=1, shape=15), title=NULL))
 	p <- p + scale_color_manual(values=palette, labels=padlabel(names(palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
@@ -211,8 +211,8 @@ make.tor_blocker.graph <- function(x, topn, title) {
 	}
 
 	p <- ggplot(x, aes(date, url, color=tor_blocker))
-	p <- p + geom_point(size=2.5, alpha=0.5)
-	p <- p + guides(color=guide_legend(override.aes=c(alpha=1), title=NULL))
+	p <- p + geom_point(size=3, alpha=0.8, shape=124)
+	p <- p + guides(color=guide_legend(override.aes=c(alpha=1, shape=15), title=NULL))
 	p <- p + scale_color_manual(values=blocker.palette, labels=padlabel(names(blocker.palette)))
 	p <- p + scale_y_discrete(labels=function(l) {strtrim(l, 40)})
 	p <- p + theme_bw()
