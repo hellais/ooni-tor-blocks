@@ -150,7 +150,7 @@ def process_file(yamloo, filename):
             tor_exit_ip = tor["request"]["tor"].get("exit_ip")
             tor_exit_nickname = tor["request"]["tor"].get("exit_name")
 
-        if url is None and isinstance(doc["input"], basestring):
+        if url is None and isinstance(doc["input"], basestring) and "\r" not in doc["input"]:
             url = doc["input"]
         if url is not None:
             url = canonicalize_url(url)
