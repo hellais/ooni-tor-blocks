@@ -152,8 +152,8 @@ def process_file(yamloo, filename):
 
         if url is None and isinstance(doc["input"], basestring) and "\r" not in doc["input"]:
             url = doc["input"]
-        if url is not None:
-            url = canonicalize_url(url)
+        if url is None:
+            continue
 
         try:
             test_date = datetime.datetime.utcfromtimestamp(doc["test_start_time"])
@@ -164,7 +164,7 @@ def process_file(yamloo, filename):
             "date": test_date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
-            "url": url,
+            "url": canonicalize_url(url),
             "nontor_isblocked": boolf(nontor_isblocked),
             "nontor_status": nontor_status,
             "nontor_class": nontor_class,
