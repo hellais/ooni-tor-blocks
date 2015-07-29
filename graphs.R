@@ -103,6 +103,7 @@ x <- read.csv("findblocks.csv", colClasses=list(
 	tor_exit_ip="factor", tor_exit_nickname="factor",
 	url="character"
 ))
+x$report_date <- as.POSIXct(x$report_date, tz="GMT")
 x$date <- as.POSIXct(x$date, tz="GMT")
 Encoding(x$url) <- "UTF-8"
 
