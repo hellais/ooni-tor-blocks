@@ -107,6 +107,7 @@ def process_file(yamloo, filename):
         if doc["record_type"] == "header":
             assert header is None
             header = doc
+            report_date = datetime.datetime.utcfromtimestamp(header["start_time"])
             continue
 
         if doc["record_type"] != "entry":
@@ -162,8 +163,9 @@ def process_file(yamloo, filename):
                 test_date = datetime.datetime.utcfromtimestamp(doc["test_started"])
             except KeyError:
                 # Some reports don't have individual test_start_time.
-                test_date = datetime.datetime.utcfromtimestamp(header["start_time"])
+                test_date = report_date
         csvw.writerow({
+            "report_date": report_date.strftime("%Y-%m-%d %H:%M:%S"),
             "date": test_date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
             "probe_cc": header["probe_cc"],
@@ -188,7 +190,7 @@ if __name__ == "__main__":
             usage()
             sys.exit()
 
-    csvw = csv.DictWriter(sys.stdout, fieldnames=["date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "tor_exit_ip", "tor_exit_nickname", "url"], lineterminator="\n")
+    csvw = csv.DictWriter(sys.stdout, fieldnames=["report_date", "date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "tor_exit_ip", "tor_exit_nickname", "url"], lineterminator="\n")
     csvw.writeheader()
 
     for filename in args:
