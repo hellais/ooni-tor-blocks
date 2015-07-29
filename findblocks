@@ -158,8 +158,11 @@ def process_file(yamloo, filename):
         try:
             test_date = datetime.datetime.utcfromtimestamp(doc["test_start_time"])
         except KeyError:
-            # Some reports don't have individual test_start_time.
-            test_date = datetime.datetime.utcfromtimestamp(header["start_time"])
+            try:
+                test_date = datetime.datetime.utcfromtimestamp(doc["test_started"])
+            except KeyError:
+                # Some reports don't have individual test_start_time.
+                test_date = datetime.datetime.utcfromtimestamp(header["start_time"])
         csvw.writerow({
             "date": test_date.strftime("%Y-%m-%d %H:%M:%S"),
             "report_id": header["report_id"],
