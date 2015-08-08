@@ -21,80 +21,82 @@ blocker.palette <- c(
 	"UNBLOCKED"="gray80"
 )
 
-blockers <- c(
-	"403-AKAMAI"="Akamai",
-	"404-AKAMAI"="Akamai",
-	"403-AMAZON-CLOUDFRONT"="Amazon",
-	"503-AMAZON"="Amazon",
-	"403-BLUEHOST"="Bluehost",
-	"403-CLOUDFLARE"="CloudFlare",
-	"503-CLOUDFLARE"="CloudFlare",
-	"501-CONVIO"="Convio",
-	"403-CRAIGSLIST"="Craigslist",
-	"403-GOOGLE-SORRY"="Google",
-	"406-SITE5"="Site5",
-	"403-SONICWALL"="SonicWALL",
-	"403-YELP"="Yelp",
-	"503-YELP"="Yelp",
 
-	"406-ARIANNELINGERIE"="other",
-	"403-BADBEHAVIOR"="other",
-	"503-DOD"="other",
-	"403-EZINEARTICLES"="other",
-	"403-GROUPON"="other",
-	"200-HACKFORUMS"="other",
-	"403-INCAPSULA"="other",
-	"999-LINKEDIN"="other",
-	"403-MCAFEE"="other",
-	"410-MYSPACE"="other",
-	"403-PASTEBIN"="other",
-	"403-PINTEREST"="other",
-	"403-RACKSPACE"="other",
-	"403-SUCURI"="other",
-	"403-TYPEPAD"="other",
-	"910-VICTORIASSECRET"="other",
-	"920-VICTORIASSECRET"="other",
-	"403-WILDAPRICOT"="other",
-	"403-WITZA"="other",
-	"999-YAHOO"="other",
+blockers <- new.env(parent=emptyenv())
 
-	"400-OTHER"="other",
-	"401-OTHER"="other",
-	"402-OTHER"="other",
-	"403-OTHER"="other",
-	"404-OTHER"="other",
-	"405-OTHER"="other",
-	"406-OTHER"="other",
-	"409-OTHER"="other",
-	"410-OTHER"="other",
-	"412-OTHER"="other",
-	"413-OTHER"="other",
-	"415-OTHER"="other",
-	"418-OTHER"="other",
-	"421-OTHER"="other",
-	"424-OTHER"="other",
-	"456-OTHER"="other",
-	"499-OTHER"="other",
-	"500-OTHER"="other",
-	"501-OTHER"="other",
-	"502-OTHER"="other",
-	"503-OTHER"="other",
-	"504-OTHER"="other",
-	"508-OTHER"="other",
-	"509-OTHER"="other",
-	"522-OTHER"="other",
-	"600-OTHER"="other",
-	"800-OTHER"="other",
-	"910-OTHER"="other",
-	"920-OTHER"="other",
-	"999-OTHER"="other",
+blockers[["403-AKAMAI"]] <- "Akamai"
+blockers[["404-AKAMAI"]] <- "Akamai"
+blockers[["403-AMAZON-CLOUDFRONT"]] <- "Amazon"
+blockers[["503-AMAZON"]] <- "Amazon"
+blockers[["403-BLUEHOST"]] <- "Bluehost"
+blockers[["403-CLOUDFLARE"]] <- "CloudFlare"
+blockers[["503-CLOUDFLARE"]] <- "CloudFlare"
+blockers[["501-CONVIO"]] <- "Convio"
+blockers[["403-CRAIGSLIST"]] <- "Craigslist"
+blockers[["403-GOOGLE-SORRY"]] <- "Google"
+blockers[["406-SITE5"]] <- "Site5"
+blockers[["403-SONICWALL"]] <- "SonicWALL"
+blockers[["403-YELP"]] <- "Yelp"
+blockers[["503-YELP"]] <- "Yelp"
 
-	# Probably client-side censorship.
-	"200-EEEP"="other",
-	"200-EEEP-OTHER"="other",
-	"200-INDIA"="other",
-	"403-IRAN"="other"
-)
+blockers[["406-ARIANNELINGERIE"]] <- "other"
+blockers[["403-BADBEHAVIOR"]] <- "other"
+blockers[["503-DOD"]] <- "other"
+blockers[["403-EZINEARTICLES"]] <- "other"
+blockers[["403-GROUPON"]] <- "other"
+blockers[["200-HACKFORUMS"]] <- "other"
+blockers[["403-INCAPSULA"]] <- "other"
+blockers[["999-LINKEDIN"]] <- "other"
+blockers[["403-MCAFEE"]] <- "other"
+blockers[["410-MYSPACE"]] <- "other"
+blockers[["403-PASTEBIN"]] <- "other"
+blockers[["403-PINTEREST"]] <- "other"
+blockers[["403-RACKSPACE"]] <- "other"
+blockers[["403-SUCURI"]] <- "other"
+blockers[["403-TYPEPAD"]] <- "other"
+blockers[["910-VICTORIASSECRET"]] <- "other"
+blockers[["920-VICTORIASSECRET"]] <- "other"
+blockers[["403-WILDAPRICOT"]] <- "other"
+blockers[["403-WITZA"]] <- "other"
+blockers[["999-YAHOO"]] <- "other"
+
+blockers[["400-OTHER"]] <- "other"
+blockers[["401-OTHER"]] <- "other"
+blockers[["402-OTHER"]] <- "other"
+blockers[["403-OTHER"]] <- "other"
+blockers[["404-OTHER"]] <- "other"
+blockers[["405-OTHER"]] <- "other"
+blockers[["406-OTHER"]] <- "other"
+blockers[["409-OTHER"]] <- "other"
+blockers[["410-OTHER"]] <- "other"
+blockers[["412-OTHER"]] <- "other"
+blockers[["413-OTHER"]] <- "other"
+blockers[["415-OTHER"]] <- "other"
+blockers[["418-OTHER"]] <- "other"
+blockers[["421-OTHER"]] <- "other"
+blockers[["424-OTHER"]] <- "other"
+blockers[["456-OTHER"]] <- "other"
+blockers[["499-OTHER"]] <- "other"
+blockers[["500-OTHER"]] <- "other"
+blockers[["501-OTHER"]] <- "other"
+blockers[["502-OTHER"]] <- "other"
+blockers[["503-OTHER"]] <- "other"
+blockers[["504-OTHER"]] <- "other"
+blockers[["508-OTHER"]] <- "other"
+blockers[["509-OTHER"]] <- "other"
+blockers[["522-OTHER"]] <- "other"
+blockers[["600-OTHER"]] <- "other"
+blockers[["800-OTHER"]] <- "other"
+blockers[["910-OTHER"]] <- "other"
+blockers[["920-OTHER"]] <- "other"
+blockers[["999-OTHER"]] <- "other"
+
+# Probably client-side censorship.
+blockers[["200-EEEP"]] <- "other"
+blockers[["200-EEEP-OTHER"]] <- "other"
+blockers[["200-INDIA"]] <- "other"
+blockers[["403-IRAN"]] <- "other"
+
 
 x <- read.csv("findblocks.csv", colClasses=list(
 	report_id="factor", probe_cc="factor",
@@ -113,7 +115,8 @@ x$blocked <- ifelse(x$nontor_isblocked,
 )
 
 class_to_blocker <- function(class) {
-	ifelse(class %in% names(blockers), blockers[class], class)
+	# Replace empty keys with bogus ones, because mget doesn't allow to look up on empty variable names.
+	unlist(mget(ifelse(class=="", "zzzzzzz", class), envir=blockers, ifnotfound=class))
 }
 
 x$tor_blocker <- factor(ifelse(x$tor_isblocked, class_to_blocker(as.character(x$tor_class)), "UNBLOCKED"))
