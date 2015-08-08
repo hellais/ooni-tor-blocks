@@ -98,8 +98,8 @@ blockers <- c(
 
 x <- read.csv("findblocks.csv", colClasses=list(
 	report_id="factor", probe_cc="factor",
-	nontor_isblocked="logical", nontor_status="integer", nontor_class="factor",
-	tor_isblocked="logical", tor_status="integer", tor_class="factor",
+	nontor_isblocked="logical", nontor_status="integer", nontor_class="factor", nontor_error="factor",
+	tor_isblocked="logical", tor_status="integer", tor_class="factor", tor_error="factor",
 	tor_exit_ip="factor", tor_exit_nickname="factor",
 	url="character"
 ))
