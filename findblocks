@@ -177,9 +177,11 @@ def process_file(yamloo, filename):
             "nontor_isblocked": boolf(nontor_isblocked),
             "nontor_status": nontor_status,
             "nontor_class": nontor_class,
+            "nontor_error": doc["experiment_failure"],
             "tor_isblocked": boolf(tor_isblocked),
             "tor_status": tor_status,
             "tor_class": tor_class,
+            "tor_error": doc["control_failure"],
             "tor_exit_ip": tor_exit_ip,
             "tor_exit_nickname": tor_exit_nickname,
         })
@@ -194,7 +196,7 @@ if __name__ == "__main__":
             usage()
             sys.exit()
 
-    csvw = csv.DictWriter(sys.stdout, fieldnames=["report_date", "date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "tor_isblocked", "tor_status", "tor_class", "tor_exit_ip", "tor_exit_nickname", "url"], lineterminator="\n")
+    csvw = csv.DictWriter(sys.stdout, fieldnames=["report_date", "date", "report_id", "probe_cc", "nontor_isblocked", "nontor_status", "nontor_class", "nontor_error", "tor_isblocked", "tor_status", "tor_class", "tor_error", "tor_exit_ip", "tor_exit_nickname", "url"], lineterminator="\n")
     csvw.writeheader()
 
     for filename in args:
