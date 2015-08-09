@@ -139,6 +139,8 @@ data.frame(breaks=breaks, numurls=(1.0-ecdf(table(x$url))(breaks-1))*length(uniq
 
 # Remove URLs probed only a few times.
 x <- x[table(x$url)[x$url] >= min.probes.required, ]
+# Remove entries where not both responses are good.
+x <- x[!is.na(x$nontor_status)&!is.na(x$tor_status), ]
 
 
 cat("\nFrequency of tor_class\n")
