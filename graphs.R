@@ -250,3 +250,8 @@ p <- make.blocked.graph(x, NULL, "OONI URLs sorted by frequency of non-Tor block
 ggsave("ooni-nontor-blocked.pdf", p, width=12, height=400, limitsize=F)
 p <- make.blocked.graph(x, 200, "OONI URLs sorted by frequency of non-Tor blocking (Tor is unblocked, non-Tor is blocked).")
 ggsave("ooni-nontor-blocked-top-200.pdf", p, width=12, height=12*2, limitsize=F)
+
+
+p <- ggplot(x[x$tor_isblocked, ], aes(date, color=ifelse(tor_blocker=="CloudFlare", "CloudFlare", "other blocker")))
+p <- p + geom_line(stat="bin", binwidth=60*60*24)#, binwidth="1 day")
+ggsave("ooni-tor-blocker-rate.pdf", p, width=8, height=4, limitsize=F)
