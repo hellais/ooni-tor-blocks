@@ -109,6 +109,10 @@ def classify_response(response):
         if re.search("The URL you requested has been blocked", body):
             return True, "200-INDIA"
 
+    if status == 302:
+        if get_header(response, "Location", "").startswith("http://www.shopper.com"):
+            return True, "302-SHOPPERCOM"
+
     if status == 403:
         if re.search("Access to the Web page you have attempted to view has been blocked by the University of Aberdeen's Web Content Filter Service\\.", body):
             return True, "403-ABERDEEN"
