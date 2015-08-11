@@ -60,7 +60,7 @@ def classify_response(response):
         if re.search("Error - site blocked", body):
             return True, "200-BRITISHTELECOM"
 
-        if re.search("<meta http-equiv=\"refresh\" content=\"0;url=http://finder.cox.net", body):
+        if re.search("<meta http-equiv=\"refresh\" content=\"0;url=http://finder\\.cox\\.net", body):
             return True, "200-COX-FINDER"
 
         # These are all blocks of gambling web sites from a blacklist of the
