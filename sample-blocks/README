@@ -66,6 +66,13 @@ The OONI reports do not appear to have a sample of the mentioned "the
 site is blocked as per the instructions of Competent Authority" page.
 
 
+== 301-VPSCONTROL
+
+Apparently some kind of DNS hijacker. It only comes from one probe in
+Germany. It redirects to https://www.vpscontrol.net with the path
+component copied from the original request.
+
+
 == 302-SHOPPERCOM
 
 Looks like a DNS redirector or monetizer. One version redirects to
