@@ -66,6 +66,12 @@ The OONI reports do not appear to have a sample of the mentioned "the
 site is blocked as per the instructions of Competent Authority" page.
 
 
+== 302-SHOPPERCOM
+
+Looks like a DNS redirector or monetizer. One version redirects to
+http://www.shopper.com/advertisers/journeys.php.
+
+
 == 403-ABERDEEN
 
 The block page of the University of Aberdeen's web content filter. I
