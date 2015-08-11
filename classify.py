@@ -60,8 +60,12 @@ def classify_response(response):
         if re.search("Error - site blocked", body):
             return True, "200-BRITISHTELECOM"
 
+        # These are obnoxious search monetization things that ISPs serve when a
+        # domain doesn't exit.
         if re.search("<meta http-equiv=\"refresh\" content=\"0;url=http://finder\\.cox\\.net", body):
             return True, "200-COX-FINDER"
+        if re.search("window\\.open\\('http://www\\.parkingcrew\\.net/privacy\\.html'", body):
+            return True, "200-PARKINGCREW"
 
         # These are all blocks of gambling web sites from a blacklist of the
         # Hellenic Gaming Commission (E.E.E.P.). Blocking is up to the ISP and
