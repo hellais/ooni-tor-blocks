@@ -66,6 +66,11 @@ The OONI reports do not appear to have a sample of the mentioned "the
 site is blocked as per the instructions of Competent Authority" page.
 
 
+== 200-PARKINGCREW
+
+Seems like some kind of DNS hijacking for nonexistent sites.
+
+
 == 301-VPSCONTROL
 
 Apparently some kind of DNS hijacker. It only comes from one probe in
