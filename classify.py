@@ -66,6 +66,8 @@ def classify_response(response):
             return True, "200-COX-FINDER"
         if re.search("window\\.open\\('http://www\\.parkingcrew\\.net/privacy\\.html'", body):
             return True, "200-PARKINGCREW"
+        if re.search("<script src='http://parkingcrew.net/assets/scripts/js3\\.js'", body):
+            return True, "200-PARKINGCREW"
 
         if re.search("<title>Scam Blocked</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">", body):
             return True, "200-COX-PHISHING"
