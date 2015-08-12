@@ -122,6 +122,8 @@ def classify_response(response):
             return True, "200-TURKEY"
 
     if status == 301:
+        if re.match("^https?://.*/sgerror\\.php", get_header(response, "Location", "")):
+            return True, "301-SQUIDGUARD"
         if get_header(response, "Location", "").startswith("https://www.vpscontrol.net/"):
             return True, "301-VPSCONTROL"
 
