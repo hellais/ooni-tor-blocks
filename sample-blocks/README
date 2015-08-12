@@ -24,6 +24,14 @@ http://finder.cox.net/
 http://www.cox.com/residential/support/internet/article.cox?articleId={4fa5b640-6447-11df-ccef-000000000000}
 
 
+== 200-COX-PHISHING
+
+It looks like it's a page of Cox Communications used to block known
+phishing domains. "You have been taken to this page because you followed
+a link in a fraudulent email. This email was <b>not</b> from Cox
+Communications."
+
+
 == 200-EEEP, 200-EEEP-OTHER
 
 These are block pages served in Greece for gambling web sites. The
