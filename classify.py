@@ -126,6 +126,8 @@ def classify_response(response):
             return True, "301-VPSCONTROL"
 
     if status == 302:
+        if re.match("^http://.*/webadmin/deny/", get_header(response, "Location", "")):
+            return True, "302-NETSWEEPER"
         if get_header(response, "Location", "").startswith("http://www.shopper.com"):
             return True, "302-SHOPPERCOM"
 
