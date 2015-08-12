@@ -118,6 +118,9 @@ def classify_response(response):
         if re.search("The URL you requested has been blocked", body):
             return True, "200-INDIA"
 
+        if re.search("sayılı kararı gereği erişime engellenmiştir", body):
+            return True, "200-TURKEY"
+
     if status == 301:
         if get_header(response, "Location", "").startswith("https://www.vpscontrol.net/"):
             return True, "301-VPSCONTROL"
