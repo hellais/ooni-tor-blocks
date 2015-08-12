@@ -67,6 +67,9 @@ def classify_response(response):
         if re.search("window\\.open\\('http://www\\.parkingcrew\\.net/privacy\\.html'", body):
             return True, "200-PARKINGCREW"
 
+        if re.search("<title>Scam Blocked</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">", body):
+            return True, "200-COX-PHISHING"
+
         # These are all blocks of gambling web sites from a blacklist of the
         # Hellenic Gaming Commission (E.E.E.P.). Blocking is up to the ISP and
         # they do it variously.
