@@ -20,7 +20,7 @@ import sys
 import urllib
 import urlparse
 
-from classify import classify_response
+from classify import classify_response, classify_error
 from ooni import ooni_open_file
 
 class options(object):
@@ -145,6 +145,8 @@ def process_file(yamloo, filename):
                 url = nontor["request"]["url"]
             nontor_isblocked, nontor_class = classify_response(nontor["response"])
             nontor_status = nontor["response"]["code"]
+        else:
+            nontor_isblocked, nontor_class = classify_error(doc["experiment_failure"])
 
         if tor is not None:
             if url is None:
@@ -154,6 +156,8 @@ def process_file(yamloo, filename):
             # Sometimes exit_ip and exit_name are missing.
             tor_exit_ip = tor["request"]["tor"].get("exit_ip")
             tor_exit_nickname = tor["request"]["tor"].get("exit_name")
+        else:
+            tor_isblocked, tor_class = classify_error(doc["control_failure"])
 
         if url is None and isinstance(doc["input"], basestring) and "\r" not in doc["input"]:
             url = doc["input"]

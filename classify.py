@@ -237,3 +237,25 @@ def classify_response(response):
     if status >= 400:
         return True, "%d-OTHER" % status
     return False, "%d" % status
+
+def classify_error(error):
+    if error is None:
+        return False, None
+
+    if error in ("task_timed_out", "socks_ttl_expired", "response_never_received", "generic_timeout_error", "tcp_timed_out_error"):
+        return True, "TIMEOUT"
+    if error in ("connection_refused_error", "socks_connection_refused", "dns_lookup_error", "connect_error", "socks_host_unreachable"):
+        return True, "REJECT"
+    if error in ("unknown_failure can't figure out how to make a context factory",
+                 "unknown_failure DummyPcapWriter instance has no attribute 'close'",
+                 "unknown_failure [<twisted.python.failure.Failure <class 'twisted.internet.error.ConnectionDone'>>]",
+                 "unknown_failure Connection was closed cleanly.",
+                 "unknown_failure 'NoneType' object has no attribute '__getitem__'",
+                 "unknown_failure ",
+                 "unknown_failure 'http_requests'",):
+        return False, None
+
+    # unknown_failure [<twisted.python.failure.Failure <class 'twisted.internet.error.ConnectionLost'>>]
+    # unknown_failure [<twisted.python.failure.Failure <class 'twisted.web._newclient.ParseError'>>]
+    # socks_server_failure
+    return True, "OTHER-OONI-ERROR"
