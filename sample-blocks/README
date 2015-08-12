@@ -81,6 +81,17 @@ https://serverfault.com/questions/638929/parkingcrew-net-hijacking-our-domain
 https://serverfault.com/questions/377533/websites-get-hijacked-by-parking-page
 
 
+== 200-TURKEY
+
+A page with text in Turkish:
+	Ulaşmaya çalıştığınız internet sitesi T.C. Beyoğlu Cumhuriyet
+	Başsavcılığı'nın 04.06.2010 tarih ve 2010/41 sayılı kararı
+	gereği erişime engellenmiştir.
+("The website you are trying to reach TC Date 04.06.2010 and numbered
+2010/41 Beyoglu Public Prosecutor's Office has blocked access by its
+decision.")
+
+
 == 301-VPSCONTROL
 
 Apparently some kind of DNS hijacker. It only comes from one probe in
