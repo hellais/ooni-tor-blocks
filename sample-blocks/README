@@ -92,6 +92,14 @@ A page with text in Turkish:
 decision.")
 
 
+== 301-SQUIDGUARD
+
+A redirect page of squidGuard, a URL blacklist plugin for Squid.
+
+http://squidguard.org/
+https://en.wikipedia.org/wiki/SquidGuard
+
+
 == 301-VPSCONTROL
 
 Apparently some kind of DNS hijacker. It only comes from one probe in
