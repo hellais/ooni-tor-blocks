@@ -99,6 +99,16 @@ Germany. It redirects to https://www.vpscontrol.net with the path
 component copied from the original request.
 
 
+== 302-NETSWEEPER
+
+Redirect block page of Netsweeper. The redirect URL has a lot of
+information in the query string, such as a numeric code for the blocking
+category. The format of the URL, with its "webadmin" string, was noted
+in Citizen Lab reports:
+https://citizenlab.org/2013/06/o-pakistan/
+https://citizenlab.org/tag/netsweeper/
+
+
 == 302-SHOPPERCOM
 
 Looks like a DNS redirector or monetizer. One version redirects to
