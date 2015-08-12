@@ -107,6 +107,12 @@ Germany. It redirects to https://www.vpscontrol.net with the path
 component copied from the original request.
 
 
+== 302-ALERT
+
+Some redirect block page, the source is unknown. The ooniprobe that
+produced it was running in Sudan.
+
+
 == 302-NETSWEEPER
 
 Redirect block page of Netsweeper. The redirect URL has a lot of
