@@ -132,10 +132,6 @@ def process_file(yamloo, filename):
         tor_exit_ip = None
         tor_exit_nickname = None
 
-        if not doc["requests"]:
-            # This means they passed a URL without a scheme or something.
-            continue
-
         nontor, tor = split_requests(doc["requests"])
         if nontor is not None:
             if url is None:
