@@ -102,6 +102,24 @@ different spelling of erişime/erisime and gereği/geregi. This particular
 page seems to be aimed at torrent/copyright blocks.
 
 
+== 200-TURKEY-TIB
+
+Block pages with what appear to be blocking rationales in Turkish and
+English.
+	5651 Sayılı Kanun uyarınca yapılan teknik inceleme ve hukuki
+	değerlendirme sonucunda bu internet sitesi (metacafe.com)
+	hakkındaki Telekomünikasyon İletişim Başkanlığı'nın 07/05/2010
+	tarih ve 421.02.00.2010-155684 sayılı kararına istinaden
+	Telekomünikasyon İletişim Başkanlığı tarafından İDARİ TEDBİR
+	uygulanmaktadır.
+	(After technical analysis and legal consideration based on the
+	Law Nr. 5651, ADMINISTRATION MEASURE has been taken for this
+	website (metacafe.com) (metacafe.com) according to Decision Nr.
+	421.02.00.2010-155684 dated 07/05/2010 of "Telekomünikasyon
+	İletişim Başkanlığı")
+There may be multiple such rationales with different text and dates.
+
+
 == 301-SQUIDGUARD
 
 A redirect page of squidGuard, a URL blacklist plugin for Squid.
