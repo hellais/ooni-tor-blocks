@@ -120,7 +120,7 @@ def classify_response(response):
         if re.search("The URL you requested has been blocked", body):
             return True, "200-INDIA"
 
-        if re.search("sayılı kararı gereği erişime engellenmiştir", body):
+        if re.search("background: url\\(/images/mainBg\\.png\\) top center no-repeat #b9babf;", body):
             return True, "200-TURKEY"
 
     if status == 301:

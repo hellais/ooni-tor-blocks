@@ -1,0 +1,51 @@
+HTTP/1.0 200 xxx
+Content-Length: 1556
+X-Powered-By: ASP.NET
+X-AspNet-Version: 4.0.30319
+Server: Microsoft-IIS/7.5
+Connection: close
+Cache-Control: private
+Date: Sat, 29 Mar 2014 00:03:52 GMT
+Content-Type: text/html; charset=utf-8
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title>
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background: url(/images/mainBg.png) top center no-repeat #b9babf;
+        }
+        .text
+        {
+            width: 800px;
+            height: 154px;
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+            margin: 0 auto;
+            color: #fff;
+            font-weight: bold;
+            padding-top: 165px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTIwMTEwMzUxNTQPZBYCAgMPZBYEAgEPFgIeBFRleHQFqwFVbGHFn21heWEgw6dhbMSxxZ90xLHEn8SxbsSxeiBpbnRlcm5ldCBzaXRlc2kgxLBzdGFuYnVsIDEyLiBTdWxoIENlemEgTWFoa2VtZXNpJ27EsW4gMDguMDMuMjAxMyB0YXJpaGxpIDIwMTMvMjA5IEQuIMSwxZ8gdmUgLyBzYXnEsWzEsSBrYXJhcsSxIGlsZSBlcmnFn2ltZSBlbmdlbGxlbm1pxZ90aXJkAgMPFgIeC18hSXRlbUNvdW50Av////8PZGRekkjFuG3/AZc+y4/7SgRm7pOH8/UF81VW2bVKODHAKg==" />
+</div>
+
+    <div class="text">
+        <p align="center" style="font-size: 24px;">
+            Ulaşmaya çalıştığınız internet sitesi İstanbul 12. Sulh Ceza Mahkemesi'nın 08.03.2013 tarihli 2013/209 D. İş ve / sayılı kararı ile erişime engellenmiştir
+        </p>
+        
+    </div>
+    </form>
+</body>
+</html>

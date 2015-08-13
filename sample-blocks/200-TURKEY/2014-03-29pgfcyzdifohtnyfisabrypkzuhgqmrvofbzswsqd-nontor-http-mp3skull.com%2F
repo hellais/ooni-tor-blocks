@@ -1,0 +1,51 @@
+HTTP/1.0 200 xxx
+Content-Length: 1544
+X-Powered-By: ASP.NET
+X-AspNet-Version: 4.0.30319
+Server: Microsoft-IIS/7.5
+Connection: close
+Cache-Control: private
+Date: Sat, 29 Mar 2014 00:13:11 GMT
+Content-Type: text/html; charset=utf-8
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+
+</title>
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background: url(/images/mainBg.png) top center no-repeat #b9babf;
+        }
+        .text
+        {
+            width: 800px;
+            height: 154px;
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+            margin: 0 auto;
+            color: #fff;
+            font-weight: bold;
+            padding-top: 165px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTIwMTEwMzUxNTQPZBYCAgMPZBYEAgEPFgIeBFRleHQFpwFVbGHFn21heWEgw6dhbMSxxZ90xLHEn8SxbsSxeiBpbnRlcm5ldCBzaXRlc2kgVC5DLiBCZXlvxJ9sdSBDdW1odXJpeWV0IEJhc3NhdmNpbGlnaSduaW4gMDUuMDUuMjAxMSB0YXJpaCB2ZSAyMDExLzY2IE11aC1LLiBzYXlpbGkga2FyYXJpIGdlcmVnaSBlcmlzaW1lIGVuZ2VsbGVubWlzdGlyLmQCAw8WAh4LXyFJdGVtQ291bnQC/////w9kZC4Oi0FAoHu31rVW6qatQXn3fv5Jzlr6jegiuRWMx07N" />
+</div>
+
+    <div class="text">
+        <p align="center" style="font-size: 24px;">
+            Ulaşmaya çalıştığınız internet sitesi T.C. Beyoğlu Cumhuriyet Bassavciligi'nin 05.05.2011 tarih ve 2011/66 Muh-K. sayili karari geregi erisime engellenmistir.
+        </p>
+        
+    </div>
+    </form>
+</body>
+</html>

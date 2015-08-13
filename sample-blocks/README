@@ -83,19 +83,23 @@ https://serverfault.com/questions/377533/websites-get-hijacked-by-parking-page
 
 == 200-TURKEY
 
-Pages with text in Turkish:
+Block pages in Turkish with varying text. For example,
 	Ulaşmaya çalıştığınız internet sitesi T.C. Beyoğlu Cumhuriyet
 	Başsavcılığı'nın 04.06.2010 tarih ve 2010/41 sayılı kararı
 	gereği erişime engellenmiştir.
 ("The website you are trying to reach TC Date 04.06.2010 and numbered
 2010/41 Beyoglu Public Prosecutor's Office has blocked access by its
 decision.")
-	Ulaşmaya çalıştığınız internet sitesi T.C.Beyoğlu Cumhuriyet
-	Başsavcılığı'nın 06.04.2011 tarih ve 2011/56 Basın Muh-K sayılı kararı
-	gereği erişime engellenmiştir.
-("TC works to reach your website Beyoglu Public Prosecutor's Office
-Press Muh-K dated 06.04.2011 date and 2011/56 are blocked due to the
-decision.")
+	Ulaşmaya çalıştığınız internet sitesi T.C. Beyoğlu Cumhuriyet
+	Bassavciligi'nin 05.05.2011 tarih ve 2011/66 Muh-K. sayili
+	karari geregi erisime engellenmistir.
+("TC works to reach your website Beyoglu Public Prosecutor's 05.05.2011
+date and 2011/66 Muhr-K. Access is blocked to the decision deemed
+necessary.")
+
+It almost seems like all the messages were hand-written. Notice the
+different spelling of erişime/erisime and gereği/geregi. This particular
+page seems to be aimed at torrent/copyright blocks.
 
 
 == 301-SQUIDGUARD
