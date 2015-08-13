@@ -122,6 +122,8 @@ def classify_response(response):
 
         if re.search("background: url\\(/images/mainBg\\.png\\) top center no-repeat #b9babf;", body):
             return True, "200-TURKEY"
+        if re.search("<title>Telekomünikasyon İletişim Başkanlığı</title>.*\\.erisime_engellenmis", body, flags=re.DOTALL):
+            return True, "200-TURKEY-TIB"
 
     if status == 301:
         if re.match("^https?://.*/sgerror\\.php", get_header(response, "Location", "")):
