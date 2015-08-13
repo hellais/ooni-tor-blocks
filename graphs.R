@@ -17,7 +17,11 @@ blocker.palette <- c(
 	"Site5"="#f93c74",
 	"SonicWALL"="green",
 	"Yelp"="#c41200",
+	"custom"="midnightblue",
 	"other"="#202020",
+	"TIMEOUT"="purple",
+	"REJECT"="red",
+	"OTHER-OONI-ERROR"="pink",
 	"UNBLOCKED"="gray80"
 )
 
@@ -26,40 +30,41 @@ blockers <- new.env(parent=emptyenv())
 
 blockers[["403-AKAMAI"]] <- "Akamai"
 blockers[["404-AKAMAI"]] <- "Akamai"
-blockers[["403-AMAZON-CLOUDFRONT"]] <- "Amazon"
-blockers[["503-AMAZON"]] <- "Amazon"
 blockers[["403-BLUEHOST"]] <- "Bluehost"
 blockers[["403-CLOUDFLARE"]] <- "CloudFlare"
 blockers[["503-CLOUDFLARE"]] <- "CloudFlare"
 blockers[["501-CONVIO"]] <- "Convio"
-blockers[["403-CRAIGSLIST"]] <- "Craigslist"
-blockers[["403-GOOGLE-SORRY"]] <- "Google"
 blockers[["406-SITE5"]] <- "Site5"
-blockers[["403-SONICWALL"]] <- "SonicWALL"
-blockers[["403-YELP"]] <- "Yelp"
-blockers[["503-YELP"]] <- "Yelp"
 
-blockers[["406-ARIANNELINGERIE"]] <- "other"
+blockers[["403-AMAZON-CLOUDFRONT"]] <- "custom" # "Amazon"
+blockers[["503-AMAZON"]] <- "custom" # "Amazon"
+blockers[["406-ARIANNELINGERIE"]] <- "custom"
+blockers[["403-CRAIGSLIST"]] <- "custom" # "Craigslist"
+blockers[["403-EZINEARTICLES"]] <- "custom"
+blockers[["403-GOOGLE-SORRY"]] <- "custom" # "Google"
+blockers[["403-GROUPON"]] <- "custom"
+blockers[["200-HACKFORUMS"]] <- "custom"
+blockers[["999-LINKEDIN"]] <- "custom"
+blockers[["404-LIVEJOURNAL-451"]] <- "custom"
+blockers[["410-MYSPACE"]] <- "custom"
+blockers[["403-PASTEBIN"]] <- "custom"
+blockers[["403-PINTEREST"]] <- "custom"
+blockers[["403-TYPEPAD"]] <- "custom"
+blockers[["910-VICTORIASSECRET"]] <- "custom"
+blockers[["920-VICTORIASSECRET"]] <- "custom"
+blockers[["999-YAHOO"]] <- "custom"
+blockers[["403-YELP"]] <- "custom" # "Yelp"
+blockers[["503-YELP"]] <- "custom" # "Yelp"
+
 blockers[["403-BADBEHAVIOR"]] <- "other"
 blockers[["503-DOD"]] <- "other"
-blockers[["403-EZINEARTICLES"]] <- "other"
-blockers[["403-GROUPON"]] <- "other"
-blockers[["200-HACKFORUMS"]] <- "other"
 blockers[["403-INCAPSULA"]] <- "other"
-blockers[["999-LINKEDIN"]] <- "other"
-blockers[["404-LIVEJOURNAL-451"]] <- "other"
 blockers[["403-MCAFEE"]] <- "other"
-blockers[["410-MYSPACE"]] <- "other"
-blockers[["403-PASTEBIN"]] <- "other"
-blockers[["403-PINTEREST"]] <- "other"
 blockers[["403-RACKSPACE"]] <- "other"
+blockers[["403-SONICWALL"]] <- "other" # "SonicWALL"
 blockers[["403-SUCURI"]] <- "other"
-blockers[["403-TYPEPAD"]] <- "other"
-blockers[["910-VICTORIASSECRET"]] <- "other"
-blockers[["920-VICTORIASSECRET"]] <- "other"
 blockers[["403-WILDAPRICOT"]] <- "other"
 blockers[["403-WITZA"]] <- "other"
-blockers[["999-YAHOO"]] <- "other"
 
 blockers[["400-OTHER"]] <- "other"
 blockers[["401-OTHER"]] <- "other"
@@ -97,6 +102,8 @@ blockers[["200-EEEP"]] <- "other"
 blockers[["200-EEEP-OTHER"]] <- "other"
 blockers[["200-INDIA"]] <- "other"
 blockers[["403-IRAN"]] <- "other"
+
+blockers[["OTHER-OONI-ERROR"]] <- "other"
 
 
 x <- read.csv("findblocks.csv", colClasses=list(
