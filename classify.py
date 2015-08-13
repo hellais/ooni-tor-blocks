@@ -258,7 +258,7 @@ def classify_response(response):
 
 def classify_error(error):
     if error is None:
-        return False, None
+        return None, None
 
     if error in ("task_timed_out", "socks_ttl_expired", "response_never_received", "generic_timeout_error", "tcp_timed_out_error"):
         return True, "TIMEOUT"
@@ -271,7 +271,7 @@ def classify_error(error):
                  "unknown_failure 'NoneType' object has no attribute '__getitem__'",
                  "unknown_failure ",
                  "unknown_failure 'http_requests'",):
-        return False, None
+        return None, None
 
     # unknown_failure [<twisted.python.failure.Failure <class 'twisted.internet.error.ConnectionLost'>>]
     # unknown_failure [<twisted.python.failure.Failure <class 'twisted.web._newclient.ParseError'>>]
