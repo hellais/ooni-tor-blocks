@@ -9,14 +9,16 @@ import sys
 
 def usage(f=sys.stdout):
     f.write("""\
-Usage: %s [-t testname,testname] [reports.json]
+Usage: %s [-t testname,testname] [--cc CC,CC,...] [reports.json]
 
 testname is e.g. "http_requests".
+The --cc option takes a comma-separated list of ISO-3166-2 codes.
 reports.json is a JSON index of OONI reports as downloaded from
 http://api.ooni.io/api/reports.
 """ % sys.argv[0])
 
 TEST_NAMES = None
+COUNTRY_CODES = set()
 
 # Returns (date, asn, test_name) typle.
 def parse_report_filename(filename):
@@ -43,14 +45,21 @@ def match_test_name(x):
         return True
     return False
 
+def match_cc(x):
+    if not COUNTRY_CODES:
+        return True
+    return x["probe_cc"].lower() in COUNTRY_CODES
+
 def make_url(filename):
     date, _, _ = parse_report_filename(filename)
     datestr = date.strftime("%Y-%m-%d")
     return "http://api.ooni.io/reportFiles/%s/%s.gz" % (datestr, filename)
 
-opts, args = getopt.gnu_getopt(sys.argv[1:], "ht:", ["help"])
+opts, args = getopt.gnu_getopt(sys.argv[1:], "ht:", ["cc=", "help"])
 for o, a in opts:
-    if o == "-t":
+    if o == "--cc":
+        COUNTRY_CODES.update([cc.lower() for cc in a.split(",")])
+    elif o == "-t":
         TEST_NAMES = a.split(",")
     elif o == "-h" or o == "--help":
         usage()
@@ -60,5 +69,5 @@ for filename in args:
     with open(filename) as f:
         j = json.load(f)
         for x in j:
-            if match_test_name(x):
+            if match_test_name(x) and match_cc(x):
                 print make_url(x["report_filename"])
