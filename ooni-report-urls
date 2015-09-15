@@ -48,7 +48,7 @@ def make_url(filename):
     datestr = date.strftime("%Y-%m-%d")
     return "http://api.ooni.io/reportFiles/%s/%s.gz" % (datestr, filename)
 
-opts, args = getopt.gnu_getopt(sys.argv[1:], "ht:", "--help")
+opts, args = getopt.gnu_getopt(sys.argv[1:], "ht:", ["help"])
 for o, a in opts:
     if o == "-t":
         TEST_NAMES = a.split(",")
