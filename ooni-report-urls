@@ -20,7 +20,7 @@ http://api.ooni.io/api/reports.
 TEST_NAMES = None
 COUNTRY_CODES = set()
 
-# Returns (date, asn, test_name) typle.
+# Returns (date, asn, test_name) tuple.
 def parse_report_filename(filename):
     m = re.match(ur'^([0-9]{8}T[0-9]{6}Z)-(AS.*)-(.*)-v1-probe.yaml', os.path.basename(filename))
     if not m:
