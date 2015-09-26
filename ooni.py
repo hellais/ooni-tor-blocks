@@ -35,7 +35,7 @@ def fixup_entry(doc):
             doc[k] = v
         del doc["report"]
 
-    # Some failures can lead to there being to requests array. For example,
+    # Some failures can lead to there being no requests array. For example,
     #   failure: Router $BD1907CD4E72F940F934FF932549599D886F9044 not in consensus.
     doc.setdefault("requests", [])
 
