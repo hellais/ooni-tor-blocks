@@ -35,6 +35,13 @@ def fixup_entry(doc):
             doc[k] = v
         del doc["report"]
 
+    if doc.get("test_name") in ("http_requests", "http_requests_test", "tor_http_requests_test", "HTTP Requests Test"):
+        doc = fixup_entry_http_requests(doc)
+
+    return doc
+
+# Fix up an http_requests entry.
+def fixup_entry_http_requests(doc):
     # Some failures can lead to there being no requests array. For example,
     #   failure: Router $BD1907CD4E72F940F934FF932549599D886F9044 not in consensus.
     doc.setdefault("requests", [])
