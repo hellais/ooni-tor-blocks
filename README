@@ -1,20 +1,183 @@
-This directory is about mining historical OONI scans to find past
-instances of Tor exit discrimination.
+These programs are for mining historical network tests of the Open
+Observatory of Network Interference (OONI) to find instances of
+discrimination against Tor exit relays by web servers. It uses the OONI
+http_requests test, which requests a variety of URLs both with and
+without Tor. We are looking for cases where the Tor request receives a
+block page (for example a 403), and the non-Tor request does not.
 
-Download index of reports.
+There is sample output in the file findblocks.csv.xz and in the graphs
+directory.
 
-$ wget -O reports.json http://api.ooni.io/api/reports
+Contact David Fifield <david@bamsoftware.com> regarding this code.
 
-Get a list of URLs of http_requests reports. There are other report
-types than http_requests but we are not interested in them.
 
-$ ./ooni-report-urls -t http_requests reports.json | sort | uniq > urls.txt
+== Usage summary
 
-Download a subset of the reports.
+Download the index of OONI reports.
+	wget -O ooni-reports.json http://api.ooni.io/api/reports
 
-$ tail -n 100 urls.txt | wget -i -
+Extract a list of report URLs using the included ooni-report-urls
+program. We are only interested in the http_requests report type.
+	./ooni-report-urls -t http_requests ooni-reports.json | sort | uniq > ooni-report-urls.txt
 
-Output a CSV file that shows success/failure status of each request and
-save block pages to a blocks directory.
+Download the reports. There are a lot of them and they are pretty big
+(3084 reports weighing over 30 GB altogether as of 2015-08-27). You
+might want to start with just a subset (the most recent 100 reports, for
+example).
+	wget -P reports -c -i ooni-report-urls.txt
 
-$ ./findblocks --save-blocks blocks *-http_requests-v1-probe.yaml.gz | tee findblocks.csv
+Run the findblocks program on the downloaded reports. For each URL in
+each report, findblocks outputs a CSV line that includes the
+classification (block/nonblock) of the Tor and non-Tor request. It
+additionally saves pages it considers to be block pages to a directory
+so you can inspect and manually classify them.
+	./findblocks --save-blocks blocks reports/*.yaml.gz | tee findblocks.csv
+
+As an example of what you can do with findblocks.csv, make some graphs:
+	Rscript graphs.R
+	Rscript poster.R
+
+
+== Details
+
+The OONI reports are gzip-compressed YAML files (.yaml.gz). Each file
+contains a sequence of YAML documents. The Python module ooni.py deals
+with processing these files. The function ooni_open_file handles gzip
+decompression and returns an iterator over individual YAML documents. A
+few documents have invalid Unicode sequences (separately encoded UTF-16
+surrogates), like this example:
+	title=\"Volume control\">\uD83D\uDD07</a> <div class=\"bar volumebar\"> <div
+These cause the YAML decoder to raise an exception. ooni_open_file makes
+a best-effort attempt to skip over such documents and continue
+processing (see the function yaml_load_sloppy). ooni_open_file also
+applies a few fixes to work around various format changes in OONI
+documents over the years (see the function fixup_entry).
+
+The first YAML document in a file has record_type=="header"; the last
+has record_type=="footer"; and those in between have
+record_type=="entry". The "entry" ones contain the actual network test
+results. Here's a short skeleton of a processing script:
+	import sys
+	from ooni import ooni_open_file
+	for filename in sys.argv[1:]:
+	    for doc in ooni_open_file(filename):
+		if doc["record_type"] == "header":
+		    # do header stuff
+		elif doc["record_type"] == "entry":
+		    # do entry stuff
+		elif doc["record_type"] == "footer":
+		    # do footer stuff
+
+The findblocks script iterates over all its inputs, which are OONI
+reports of the http_requests test. The http_requests test makes two HTTP
+requests per URL, one using Tor and one without Tor. findblocks
+classifies the two HTTP responses as to whether they represent block
+pages, and who the blocker is if the page matches a known pattern. It
+outputs a CSV for each Tor/non-Tor pair of HTTP requests. Here are some
+examples:
+	report_date,date,report_id,probe_cc,nontor_isblocked,nontor_status,nontor_class,nontor_error,tor_isblocked,tor_status,tor_class,tor_error,tor_exit_ip,tor_exit_nickname,url
+	2015-07-19 02:26:56,2015-07-19 03:23:38,2015-07-19vpnknsfxgutzdjmdilwrhvwbtwtubfbrgjwzehxi,ES,F,200,200,,F,200,200,,188.138.125.209,NCC1701,http://www.chinatimes.com
+	2015-07-20 00:00:12,2015-07-20 00:17:34,2015-07-20ajmqxtqqkrrfttgtbsllbzlntxfdsegomahzcwow,DE,F,200,200,,T,403,403-AKAMAI,,171.25.193.20,DFRI0,http://www.walmart.com
+The first example (url=http://www.chinatimes.com) is an unblocked pair
+of requests. The string "F,200,200" means that the request was not
+blocked, the status code was 200, and the classification was also 200
+(we use the status code as the classification whenever we don't have
+something more specific). "188.138.125.209,NCC1701" indicates the Tor
+exit being used. The second example (url=http://www.walmart.com) is
+accessible without Tor ("F,200,200"), but blocked with Tor
+("T,403,403-AKAMAI"). "403-AKAMAI" means that findblocks identified the
+block page as being an Akamai page. "171.25.193.20,DFRI0" is the Tor
+exit.
+
+The file classify.py contains the logic for classifying HTTP responses
+as to whether they are block pages, and who the operator of the block
+page is. The overall idea is pretty simple: any response with a status
+code of 400 or greater is considered a block. However there are a few
+exceptions, like responses with status 200 that nevertheless are block
+pages, and status codes like 408 and 504 that probably do not indicate
+deliberate blocking. Classification of block pages is handled with a
+long chain of regular expression matches. For example, the string
+"<title>Attention Required! | CloudFlare</title>" indicates a CloudFlare
+block page that would get the classification string "403-CLOUDFLARE".
+For details on the known block page classifications, see the file
+sample-blocks/README.
+
+findblocks can optionally save all the responses it thinks are blocks
+(use the --save-blocks option). We originally did this so we could
+analyze all the block pages and look for patterns for classification. If
+you look in the saved blocks directory, you'll see subdirectories named
+like these:
+	400-OTHER
+	403-AKAMAI
+	403-AMAZON-CLOUDFRONT
+	403-CLOUDFLARE
+	403-CRAIGSLIST
+	403-EZINEARTICLES
+	403-OTHER
+	403-YELP
+	404-OTHER
+	410-MYSPACE
+	500-OTHER
+	503-AMAZON
+	503-OTHER
+The "OTHER" directories contain all the pages that weren't recognized by
+classify.py. The saved files are named after the OONI report ID and the
+URL, for example:
+	403-CLOUDFLARE/2014-10-01jdgdoplqurezgrgrlqgvmpwqtylreduntfumkijm-http-sears.com%2F
+The files contain the reconstructed header and body of the original
+response. The OONI reports don't contain all the available information;
+for example we substitute "xxx" for the status message in the first
+line because OONI doesn't record it. The conversion from OONI's Unicode
+strings back to bytes is not necessarily lossless either.
+
+
+== Files
+
+ooni-report-urls
+This program processes a JSON index of OONI report filenames and turns
+them into a list of URLs. You can limit the reports to a specific type
+or specific countries.
+
+findblocks
+This program processes http_requests reports and writes a CSV file that
+summarizes the blocked/non-blocked status of each download.
+
+ooni-dump
+This program dumps all the responses from an http_requests report. It is
+like "findblocks --save-blocks" but it also saves nonblocks.
+
+classify.py
+A Python module that classifies HTTP responses.
+
+ooni.py
+A Python module for reading OONI YAML files.
+
+graphs.R
+poster.R
+These programs process the output of findblocks (findblocks.csv) and
+make some graphs. Run them with "Rscript graphs.R" or "Rscript poster.R".
+
+ooni-report-filenames.txt
+ooni-report-urls.txt
+ooni-test-urls.txt
+These are the input files that were used in building the sample graphs.
+
+graphs/
+findblocks.csv
+findblocks.csv.xz
+These are sample outputs.
+
+sample-blocks/
+These are examples of pages that classify.py considers to be block
+pages. The file sample-blocks/README has further details and
+justification for all the block page classification (in case you wonder
+what 501-CONVIO means, for example).
+
+sample-nonblocks/
+These are pages with 400- or 500-series status codes that nevertheless
+should not be considered block pages.
+
+test.py
+This test program verifies what classify.py gets the correct
+classification for all the sample pages in sample-blocks and
+sample-nonblocks.
