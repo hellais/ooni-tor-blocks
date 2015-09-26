@@ -30,7 +30,7 @@ def parse_report_filename(filename):
 
 # Some older reports have different names for the same(?) test.
 def canonicalize_test_name(test_name):
-    if test_name in ("http_requests_test", "tor_http_requests_test"):
+    if test_name in ("http_requests_test", "tor_http_requests_test", "HTTP Requests Test"):
         test_name = "http_requests"
     return test_name
 
