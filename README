@@ -8,7 +8,8 @@ block page (for example a 403), and the non-Tor request does not.
 There is sample output in the file findblocks.csv.xz and in the graphs
 directory.
 
-Contact David Fifield <david@bamsoftware.com> regarding this code.
+Contact David Fifield <david@bamsoftware.com> regarding this code. All
+code is in the public domain.
 
 
 == Usage summary
