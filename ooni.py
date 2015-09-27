@@ -53,7 +53,7 @@ def fixup_entry_http_requests(doc):
     for request in doc["requests"]:
         try:
             is_tor = request["request"]["tor"]
-            # Some reports have tor:true and tor_false instead of having a
+            # Some reports have tor:true and tor:false instead of having a
             # sub-table.
             if type(is_tor) == bool:
                 request["request"]["tor"] = {"is_tor": is_tor}
