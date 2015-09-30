@@ -146,6 +146,8 @@ def classify_response(response):
             return True, "403-AMAZON-CLOUDFRONT"
         if re.search("<p>You can use this key to <a href=\"http://www\\.ioerror\\.us/bb2-support-key\\?key=[\\w-]+\">fix this problem yourself</a>\\.</p>", body):
             return True, "403-BADBEHAVIOR"
+        if re.search("<meta name=\"author\" content=\"Blue Coat systems\">\r\n<meta name=\"description\" content=\"Denied Access Policy\">\r\n", body):
+            return True, "403-BLUECOAT"
         if server == "Apache" and re.search("Access denied\\.  Your IP address \\[[\\d.]+\\] is blacklisted\\.  If you feel this is in error please contact your hosting providers abuse department", body):
             return True, "403-BLUEHOST"
         if server == "cloudflare-nginx" and re.search("<title>Attention Required! \\| CloudFlare</title>|One more step to access", body):
