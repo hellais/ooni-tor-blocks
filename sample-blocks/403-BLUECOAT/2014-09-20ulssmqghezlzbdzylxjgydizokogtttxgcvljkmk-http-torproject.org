@@ -1,0 +1,32 @@
+HTTP/1.0 403 xxx
+Connection: close
+Content-Type: text/html; charset=utf-8
+Content-Length: 962
+Pragma: no-cache
+Cache-Control: no-cache
+
+<html>
+<head>
+<title>Denied Access Policy </title>
+<meta name="author" content="Blue Coat systems">
+<meta name="description" content="Denied Access Policy">
+</head>
+<body bgcolor="#5A85AF">
+<center>
+<font face="Arial, Helvetica, sans-serif" size="6"><b>InfoCamere</b></font>
+<p>
+<font face="Arial, Helvetica, sans-serif" size="4"><b>Stai accedendo ad Internet tramite la Rete InfoCamere
+<p>
+<font face="Arial, Helvetica, sans-serif" size="4">L' utilizzo di Internet è registrato.</font>
+<p>
+<font face="Arial, Helvetica, sans-serif" size="5" color="white"><b>  IP
+address: 10.4.249.66<br> Username: 3387076857@po<br> URL: http://torproject.org/<br> Category: Proxy Avoidance</b></font>
+<p>
+<font face="Arial, Helvetica, sans-serif" size="3">La pagina è stata bloccata perchè ritenuta pericolosa
+<p>
+Per ogni commento email a:  <a href='mailto:gestione.proxy@infocamere.it
+'>Supporto Sicurezza</a></font>
+<p>
+</center>
+</body>
+</html>

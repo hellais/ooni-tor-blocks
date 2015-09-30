@@ -185,6 +185,15 @@ or it may say:
 	"You do not have permission to access this server. Before trying again, run anti-virus and anti-spyware software and remove any viruses and spyware from your computer."
 
 
+== 403-BLUECOAT
+
+A block page with "Blue Coat" in the metadata. The samples we have are
+written in Italian and mention the site infocamere.it.
+	<title>Denied Access Policy </title>
+	<meta name="author" content="Blue Coat systems">
+	<meta name="description" content="Denied Access Policy">
+
+
 == 403-BLUEHOST
 
 A custom block page of the Bluehost web hosting company. It says one of:
